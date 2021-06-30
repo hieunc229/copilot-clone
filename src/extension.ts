@@ -51,16 +51,6 @@ export function activate(context: vscode.ExtensionContext) {
 						trackingId: 'some-id',
 					});
 				})
-				// for (const s of suggestions) {
-				// 	const l = longestSuffixPrefixLength(textBeforeCursor, s);
-				// 	if (l > 0) {
-				// 		items.push({
-				// 			text: s,
-				// 			range: new vscode.Range(position.translate(0, -l), position),
-				// 			trackingId: 'some-id',
-				// 		});
-				// 	}
-				// }
 				return { items };
 			}
 			return { items: [] }
