@@ -5,7 +5,7 @@ const KEYWORD = `//find`
 
 export function activate(context: vscode.ExtensionContext) {
 	const disposable = vscode.commands.registerCommand(
-		'extension.inline-completion-settings',
+		'extension.copilot-clone-settings',
 		() => {
 			vscode.window.showInformationMessage('Show settings');
 		}
@@ -34,7 +34,15 @@ export function activate(context: vscode.ExtensionContext) {
 
 			if (textBeforeCursor.indexOf(KEYWORD) == 0 && textBeforeCursor[textBeforeCursor.length - 1] === ".") {
 
-				const rs = await search(textBeforeCursor)
+				let rs;
+
+				try {
+					rs = await search(textBeforeCursor)
+				} catch (err) {
+					vscode.window.showInformationMessage(err.toString());
+					return { items:[] }
+				}
+
 
 				if (rs == null) {
 					return { items: [] }

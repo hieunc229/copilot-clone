@@ -1,10 +1,12 @@
 import fetch from "node-fetch";
 import { JSDOM } from "jsdom";
 
+
 const GURL = `https://www.google.com/search?q=site%3Astackoverflow.com+`;
 
-type SnippetResult = {
-    results: { votes: number, code:string, textContent: string }[],
+type SnippetResult = { votes: number, code: string, textContent: string }
+type SnippetPageResult = {
+    results: SnippetResult[],
     url: string
 }
 
@@ -22,6 +24,9 @@ function getGoogleResults(keyword: string): Promise<string[] | null> {
 }
 
 async function getStackoverflowContent(url: string): Promise<{ content: string, url: string }> {
+
+
+    
     return new Promise((resolve, reject) => {
         return fetch(url)
             .then(rs => rs.text())
@@ -31,7 +36,7 @@ async function getStackoverflowContent(url: string): Promise<{ content: string, 
 }
 
 // Extract and sort stackoverflow answers
-function getSnippetResults(options: { content: string, url: string }): SnippetResult {
+function getSnippetResults(options: { content: string, url: string }): SnippetPageResult {
     var doc = new JSDOM(options.content)
 
     let els = Array.from(doc.window.document.querySelectorAll(".answer"))
@@ -44,22 +49,35 @@ function getSnippetResults(options: { content: string, url: string }): SnippetRe
     }))
 
     // Sort results by code length
-    results.sort((a,b) => b.code.length - a.code.length)
+    results.sort((a, b) => b.code.length - a.code.length)
 
     return { url: options.url, results }
 }
 
 // Send search query to google, get answers from stackoverflow
 // then extract and return code results
-export async function search(keyword: string) {
-    const urls = await getGoogleResults(keyword)
+export async function search(keyword: string): Promise<null | { results: SnippetResult[] }> {
 
-    if (urls === null) {
-        return null
-    }
+    return new Promise(async (resolve, reject) => {
 
-    // Iterate through all urls if you want
-    // I also use the first results to avoid having too many requests
-    const snippets = await getStackoverflowContent(urls[0]);
-    return getSnippetResults(snippets)
+        let urls = await getGoogleResults(keyword)
+
+        if (urls === null) {
+            return Promise.resolve(null)
+        }
+
+        let results: SnippetResult[] = [];
+
+        try {
+            for (const i in urls.splice(0, 2)) {
+                const snippets = await getStackoverflowContent(urls[i]);
+                results = results.concat(getSnippetResults(snippets).results);
+            }
+
+            resolve({ results })
+        } catch (err) {
+            reject(err)
+        }
+        
+    })
 }
