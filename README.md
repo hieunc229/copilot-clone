@@ -2,6 +2,8 @@
 
 A clone version of [Github Copilot](https://copilot.github.com/). Instead of using AI, this extension send your search query to google, retrive stackoverflow answers and autocomplete them for you.
 
+Note: ⚠️ This sample can only be used for extension development in [Insider release](https://code.visualstudio.com/insiders/). You cannot publish extensions using Proposed API. **Meaning it's not gonna work on VSCode. You'll need to download and use the [VSCode Insider](https://code.visualstudio.com/insiders/) version**
+
 ![Demo Video](./demo.gif)
 
 Note: vscode inline-completions feature is still not ready for production (VSCode store won't accept extension like this yet). Check out the original [Microsoft/examples/inline-completions](https://github.com/microsoft/vscode-extension-samples/tree/main/inline-completions) repository
