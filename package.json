@@ -1,7 +1,7 @@
 {
 	"enableProposedApi": true,
 	"name": "copilot-clone",
-	"displayName": "Copilot Clone",
+	"displayName": "Captain Stack",
 	"description": "Find snippets codes from Stackoverflow",
 	"version": "0.0.1",
 	"publisher": "hieunc229",

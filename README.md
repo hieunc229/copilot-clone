@@ -1,6 +1,8 @@
-# Copilot clone
+![Captain Stack](./logo.svg)
 
-A clone version of [Github Copilot](https://copilot.github.com/). Instead of using AI, this extension send your search query to google, retrive stackoverflow answers and autocomplete them for you.
+# Captain Stack — Code suggestion for VSCode
+
+A clone version of [Github Copilot](https://copilot.github.com/). Instead of using AI, this extension send your search query to google, thenretrive stackoverflow answers and autocomplete them for you.
 
 Note: ⚠️ This sample can only be used for extension development in [Insider release](https://code.visualstudio.com/insiders/). You cannot publish extensions using Proposed API. **Meaning it's not gonna work on VSCode. You'll need to download and use the [VSCode Insider](https://code.visualstudio.com/insiders/) version**
 
