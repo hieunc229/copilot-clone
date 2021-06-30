@@ -2,6 +2,8 @@
 
 # Captain Stack — Code suggestion for VSCode
 
+<a href="https://www.producthunt.com/posts/captain-stack?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-captain-stack" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=302437&theme=light" alt="Captain Stack - An open source alternative to GitHub Copilot | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+
 This feature is somewhat similar to [Github Copilot](https://copilot.github.com/)'s code suggestion. But instead of using AI, it sends your search query to Google, then retrieves StackOverflow answers and autocompletes them for you.
 
 Note: ⚠️ This sample can only be used for extension development in [Insider release](https://code.visualstudio.com/insiders/). You cannot publish extensions using Proposed API. **Meaning it's not gonna work on VSCode. You'll need to download and use the [VSCode Insider](https://code.visualstudio.com/insiders/) version**
