@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { search } from './search';
+import { search } from './utils/search';
 
 const KEYWORD = `//find`
 
@@ -52,10 +52,10 @@ export function activate(context: vscode.ExtensionContext) {
 				const items = new Array<CustomInlineCompletionItem>();
 
 				suggestions.forEach(code => {
-					const l = longestSuffixPrefixLength(textBeforeCursor, code);
+					// const l = longestSuffixPrefixLength(textBeforeCursor, code);
 					items.push({
 						text: `\n` + code,
-						range: new vscode.Range(position.translate(0, -l), position),
+						range: new vscode.Range(position.translate(0, code.length + 1), position),
 						trackingId: 'some-id',
 					});
 				})
