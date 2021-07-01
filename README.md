@@ -26,15 +26,19 @@ _Note: ⚠️ This extension uses a proposed API (inline-completion) and can onl
 
 ## 1. Installation
 
-_Before installation, make sure you have [VSCode Insider](https://code.visualstudio.com/insiders/). You'll be using this version instead of the stable one_
+_Before installation, make sure you have [VSCode Insider](https://code.visualstudio.com/insiders/). You'll be using this version_
 
-- Download this repository to your local machine
-- Run `npm install` in the terminal to install dependencies. _A `postinstall` script would download the latest version of `vscode.proposed.d.ts`_
-- Run the `Run Extension` target in the Debug View. Or from the top menu, choose `Run > Start Debugging`.
+To install and starting Captain Stack:
+
+1. Download this repository to your local machine
+2. Run `npm install` in the terminal to install dependencies. _A `postinstall` script would download the latest version of `vscode.proposed.d.ts`_
+3. Run the `Run Extension` target in the Debug View. Or from the top menu, choose `Run > Start Debugging`.
 
 This will:
-	- Start a task `npm: watch` to compile the code
-	- Run the extension in a new VS Code window (you should play the code here)
+- Start a task `npm: watch` to compile the code and watch for changes
+- Open a new VSCode windows (you should play the extension here)
+
+_Note: when you make changes, you should refresh that windows to apply changes. To refersh, open Command Palette (Command+Shift+P on MacOS, or Ctrl+Shift+P on Windows), then choose "Developer: Reload window"_
 
 ---
 
@@ -67,6 +71,4 @@ If those factor became problems, the extension could be using their official API
 - Jul 01, 2021 - Added snippet source (thanks for [mechero's suggestion](https://news.ycombinator.com/item?id=27698687))
 - Jun 30, 2021 — Publish the initial version
 
-**Feel free to open a thread for feedback or discussion**
-
-Have fun
+**Feel free to open a thread for feedback or discussion. And have fun!**
