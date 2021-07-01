@@ -5,6 +5,7 @@ export type SnippetResult = {
     votes: number,
     code: string,
     hasCheckMark: boolean,
+    sourceURL: string,
     // textContent: string 
 }
 
@@ -28,6 +29,7 @@ export function extractSnippetResults(options: FetchPageResult): SnippetPageResu
             // TODO: Handle answers with more than one code block
             // p/s: they often about explaining the something
             code: item.querySelector("code").textContent,
+            sourceURL: item.querySelector(".js-share-link").href,
             hasCheckMark: item.querySelector("iconCheckmarkLg") != null
         }) as SnippetResult)
         .filter(item => isCodeValid(item.code))

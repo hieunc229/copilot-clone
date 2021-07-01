@@ -1,5 +1,5 @@
 import { extractGoogleResults } from "./extractGoogleResults";
-import { extractSnippetResults, SnippetResult } from "./sortResults";
+import { extractSnippetResults, SnippetResult } from "./extractStackOverflowResults";
 import { fetchPageTextContent } from "./fetchPageContent";
 
 // Send search query to google, get answers from stackoverflow

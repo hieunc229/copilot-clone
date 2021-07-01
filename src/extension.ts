@@ -1,7 +1,6 @@
 import * as vscode from 'vscode';
+import CSConfig from './config';
 import { search } from './utils/search';
-
-const KEYWORD = `//find`
 
 export function activate(context: vscode.ExtensionContext) {
 	const disposable = vscode.commands.registerCommand(
@@ -13,15 +12,6 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(disposable);
 
-	function longestSuffixPrefixLength(a: string, b: string): number {
-		for (let i = Math.min(a.length, b.length); i > 0; i--) {
-			if (a.substr(-i) == b.substr(0, i)) {
-				return i;
-			}
-		}
-		return 0;
-	}
-
 	interface CustomInlineCompletionItem extends vscode.InlineCompletionItem {
 		trackingId: string;
 	}
@@ -32,14 +22,14 @@ export function activate(context: vscode.ExtensionContext) {
 				new vscode.Range(position.with(undefined, 0), position)
 			);
 
-			if (textBeforeCursor.indexOf(KEYWORD) == 0 && textBeforeCursor[textBeforeCursor.length - 1] === ".") {
+			if (textBeforeCursor.indexOf(CSConfig.SEARCH_PHARSE_START) == 0 && textBeforeCursor[textBeforeCursor.length - 1] === CSConfig.SEARCH_PHARSE_END) {
 
 				let rs;
 
 				try {
 					rs = await search(textBeforeCursor)
 				} catch (err) {
-					vscode.window.showInformationMessage(err.toString());
+					vscode.window.showErrorMessage(err.toString());
 					return { items:[] }
 				}
 
@@ -48,15 +38,15 @@ export function activate(context: vscode.ExtensionContext) {
 					return { items: [] }
 				}
 
-				const suggestions = rs.results.map(item => item.code)
 				const items = new Array<CustomInlineCompletionItem>();
 
-				suggestions.forEach(code => {
-					// const l = longestSuffixPrefixLength(textBeforeCursor, code);
+				rs.results.forEach((item, i) => {
+
+					const output = `\n// Source: https://stackoverflow.com${item.sourceURL}\n${item.code}`
 					items.push({
-						text: `\n` + code,
-						range: new vscode.Range(position.translate(0, code.length + 1), position),
-						trackingId: 'some-id',
+						text: output,
+						range: new vscode.Range(position.translate(0, output.length), position),
+						trackingId: `snippet-${i}`,
 					});
 				})
 				return { items };
