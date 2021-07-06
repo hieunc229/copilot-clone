@@ -26,12 +26,12 @@ _Note: ⚠️ This extension uses a proposed API (inline-completion) and can onl
 
 ## 1. Installation
 
-_Before installation, make sure you have [VSCode Insider](https://code.visualstudio.com/insiders/). You'll be using this version_
+**Check out the installation video: https://youtu.be/MD-kzsF0Scg**
 
-To install and starting Captain Stack:
+Before installation, make sure you have [VSCode Insider](https://code.visualstudio.com/insiders/). You'll be using this version. To install and starting Captain Stack:
 
-1. Download this repository to your local machine
-2. Run `npm install` in the terminal to install dependencies. _A `postinstall` script would download the latest version of `vscode.proposed.d.ts`_
+1. Download this repository to your local machine. Unzip and open it on VSCode Insider (make sure the root directory is the same as `package.json` file)
+2. (optional) Run `npm install` in the terminal to install dependencies. _A `postinstall` script would download the latest version of `vscode.proposed.d.ts`_
 3. Run the `Run Extension` target in the Debug View. Or from the top menu, choose `Run > Start Debugging`.
 
 This will:
