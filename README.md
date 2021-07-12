@@ -3,7 +3,7 @@
 # Captain Stack — Code suggestion for VSCode
 
 
-This feature is somewhat similar to [Github Copilot](https://copilot.github.com/)'s code suggestion. But instead of using AI, it sends your search query to Google, then retrieves StackOverflow answers and autocompletes them for you. 
+This feature is somewhat similar to [Github Copilot](https://copilot.github.com/)'s code suggestion. But instead of using AI, it sends your search query to Google, then retrieves StackOverflow answers and autocompletes them for you. Have question? [Join our Discord server](https://discord.gg/5F5tDsWFmp) [![Discord Chat](https://img.shields.io/discord/864164585070526475.svg)](https://discord.gg/5F5tDsWFmp)  
 
 _Captain Stack is launched on Product Hunt and would appricate your support_
 
@@ -60,11 +60,16 @@ Make sure that `showInlineCompletions` is enabled in your settings!
 
 ## 3. Notes
 
+- There are more code sources that should be considered besides StackOverflow
+- If you see `unsupported` error message, ignore it
+
+**Limits:**
 - The extension use fetch-node to get page content, and I don't know if there is any fetching limit
 - The extension uses querySelector to extract code and other info. There is a risk when either StackOverflow or Google changing its querySelector
-- There are more code sources that should be considered besides StackOverflow
 
 If those factor became problems, the extension could be using their official APIs instead.
+
+
 
 ## 4. Changelog
 
