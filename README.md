@@ -3,9 +3,9 @@
 # Captain Stack — Code suggestion for VSCode
 
 
-This feature is somewhat similar to [Github Copilot](https://copilot.github.com/)'s code suggestion. But instead of using AI, it sends your search query to Google, then retrieves StackOverflow answers and autocompletes them for you. Have question? [Join our Discord server](https://discord.gg/5F5tDsWFmp) [![Discord Chat](https://img.shields.io/discord/864164585070526475.svg)](https://discord.gg/5F5tDsWFmp)  
+This feature is somewhat similar to [Github Copilot](https://copilot.github.com/)'s code suggestion. But instead of using AI, it sends your search query to Google, then retrieves StackOverflow answers and autocompletes them for you. Have questions? [Join our Discord server](https://discord.gg/5F5tDsWFmp) [![Discord Chat](https://img.shields.io/discord/864164585070526475.svg)](https://discord.gg/5F5tDsWFmp)  
 
-_Captain Stack is launched on Product Hunt and would appricate your support_
+_Captain Stack is launched on Product Hunt and would appreciate your support_
 
 <a href="https://www.producthunt.com/posts/captain-stack?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-captain-stack" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=302437&theme=light" alt="Captain Stack - An open source alternative to GitHub Copilot | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a> 
 
@@ -36,9 +36,9 @@ Before installation, make sure you have [VSCode Insider](https://code.visualstud
 
 This will:
 - Start a task `npm: watch` to compile the code and watch for changes
-- Open a new VSCode windows (you should play the extension here)
+- Open a new VSCode window (you should use the extension here)
 
-_Note: when you make changes, you should refresh that windows to apply changes. To refersh, open Command Palette (Command+Shift+P on MacOS, or Ctrl+Shift+P on Windows), then choose "Developer: Reload window"_
+_Note: When you make changes, you should refresh that window to apply changes. To refresh, open Command Palette (Command+Shift+P on MacOS, or Ctrl+Shift+P on Windows), then choose "Developer: Reload window"_
 
 ---
 
@@ -64,8 +64,8 @@ Make sure that `showInlineCompletions` is enabled in your settings!
 - If you see `unsupported` error message, ignore it
 
 **Limits:**
-- The extension use fetch-node to get page content, and I don't know if there is any fetching limit
-- The extension uses querySelector to extract code and other info. There is a risk when either StackOverflow or Google changing its querySelector
+- The extension uses fetch-node to get page content, and I don't know if there is any fetching limit
+- The extension uses querySelector to extract code and other info. There is a risk of either StackOverflow or Google changing its querySelector
 
 If those factor became problems, the extension could be using their official APIs instead.
 
@@ -73,7 +73,8 @@ If those factor became problems, the extension could be using their official API
 
 ## 4. Changelog
 
+- Jul 14, 2021 - Adapted to VS Code Insiders Release Version 1.59
 - Jul 01, 2021 - Added snippet source (thanks for [mechero's suggestion](https://news.ycombinator.com/item?id=27698687))
-- Jun 30, 2021 — Publish the initial version
+- Jun 30, 2021 - Publish the initial version
 
 **Feel free to open a thread for feedback or discussion. And have fun!**
