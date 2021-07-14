@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.activate = void 0;
 const vscode = require("vscode");
@@ -10,12 +19,12 @@ function activate(context) {
     });
     context.subscriptions.push(disposable);
     const provider = {
-        provideInlineCompletionItems: async (document, position, context, token) => {
+        provideInlineCompletionItems: (document, position, context, token) => __awaiter(this, void 0, void 0, function* () {
             const textBeforeCursor = document.getText(new vscode.Range(position.with(undefined, 0), position));
             if (textBeforeCursor.indexOf(config_1.default.SEARCH_PHARSE_START) == 0 && textBeforeCursor[textBeforeCursor.length - 1] === config_1.default.SEARCH_PHARSE_END) {
                 let rs;
                 try {
-                    rs = await search_1.search(textBeforeCursor);
+                    rs = yield search_1.search(textBeforeCursor);
                 }
                 catch (err) {
                     vscode.window.showErrorMessage(err.toString());
@@ -36,7 +45,7 @@ function activate(context) {
                 return { items };
             }
             return { items: [] };
-        },
+        }),
     };
     vscode.languages.registerInlineCompletionItemProvider({ pattern: "**" }, provider);
     // Be aware that the API around `getInlineCompletionItemController` will not be finalized as is!

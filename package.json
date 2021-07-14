@@ -3,9 +3,9 @@
 	"name": "copilot-clone",
 	"displayName": "Captain Stack",
 	"description": "Find snippets codes from Stackoverflow",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"publisher": "hieunc229",
-    "icon": "icon.png",
+	"icon": "https://github.com/hieunc229/copilot-clone/blob/master/icon.png",
 	"repository": "https://github.com/Microsoft/vscode-extension-samples",
 	"engines": {
 		"vscode": "^1.34.0"

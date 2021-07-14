@@ -27,31 +27,31 @@ export function activate(context: vscode.ExtensionContext) {
 				let rs;
 
 				try {
-					rs = await search(textBeforeCursor)
+					rs = await search(textBeforeCursor);
 				} catch (err) {
 					vscode.window.showErrorMessage(err.toString());
-					return { items:[] }
+					return { items:[] };
 				}
 
 
 				if (rs == null) {
-					return { items: [] }
+					return { items: [] };
 				}
 
 				const items = new Array<CustomInlineCompletionItem>();
 
 				rs.results.forEach((item, i) => {
 
-					const output = `\n// Source: https://stackoverflow.com${item.sourceURL}\n${item.code}`
+					const output = `\n// Source: https://stackoverflow.com${item.sourceURL}\n${item.code}`;
 					items.push({
 						text: output,
 						range: new vscode.Range(position.translate(0, output.length), position),
 						trackingId: `snippet-${i}`,
 					});
-				})
+				});
 				return { items };
 			}
-			return { items: [] }
+			return { items: [] };
 		},
 	};
 
