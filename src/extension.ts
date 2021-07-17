@@ -22,7 +22,7 @@ export function activate(context: vscode.ExtensionContext) {
 				new vscode.Range(position.with(undefined, 0), position)
 			);
 
-			if (textBeforeCursor.indexOf(CSConfig.SEARCH_PHRASE_START) == 0 && textBeforeCursor[textBeforeCursor.length - 1] === CSConfig.SEARCH_PHRASE_END) {
+			if (textBeforeCursor.indexOf(CSConfig.SEARCH_PHRASE_START) != 0 && textBeforeCursor[textBeforeCursor.length - 1] === CSConfig.SEARCH_PHRASE_END) {
 
 				let rs;
 
