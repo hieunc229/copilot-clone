@@ -11,7 +11,7 @@ Have questions? [Join our Discord server](https://discord.gg/5F5tDsWFmp) [![Disc
 
 [<img src="https://raw.githubusercontent.com/hieunc229/asssets/master/cs-header.svg" alt="Inverr"/>](https://inverr.com/)
 
-[Need to build website? Use Inverr](https://inverr.com/?ref=github-filepond) / [Dev updates on Twitter](https://twitter.com/hieuSSR/)
+[Need to build website? Use Inverr Site Builder](https://inverr.com/?ref=github-filepond) / [Dev updates on Twitter](https://twitter.com/hieuSSR/)
 
 ---
 
@@ -24,6 +24,8 @@ Have questions? [Join our Discord server](https://discord.gg/5F5tDsWFmp) [![Disc
 2. [Play with Captain Stack](#2-play-with-captain-stack)
 3. [Notes](#3-notes)
 4. [Changelog](#4-changelog)
+5. [Troubleshooting](#5-troubleshooting)
+6. [Contributors](#6-contributors)
 
 
 _Note: ⚠️ This extension uses a proposed API (inline-completion) and can only be used for extension development in [VSCode Insider release](https://code.visualstudio.com/insiders/). It's not yet available on VSCode_
@@ -75,12 +77,39 @@ Make sure that `showInlineCompletions` is enabled in your settings!
 
 If those factor became problems, the extension could be using their official APIs instead.
 
-
+---
 
 ## 4. Changelog
 
 - Jul 14, 2021 - Adapted to VS Code Insiders Release Version 1.59
 - Jul 01, 2021 - Added snippet source (thanks for [mechero's suggestion](https://news.ycombinator.com/item?id=27698687))
 - Jun 30, 2021 - Publish the initial version
+
+---
+
+## 5. Troubleshooting
+
+### Common reasons why you can't run Captain Stack:
+
+- You're not using VSCode Insider. It can be [downloaded here](https://code.visualstudio.com/insiders/)
+- When `Run debugger`, it shows different target options (nodejs, edge, etc.). Your VSCode root directly might be incorrect. Make sure your root directory is the same with the `package.json` file.
+- Error message `module "node-fetch" not found...`. You need to run `npm install`
+
+### Still not running?
+
+- You haven't enabled the inline completion feature. To enable, set VSCode config `"editor.inlineSuggest.enabled": true`
+- It might conflict with some other plugins. You might need to disable plugins to check
+
+If none of the above works, open a thread or join our [Discord channel and have a chat](https://discord.gg/5F5tDsWFmp).
+
+---
+
+## 6. Contributors
+
+The plugins is available, thanks to:
+
+- [Kekschen](https://github.com/Kek5chen)
+- [Charlie Lin](https://github.com/clin1234)
+- [Hieu Nguyen](https://github.com/hieunc229)
 
 **Feel free to open a thread for feedback or discussion. And have fun!**
