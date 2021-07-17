@@ -3,11 +3,17 @@
 # Captain Stack — Code suggestion for VSCode
 
 
-This feature is somewhat similar to [Github Copilot](https://copilot.github.com/)'s code suggestion. But instead of using AI, it sends your search query to Google, then retrieves StackOverflow answers and autocompletes them for you. Have questions? [Join our Discord server](https://discord.gg/5F5tDsWFmp) [![Discord Chat](https://img.shields.io/discord/864164585070526475.svg)](https://discord.gg/5F5tDsWFmp)  
+This feature is somewhat similar to [Github Copilot](https://copilot.github.com/)'s code suggestion. But instead of using AI, it sends your search query to Google, then retrieves StackOverflow answers and autocompletes them for you. 
 
-_Captain Stack is launched on Product Hunt and would appreciate your support_
+Have questions? [Join our Discord server](https://discord.gg/5F5tDsWFmp) [![Discord Chat](https://img.shields.io/discord/864164585070526475.svg)](https://discord.gg/5F5tDsWFmp)  
 
-<a href="https://www.producthunt.com/posts/captain-stack?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-captain-stack" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=302437&theme=light" alt="Captain Stack - An open source alternative to GitHub Copilot | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a> 
+---
+
+[<img src="https://raw.githubusercontent.com/hieunc229/asssets/master/cs-header.svg" alt="Inverr"/>](https://inverr.com/)
+
+[Need to build website? Use Inverr](https://inverr.com/?ref=github-filepond) / [Dev updates on Twitter](https://twitter.com/hieuSSR/)
+
+---
 
 
 ![Demo Video](./demo.gif)
