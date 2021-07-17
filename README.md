@@ -85,6 +85,7 @@ If those factor became problems, the extension could be using their official API
 - You're not using VSCode Insider. It can be [downloaded here](https://code.visualstudio.com/insiders/)
 - When `Run debugger`, it shows different target options (nodejs, edge, etc.). Your VSCode root directly might be incorrect. Make sure your root directory is the same with the `package.json` file.
 - Error message `module "node-fetch" not found...`. You need to run `npm install`
+<<<<<<< HEAD
 - `canvas.node` was compiled against a different Node.js. [Try to remove canvas](https://github.com/hieunc229/copilot-clone/issues/9) (`npm uninstall canvas`)
 
 ### Still not running?
