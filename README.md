@@ -9,13 +9,6 @@ Have questions? [Join our Discord server](https://discord.gg/5F5tDsWFmp) [![Disc
 
 ---
 
-[<img src="https://raw.githubusercontent.com/hieunc229/asssets/master/cs-header.svg" alt="Inverr"/>](https://inverr.com/)
-
-[Need to build website? Use Inverr Site Builder](https://inverr.com/?ref=github-filepond) / [Dev updates on Twitter](https://twitter.com/hieuSSR/)
-
----
-
-
 ![Demo Video](./demo.gif)
 
 ## Table of contents:
@@ -94,6 +87,7 @@ If those factor became problems, the extension could be using their official API
 - You're not using VSCode Insider. It can be [downloaded here](https://code.visualstudio.com/insiders/)
 - When `Run debugger`, it shows different target options (nodejs, edge, etc.). Your VSCode root directly might be incorrect. Make sure your root directory is the same with the `package.json` file.
 - Error message `module "node-fetch" not found...`. You need to run `npm install`
+- `canvas.node` was compiled against a different Node.js. [Try to remove canvas](https://github.com/hieunc229/copilot-clone/issues/9) (`npm uninstall canvas`)
 
 ### Still not running?
 
@@ -113,3 +107,9 @@ The plugins is available, thanks to:
 - [Hieu Nguyen](https://github.com/hieunc229)
 
 **Feel free to open a thread for feedback or discussion. And have fun!**
+
+---
+Love Captain Stack? Check out other things I do:
+
+- [Inverr Nocode Site Builder](https://inverr.com/?ref=github-filepond)
+- [Hieu's Twitter](https://twitter.com/hieuSSR/)
