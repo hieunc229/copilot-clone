@@ -10,7 +10,8 @@
 			"request": "launch",
 			"runtimeExecutable": "${execPath}",
 			"args": [
-				"--extensionDevelopmentPath=${workspaceFolder}"
+				"--extensionDevelopmentPath=${workspaceFolder}",
+				"--enable-proposed-api"
 			],
 			"outFiles": [
 				"${workspaceFolder}/out/**/*.js"
