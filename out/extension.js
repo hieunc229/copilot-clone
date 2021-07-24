@@ -14,14 +14,14 @@ const vscode = require("vscode");
 const config_1 = require("./config");
 const search_1 = require("./utils/search");
 function activate(context) {
-    const disposable = vscode.commands.registerCommand('extension.copilot-clone-settings', () => {
+    const disposable = vscode.commands.registerCommand('extension.captain-stack-settings', () => {
         vscode.window.showInformationMessage('Show settings');
     });
     context.subscriptions.push(disposable);
     const provider = {
         provideInlineCompletionItems: (document, position, context, token) => __awaiter(this, void 0, void 0, function* () {
             const textBeforeCursor = document.getText(new vscode.Range(position.with(undefined, 0), position));
-            if (textBeforeCursor.indexOf(config_1.default.SEARCH_PHARSE_START) == 0 && textBeforeCursor[textBeforeCursor.length - 1] === config_1.default.SEARCH_PHARSE_END) {
+            if (textBeforeCursor.indexOf(config_1.default.SEARCH_PHRASE_START) == 0 && textBeforeCursor[textBeforeCursor.length - 1] === config_1.default.SEARCH_PHRASE_END) {
                 let rs;
                 try {
                     rs = yield search_1.search(textBeforeCursor);
