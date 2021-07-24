@@ -4,7 +4,7 @@ import { search } from './utils/search';
 
 export function activate(context: vscode.ExtensionContext) {
 	const disposable = vscode.commands.registerCommand(
-		'extension.copilot-clone-settings',
+		'extension.captain-stack-settings',
 		() => {
 			vscode.window.showInformationMessage('Show settings');
 		}

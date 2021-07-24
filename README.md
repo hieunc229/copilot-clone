@@ -1,12 +1,11 @@
-![Captain Stack](./logo.svg)
+![Captain Stack](./icon.png)
 
 # Captain Stack — Code suggestion for VSCode
 
 
 This feature is somewhat similar to [Github Copilot](https://copilot.github.com/)'s code suggestion. But instead of using AI, it sends your search query to Google, then retrieves StackOverflow answers and autocompletes them for you. 
 
-Have questions? [Join our Discord server](https://discord.gg/5F5tDsWFmp) [![Discord Chat](https://img.shields.io/discord/864164585070526475.svg)](https://discord.gg/5F5tDsWFmp)  
-
+Have questions? [Join our Discord server](https://discord.gg/5F5tDsWFmp)
 ---
 
 ![Demo Video](./demo.gif)
