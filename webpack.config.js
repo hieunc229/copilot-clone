@@ -1,8 +1,5 @@
 const path = require('path');
-<<<<<<< HEAD
 const webpack = require("webpack");
-=======
->>>>>>> e32b490 (Added configs to publish to OpenVSX)
 
 const config = {
   target: 'node',
@@ -33,11 +30,7 @@ const config = {
       {
         test: /\.node$/,
         loader: "node-loader",
-<<<<<<< HEAD
       }
-=======
-      },
->>>>>>> e32b490 (Added configs to publish to OpenVSX)
     ]
   }
 };

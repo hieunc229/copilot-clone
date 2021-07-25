@@ -10,6 +10,6 @@ export function fetchPageTextContent(url: string): Promise<FetchPageResult> {
         return fetch(url)
             .then(rs => rs.text())
             .then(textContent => resolve({ textContent, url }))
-            .catch(reject)
-    })
+            .catch(reject);
+    });
 }

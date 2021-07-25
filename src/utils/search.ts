@@ -11,7 +11,7 @@ export async function search(keyword: string): Promise<null | { results: Snippet
         extractGoogleResults(keyword)
             .then(async urls => {
                 if (urls === null) {
-                    return Promise.resolve(null)
+                    return Promise.resolve(null);
                 }
 
                 let results: SnippetResult[] = [];
@@ -26,11 +26,11 @@ export async function search(keyword: string): Promise<null | { results: Snippet
                         }
                     }
 
-                    resolve({ results })
+                    resolve({ results });
                 } catch (err) {
-                    reject(err)
+                    reject(err);
                 }
-            }).catch(reject)
+            }).catch(reject);
 
-    })
+    });
 }
