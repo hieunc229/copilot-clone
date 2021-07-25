@@ -1,4 +1,4 @@
-import { JSDOM } from "jsdom";
+import { parseHTML } from "linkedom";
 import { FetchPageResult } from "./fetchPageContent";
 
 export type SnippetResult = {
@@ -16,7 +16,9 @@ export type SnippetPageResult = {
 
 // Extract and sort stackoverflow answers
 export function extractSnippetResults(options: FetchPageResult): SnippetPageResult {
-    var doc = new JSDOM(options.textContent)
+    var doc = parseHTML(options.textContent)
+
+    console.log(`got`, doc)
 
     let answersWithCodeBlock = Array.from(doc.window.document.querySelectorAll(".answer"))
         .filter((item: any) => item.querySelector("code") != null)

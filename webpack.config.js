@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require("webpack");
 
 const config = {
   target: 'node',
@@ -29,7 +30,7 @@ const config = {
       {
         test: /\.node$/,
         loader: "node-loader",
-      },
+      }
     ]
   }
 };

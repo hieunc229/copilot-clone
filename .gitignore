@@ -6,6 +6,6 @@ node_modules
 yarn.lock
 package-lock.json
 
-/ts-out
+/out-vsxi
 
 *.node

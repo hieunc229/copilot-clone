@@ -3,7 +3,7 @@
 	"name": "captain-stack",
 	"displayName": "Captain Stack",
 	"description": "Find snippets codes from Stackoverflow",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"publisher": "captain-stack",
 	"icon": "icon.png",
 	"repository": "https://github.com/hieunc229/copilot-clone",
@@ -42,7 +42,8 @@
 		"vscode:prepublish": "webpack --mode production",
 		"webpack": "webpack --mode development",
 		"webpack-dev": "webpack --mode development --watch",
-		"test-compile": "tsc -p ./"
+		"test-compile": "tsc -p ./",
+		"build": "vsce package -o ./out-vsix"
 	},
 	"devDependencies": {
 		"@types/node": "^14.15.0",
@@ -62,8 +63,8 @@
 	},
 	"dependencies": {
 		"@types/jsdom": "^16.2.12",
-		"canvas": "^2.8.0",
 		"jsdom": "^16.6.0",
+		"linkedom": "^0.11.1",
 		"node-fetch": "^2.6.1"
 	}
 }

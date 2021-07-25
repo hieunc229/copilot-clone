@@ -1,0 +1,37 @@
+/*!
+ * Canvas
+ * Copyright (c) 2010 LearnBoost <tj@learnboost.com>
+ * MIT Licensed
+ */
+
+/*!
+ * Canvas - Context2d
+ * Copyright (c) 2010 LearnBoost <tj@learnboost.com>
+ * MIT Licensed
+ */
+
+/*!
+ * Canvas - Image
+ * Copyright (c) 2010 LearnBoost <tj@learnboost.com>
+ * MIT Licensed
+ */
+
+/*!
+ * Canvas - JPEGStream
+ * Copyright (c) 2010 LearnBoost <tj@learnboost.com>
+ * MIT Licensed
+ */
+
+/*!
+ * Canvas - PDFStream
+ */
+
+/*!
+ * Canvas - PNGStream
+ * Copyright (c) 2010 LearnBoost <tj@learnboost.com>
+ * MIT Licensed
+ */
+
+/*! (c) Andrea Giammarchi - ISC */
+
+/*! simple-concat. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
