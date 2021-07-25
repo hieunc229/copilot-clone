@@ -18,8 +18,6 @@ export type SnippetPageResult = {
 export function extractSnippetResults(options: FetchPageResult): SnippetPageResult {
     var doc = parseHTML(options.textContent)
 
-    console.log(`got`, doc)
-
     let answersWithCodeBlock = Array.from(doc.window.document.querySelectorAll(".answer"))
         .filter((item: any) => item.querySelector("code") != null)
 
