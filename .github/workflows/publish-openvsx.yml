@@ -1,0 +1,28 @@
+name: NodeJS with Webpack
+
+on:
+  push:
+    branches: [ releases ]
+
+jobs:
+  build:
+    runs-on: [macos-latest, ubuntu-latest, windows-latest]
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+    
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - run: npm install
+    - run: npm ci
+    - name: Publish to Open VSX Registry
+      uses: HaaLeo/publish-vscode-extension@v0
+      with:
+        pat: ${{ secrets.OPEN_VSX_TOKEN }}
