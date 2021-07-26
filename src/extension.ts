@@ -67,7 +67,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 /**
  * Match the giving string with search pattern
- * @param input 
+ * @param input
  * @returns search phrase or undefined
  */
 function matchPhrase(input: string) {
