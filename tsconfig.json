@@ -1,10 +1,9 @@
 {
 	"compilerOptions": {
 		"module": "commonjs",
-		"target": "es6",
-		"lib": ["es6"],
+		"target": "es2020",
+		"lib": ["es2020"],
 		"outDir": "out",
-		"sourceMap": false,
 		"strict": true,
 		"rootDir": "src",
 		"skipDefaultLibCheck": true,
