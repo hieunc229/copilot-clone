@@ -22,7 +22,9 @@ export function activate(context: vscode.ExtensionContext) {
 				new vscode.Range(position.with(undefined, 0), position)
 			);
 
-			if (textBeforeCursor.indexOf(CSConfig.SEARCH_PHRASE_START) == 0 && textBeforeCursor[textBeforeCursor.length - 1] === CSConfig.SEARCH_PHRASE_END) {
+			let searchPhrase = matchPhrase(textBeforeCursor);
+
+			if (searchPhrase) {
 
 				let rs;
 
@@ -61,4 +63,14 @@ export function activate(context: vscode.ExtensionContext) {
 	vscode.window.getInlineCompletionItemController(provider).onDidShowCompletionItem(e => {
 		const id = e.completionItem.trackingId;
 	});
+}
+
+/**
+ * Match the giving string with search pattern
+ * @param input 
+ * @returns search pharse or undefined
+ */
+function matchPhrase(input: string) {
+	let match = CSConfig.SEARCH_PATTERN.exec(input)
+	return match && match.length ? match[1] : undefined
 }
