@@ -68,7 +68,7 @@ export function activate(context: vscode.ExtensionContext) {
 /**
  * Match the giving string with search pattern
  * @param input 
- * @returns search pharse or undefined
+ * @returns search phrase or undefined
  */
 function matchPhrase(input: string) {
 	let match = CSConfig.SEARCH_PATTERN.exec(input)
