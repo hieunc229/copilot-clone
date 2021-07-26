@@ -4,6 +4,7 @@ node_modules
 *.vsix
 
 yarn.lock
+yarn-error.log
 package-lock.json
 
 /out-vsxi

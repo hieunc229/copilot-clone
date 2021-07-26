@@ -8,7 +8,7 @@
 	"icon": "icon.png",
 	"homepage": "https://github.com/hieunc229/copilot-clone",
 	"repository": "https://github.com/hieunc229/copilot-clone",
-	"keywords": ["code-suggestion", "copilot", "code-inference"]
+	"keywords": ["code-suggestion", "copilot", "code-inference"],
 	"engines": {
 		"vscode": "^1.34.0"
 	},
@@ -47,7 +47,6 @@
 	},
 	"scripts": {
 		"lint": "eslint . --ext .ts,.tsx",
-		"lsp": "typescript-language-server "
 		"watch": "tsc -watch -p ./",
 		"download-api": "vscode-dts dev",
 		"postdownload-api": "vscode-dts main",
