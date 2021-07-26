@@ -1,21 +1,24 @@
 on:
   schedule:
-    - cron: '0 0 * * 0'
+    - cron: '0 0 */10 * *'
 
 name: Deploy Extension
 jobs:
-  deploy:
-    runs-on: [ubuntu-latest, macos-latest, windows-latest]
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '16'
-          cache: 'npm'
-          check-latest: true
-      - run: npm install
-      - run: npm ci
-      - name: Publish to Open VSX Registry
-        uses: HaaLeo/publish-vscode-extension@v0
-        with:
-          pat: ${{ secrets.OPEN_VSX_TOKEN }}
+  build:
+      strategy:
+        matrix:
+          os: [macos-latest, ubuntu-latest, windows-latest]
+      runs-on: ${{ matrix.os }}
+      steps:
+        - uses: actions/checkout@v2
+        - uses: actions/setup-node@v1
+          with:
+            node-version: '16'
+            cache: 'npm'
+            check-latest: true
+        - run: npm install
+        - run: npm ci
+        - name: Publish to Open VSX Registry
+          uses: HaaLeo/publish-vscode-extension@v0
+          with:
+            pat: ${{ secrets.OPEN_VSX_TOKEN }}
