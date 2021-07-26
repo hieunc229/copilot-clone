@@ -1,10 +1,12 @@
 on:
-  schedule:
-    - cron: '0 0 */10 * *'
+  push:
+    branches:
+      - releases;
 
 name: Deploy Extension
 jobs:
   build:
+      name: "Build and deploy extension"
       strategy:
         matrix:
           os: [macos-latest, ubuntu-latest, windows-latest]
