@@ -65,4 +65,3 @@ export function activate(context: vscode.ExtensionContext) {
 		const id = e.completionItem.trackingId;
 	});
 }
-
