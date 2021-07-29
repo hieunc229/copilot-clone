@@ -22,14 +22,14 @@ export function activate(context: vscode.ExtensionContext) {
 				new vscode.Range(position.with(undefined, 0), position)
 			);
 
-			let searchPhrase = matchPhrase(textBeforeCursor);
+			const searchPhrase = matchPhrase(textBeforeCursor);
 
 			if (searchPhrase) {
 
 				let rs;
 
 				try {
-					rs = await search(searchPhrase);
+					rs = await search(searchPhrase[1]);
 				} catch (err) {
 					vscode.window.showErrorMessage(err.toString());
 					return { items:[] };
@@ -44,7 +44,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 				rs.results.forEach((item, i) => {
 
-					const output = `\n// Source: https://stackoverflow.com${item.sourceURL}\n${item.code}`;
+					const output = `\n${searchPhrase?.[0]} Source: https://stackoverflow.com${item.sourceURL}\n${item.code}`;
 					items.push({
 						text: output,
 						range: new vscode.Range(position.translate(0, output.length), position),
@@ -71,6 +71,6 @@ export function activate(context: vscode.ExtensionContext) {
  * @returns search phrase or undefined
  */
 function matchPhrase(input: string) {
-	let match = CSConfig.SEARCH_PATTERN.exec(input)
-	return match && match.length ? match[1] : undefined
+	const match = CSConfig.SEARCH_PATTERN.exec(input);
+	return match ? [match[1], match[2]] : undefined;
 }

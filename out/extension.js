@@ -12,11 +12,11 @@ function activate(context) {
     const provider = {
         provideInlineCompletionItems: async (document, position, context, token) => {
             const textBeforeCursor = document.getText(new vscode.Range(position.with(undefined, 0), position));
-            let searchPhrase = matchPhrase(textBeforeCursor);
+            const searchPhrase = matchPhrase(textBeforeCursor);
             if (searchPhrase) {
                 let rs;
                 try {
-                    rs = await search_1.search(searchPhrase);
+                    rs = await search_1.search(searchPhrase[1]);
                 }
                 catch (err) {
                     vscode.window.showErrorMessage(err.toString());
@@ -27,7 +27,7 @@ function activate(context) {
                 }
                 const items = new Array();
                 rs.results.forEach((item, i) => {
-                    const output = `\n// Source: https://stackoverflow.com${item.sourceURL}\n${item.code}`;
+                    const output = `\n${searchPhrase?.[0]} Source: https://stackoverflow.com${item.sourceURL}\n${item.code}`;
                     items.push({
                         text: output,
                         range: new vscode.Range(position.translate(0, output.length), position),
@@ -52,6 +52,6 @@ exports.activate = activate;
  * @returns search phrase or undefined
  */
 function matchPhrase(input) {
-    let match = config_1.default.SEARCH_PATTERN.exec(input);
-    return match && match.length ? match[1] : undefined;
+    const match = config_1.default.SEARCH_PATTERN.exec(input);
+    return match ? [match[1], match[2]] : undefined;
 }

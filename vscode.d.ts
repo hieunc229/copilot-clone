@@ -11567,7 +11567,10 @@ declare module 'vscode' {
 		/**
 		 * An event that fires when a message is received from a renderer.
 		 */
-		readonly onDidReceiveMessage: Event<{ editor: NotebookEditor, message: any }>;
+		readonly onDidReceiveMessage: Event<{
+			readonly editor: NotebookEditor;
+			readonly message: any;
+		}>;
 
 		/**
 		 * Send a message to one or all renderer.
@@ -13817,7 +13820,7 @@ declare module 'vscode' {
 
 	/**
 	 * Namespace for testing functionality. Tests are published by registering
-	 * {@link TestController} instances, then adding {@link TestItem}s.
+	 * {@link TestController} instances, then adding {@link TestItem TestItems}.
 	 * Controllers may also describe how to run tests by creating one or more
 	 * {@link TestRunProfile} instances.
 	 */
@@ -13902,7 +13905,7 @@ declare module 'vscode' {
 	/**
 	 * Entry point to discover and execute tests. It contains {@link items} which
 	 * are used to populate the editor UI, and is associated with
-	 * {@link createRunProfile | run profiles} to allow
+	 * {@link createRunProfile run profiles} to allow
 	 * for tests to be executed.
 	 */
 	export interface TestController {
@@ -13964,7 +13967,7 @@ declare module 'vscode' {
 		resolveHandler?: (item: TestItem | undefined) => Thenable<void> | void;
 
 		/**
-		 * Creates a {@link TestRun<T>}. This should be called by the
+		 * Creates a {@link TestRun}. This should be called by the
 		 * {@link TestRunProfile} when a request is made to execute tests, and may
 		 * also be called if a test run is detected externally. Once created, tests
 		 * that are included in the request will be moved into the queued state.
@@ -14006,7 +14009,14 @@ declare module 'vscode' {
 	}
 
 	/**
-	 * Options given to {@link tests.runTests}.
+	 * A TestRunRequest is a precursor to a {@link TestRun}, which in turn is
+	 * created by passing a request to {@link tests.runTests}. The TestRunRequest
+	 * contains information about which tests should be run, which should not be
+	 * run, and how they are run (via the {@link profile}).
+	 *
+	 * In general, TestRunRequests are created by the editor and pass to
+	 * {@link TestRunProfile.runHandler}, however you can also create test
+	 * requests and runs outside of the `runHandler`.
 	 */
 	export class TestRunRequest {
 		/**
@@ -14018,7 +14028,7 @@ declare module 'vscode' {
 		 * The process of running tests should resolve the children of any test
 		 * items who have not yet been resolved.
 		 */
-		include?: TestItem[];
+		readonly include?: TestItem[];
 
 		/**
 		 * An array of tests the user has marked as excluded from the test included
@@ -14027,14 +14037,14 @@ declare module 'vscode' {
 		 * May be omitted if no exclusions were requested. Test controllers should
 		 * not run excluded tests or any children of excluded tests.
 		 */
-		exclude?: TestItem[];
+		readonly exclude?: TestItem[];
 
 		/**
 		 * The profile used for this request. This will always be defined
 		 * for requests issued from the editor UI, though extensions may
 		 * programmatically create requests not associated with any profile.
 		 */
-		profile?: TestRunProfile;
+		readonly profile?: TestRunProfile;
 
 		/**
 		 * @param tests Array of specific tests to run, or undefined to run all tests
@@ -14086,7 +14096,7 @@ declare module 'vscode' {
 
 		/**
 		 * Indicates a test has failed. You should pass one or more
-		 * {@link TestMessage | TestMessages} to describe the failure.
+		 * {@link TestMessage TestMessages} to describe the failure.
 		 * @param test Test item to update.
 		 * @param messages Messages associated with the test failure.
 		 * @param duration How long the test took to execute, in milliseconds.
@@ -14095,7 +14105,7 @@ declare module 'vscode' {
 
 		/**
 		 * Indicates a test has errored. You should pass one or more
-		 * {@link TestMessage | TestMessages} to describe the failure. This differs
+		 * {@link TestMessage TestMessages} to describe the failure. This differs
 		 * from the "failed" state in that it indicates a test that couldn't be
 		 * executed at all, from a compilation error for example.
 		 * @param test Test item to update.
@@ -14159,7 +14169,7 @@ declare module 'vscode' {
 		add(item: TestItem): void;
 
 		/**
-		 * Removes the a single test item from the collection.
+		 * Removes a single test item from the collection.
 		 * @param itemId Item ID to delete.
 		 */
 		delete(itemId: string): void;
@@ -14167,32 +14177,34 @@ declare module 'vscode' {
 		/**
 		 * Efficiently gets a test item by ID, if it exists, in the children.
 		 * @param itemId Item ID to get.
-		 * @returns The found item, or undefined if it does not exist.
+		 * @returns The found item or undefined if it does not exist.
 		 */
 		get(itemId: string): TestItem | undefined;
 	}
 
 	/**
-	 * A test item is an item shown in the "test explorer" view. It encompasses
-	 * both a suite and a test, since they simiular capabilities.
+	 * An item shown in the "test explorer" view.
+	 *
+	 * A `TestItem` can represent either a test suite or a test itself, since
+	 * they both have similar capabilities.
 	 */
 	export interface TestItem {
 		/**
-		 * Identifier for the TestItem. This is used to correlate
+		 * Identifier for the `TestItem`. This is used to correlate
 		 * test results and tests in the document with those in the workspace
-		 * (test explorer). This cannot change for the lifetime of the TestItem,
+		 * (test explorer). This cannot change for the lifetime of the `TestItem`,
 		 * and must be unique among its parent's direct children.
 		 */
 		readonly id: string;
 
 		/**
-		 * URI this TestItem is associated with. May be a file or directory.
+		 * URI this `TestItem` is associated with. May be a file or directory.
 		 */
 		readonly uri?: Uri;
 
 		/**
 		 * The children of this test item. For a test suite, this may contain the
-		 * individual test cases, or nested suites.
+		 * individual test cases or nested suites.
 		 */
 		readonly children: TestItemCollection;
 
@@ -14205,7 +14217,8 @@ declare module 'vscode' {
 
 		/**
 		 * Indicates whether this test item may have children discovered by resolving.
-		 * If so, it will be shown as expandable in the Test Explorer view, and
+		 *
+		 * If true, this item is shown as expandable in the Test Explorer view and
 		 * expanding the item will cause {@link TestController.resolveHandler}
 		 * to be invoked with the item.
 		 *
@@ -14215,8 +14228,9 @@ declare module 'vscode' {
 
 		/**
 		 * Controls whether the item is shown as "busy" in the Test Explorer view.
-		 * This is useful for showing status while discovering children. Defaults
-		 * to false.
+		 * This is useful for showing status while discovering children.
+		 *
+		 * Defaults to `false`.
 		 */
 		busy: boolean;
 
@@ -14231,15 +14245,17 @@ declare module 'vscode' {
 		description?: string;
 
 		/**
-		 * Location of the test item in its `uri`. This is only meaningful if the
-		 * `uri` points to a file.
+		 * Location of the test item in its {@link uri}.
+		 *
+		 * This is only meaningful if the `uri` points to a file.
 		 */
 		range?: Range;
 
 		/**
-		 * May be set to an error associated with loading the test. Note that this
-		 * is not a test result and should only be used to represent errors in
-		 * discovery, such as syntax errors.
+		 * Optional error encountered while loading the test.
+		 *
+		 * Note that this is not a test result and should only be used to represent errors in
+		 * test discovery, such as syntax errors.
 		 */
 		error?: string | MarkdownString;
 	}
@@ -14255,12 +14271,12 @@ declare module 'vscode' {
 		message: string | MarkdownString;
 
 		/**
-		 * Expected test output. If given with `actualOutput`, a diff view will be shown.
+		 * Expected test output. If given with {@link actualOutput}, a diff view will be shown.
 		 */
 		expectedOutput?: string;
 
 		/**
-		 * Actual test output. If given with `expectedOutput`, a diff view will be shown.
+		 * Actual test output. If given with {@link expectedOutput}, a diff view will be shown.
 		 */
 		actualOutput?: string;
 

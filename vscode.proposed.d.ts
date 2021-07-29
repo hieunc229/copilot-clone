@@ -1001,6 +1001,20 @@ declare module 'vscode' {
 	}
 	//#endregion
 
+	export class TaskGroup2 {
+		static Clean: TaskGroup2;
+		static Build: TaskGroup2;
+		static Rebuild: TaskGroup2;
+		static Test: TaskGroup2;
+		readonly isDefault?: boolean;
+		readonly id: string;
+		private constructor(id: string, label: string);
+	}
+
+	export class Task2 extends Task {
+		group?: TaskGroup2;
+	}
+
 	//#region Custom editor move https://github.com/microsoft/vscode/issues/86146
 
 	// TODO: Also for custom editor
@@ -1884,18 +1898,18 @@ declare module 'vscode' {
 		/**
 		 * Unix milliseconds timestamp at which the test run was completed.
 		 */
-		completedAt: number;
+		readonly completedAt: number;
 
 		/**
 		 * Optional raw output from the test run.
 		 */
-		output?: string;
+		readonly output?: string;
 
 		/**
 		 * List of test results. The items in this array are the items that
 		 * were passed in the {@link tests.runTests} method.
 		 */
-		results: ReadonlyArray<Readonly<TestResultSnapshot>>;
+		readonly results: ReadonlyArray<Readonly<TestResultSnapshot>>;
 	}
 
 	/**
