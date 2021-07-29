@@ -16,7 +16,7 @@ function activate(context) {
             if (searchPhrase) {
                 let rs;
                 try {
-                    rs = await search_1.search(textBeforeCursor);
+                    rs = await search_1.search(searchPhrase);
                 }
                 catch (err) {
                     vscode.window.showErrorMessage(err.toString());
@@ -49,7 +49,7 @@ exports.activate = activate;
 /**
  * Match the giving string with search pattern
  * @param input
- * @returns search pharse or undefined
+ * @returns search phrase or undefined
  */
 function matchPhrase(input) {
     let match = config_1.default.SEARCH_PATTERN.exec(input);

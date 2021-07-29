@@ -29,7 +29,7 @@ export function activate(context: vscode.ExtensionContext) {
 				let rs;
 
 				try {
-					rs = await search(textBeforeCursor);
+					rs = await search(searchPhrase);
 				} catch (err) {
 					vscode.window.showErrorMessage(err.toString());
 					return { items:[] };
