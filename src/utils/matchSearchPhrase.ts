@@ -17,13 +17,13 @@ export function matchSearchPhrase(input: string): SearchMatchResult | undefined 
 
     if (match && match.length > 2) {
 
-        let [_, commentSyntax, searchPhrase, commentSyntaxEnd] = match;
+        const [_, commentSyntax, searchPhrase, commentSyntaxEnd] = match;
 
         return {
             commentSyntax,
             commentSyntaxEnd,
             searchPhrase,
-        }
+        };
     }
 
     return undefined;

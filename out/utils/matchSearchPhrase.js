@@ -10,7 +10,7 @@ const config_1 = require("../config");
 function matchSearchPhrase(input) {
     const match = config_1.default.SEARCH_PATTERN.exec(input);
     if (match && match.length > 2) {
-        let [_, commentSyntax, searchPhrase, commentSyntaxEnd] = match;
+        const [_, commentSyntax, searchPhrase, commentSyntaxEnd] = match;
         return {
             commentSyntax,
             commentSyntaxEnd,
