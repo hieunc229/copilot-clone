@@ -27,7 +27,7 @@ function activate(context) {
                 }
                 const items = new Array();
                 rs.results.forEach((item, i) => {
-                    const output = `\n${match.commentSyntax} Source: https://stackoverflow.com${item.sourceURL}\n${item.code} ${match.commentSyntaxEnd}`;
+                    const output = `\n${match.commentSyntax} Source: https://stackoverflow.com${item.sourceURL} ${match.commentSyntaxEnd}\n${item.code}`;
                     items.push({
                         text: output,
                         range: new vscode.Range(position.translate(0, output.length), position),
