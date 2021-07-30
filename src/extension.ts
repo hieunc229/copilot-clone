@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
-import CSConfig from './config';
+
 import { search } from './utils/search';
+import { matchSearchPhrase } from './utils/matchSearchPhrase';
 
 export function activate(context: vscode.ExtensionContext) {
 	const disposable = vscode.commands.registerCommand(
@@ -22,17 +23,17 @@ export function activate(context: vscode.ExtensionContext) {
 				new vscode.Range(position.with(undefined, 0), position)
 			);
 
-			const searchPhrase = matchPhrase(textBeforeCursor);
+			const match = matchSearchPhrase(textBeforeCursor);
 
-			if (searchPhrase) {
+			if (match) {
 
 				let rs;
 
 				try {
-					rs = await search(searchPhrase[1]);
+					rs = await search(match.searchPhrase);
 				} catch (err) {
 					vscode.window.showErrorMessage(err.toString());
-					return { items:[] };
+					return { items: [] };
 				}
 
 
@@ -44,7 +45,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 				rs.results.forEach((item, i) => {
 
-					const output = `\n${searchPhrase?.[0]} Source: https://stackoverflow.com${item.sourceURL}\n${item.code}`;
+					const output = `\n${match.commentSyntax} Source: https://stackoverflow.com${item.sourceURL}\n${item.code} ${match.commentSyntaxEnd}`;
 					items.push({
 						text: output,
 						range: new vscode.Range(position.translate(0, output.length), position),
@@ -65,12 +66,3 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 }
 
-/**
- * Match the giving string with search pattern
- * @param input
- * @returns search phrase or undefined
- */
-function matchPhrase(input: string) {
-	const match = CSConfig.SEARCH_PATTERN.exec(input);
-	return match ? [match[1], match[2]] : undefined;
-}

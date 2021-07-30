@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.activate = void 0;
 const vscode = require("vscode");
-const config_1 = require("./config");
 const search_1 = require("./utils/search");
+const matchSearchPhrase_1 = require("./utils/matchSearchPhrase");
 function activate(context) {
     const disposable = vscode.commands.registerCommand('extension.captain-stack-settings', () => {
         vscode.window.showInformationMessage('Show settings');
@@ -12,11 +12,11 @@ function activate(context) {
     const provider = {
         provideInlineCompletionItems: async (document, position, context, token) => {
             const textBeforeCursor = document.getText(new vscode.Range(position.with(undefined, 0), position));
-            const searchPhrase = matchPhrase(textBeforeCursor);
-            if (searchPhrase) {
+            const match = matchSearchPhrase_1.matchSearchPhrase(textBeforeCursor);
+            if (match) {
                 let rs;
                 try {
-                    rs = await search_1.search(searchPhrase[1]);
+                    rs = await search_1.search(match.searchPhrase);
                 }
                 catch (err) {
                     vscode.window.showErrorMessage(err.toString());
@@ -27,7 +27,7 @@ function activate(context) {
                 }
                 const items = new Array();
                 rs.results.forEach((item, i) => {
-                    const output = `\n${searchPhrase?.[0]} Source: https://stackoverflow.com${item.sourceURL}\n${item.code}`;
+                    const output = `\n${match.commentSyntax} Source: https://stackoverflow.com${item.sourceURL}\n${item.code} ${match.commentSyntaxEnd}`;
                     items.push({
                         text: output,
                         range: new vscode.Range(position.translate(0, output.length), position),
@@ -46,12 +46,3 @@ function activate(context) {
     });
 }
 exports.activate = activate;
-/**
- * Match the giving string with search pattern
- * @param input
- * @returns search phrase or undefined
- */
-function matchPhrase(input) {
-    const match = config_1.default.SEARCH_PATTERN.exec(input);
-    return match ? [match[1], match[2]] : undefined;
-}
