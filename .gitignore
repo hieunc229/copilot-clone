@@ -10,3 +10,6 @@ package-lock.json
 /out-vsxi
 
 *.node
+
+vscode.d.ts
+vscode.proposed.d.ts
