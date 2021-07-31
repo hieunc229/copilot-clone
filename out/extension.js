@@ -25,12 +25,14 @@ function activate(context) {
                 if (rs == null) {
                     return { items: [] };
                 }
-                const items = rs.results.map(item => {
-                    const output = `\n${match.commentSyntax} Source: ${item.sourceURL} ${match.commentSyntaxEnd}\n${item.code}`;
-                    return {
+                const items = new Array();
+                rs.results.forEach((item, i) => {
+                    const output = `\n${match.commentSyntax} Source: https://stackoverflow.com${item.sourceURL} ${match.commentSyntaxEnd}\n${item.code}`;
+                    items.push({
                         text: output,
-                        range: new vscode.Range(position.translate(0, output.length), position)
-                    };
+                        range: new vscode.Range(position.translate(0, output.length), position),
+                        trackingId: `snippet-${i}`,
+                    });
                 });
                 return { items };
             }
@@ -38,5 +40,9 @@ function activate(context) {
         },
     };
     vscode.languages.registerInlineCompletionItemProvider({ pattern: "**" }, provider);
+    // Be aware that the API around `getInlineCompletionItemController` will not be finalized as is!
+    vscode.window.getInlineCompletionItemController(provider).onDidShowCompletionItem(e => {
+        const id = e.completionItem.trackingId;
+    });
 }
 exports.activate = activate;

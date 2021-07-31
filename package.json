@@ -55,7 +55,6 @@
 		"webpack": "webpack --mode development",
 		"webpack-dev": "webpack --mode development --watch",
 		"test-compile": "tsc -p ./",
-		"prebuild": "npm run lint",
 		"build": "vsce package -o ./out-vsix"
 	},
 	"devDependencies": {

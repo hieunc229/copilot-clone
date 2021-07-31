@@ -72,7 +72,6 @@ If those factor became problems, the extension could be using their official API
 
 ## 4. Changelog
 
-- Jul 31, 2021 — Create code extracting abstracting to add more code sources 
 - Jul 14, 2021 - Adapted to VS Code Insiders Release Version 1.59
 - Jul 01, 2021 - Added snippet source (thanks for [mechero's suggestion](https://news.ycombinator.com/item?id=27698687))
 - Jun 30, 2021 - Publish the initial version

@@ -13,7 +13,11 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(disposable);
 
-	const provider: vscode.InlineCompletionItemProvider<vscode.InlineCompletionItem> = {
+	interface CustomInlineCompletionItem extends vscode.InlineCompletionItem {
+		trackingId: string;
+	}
+
+	const provider: vscode.InlineCompletionItemProvider<CustomInlineCompletionItem> = {
 		provideInlineCompletionItems: async (document, position, context, token) => {
 			const textBeforeCursor = document.getText(
 				new vscode.Range(position.with(undefined, 0), position)
@@ -32,24 +36,32 @@ export function activate(context: vscode.ExtensionContext) {
 					return { items: [] };
 				}
 
+
 				if (rs == null) {
 					return { items: [] };
 				}
 
-				const items = rs.results.map(item => {
-					const output = `\n${match.commentSyntax} Source: ${item.sourceURL} ${match.commentSyntaxEnd}\n${item.code}`;
-					return {
-						text: output,
-						range: new vscode.Range(position.translate(0, output.length), position)
-					} as vscode.InlineCompletionItem;
-				});
+				const items = new Array<CustomInlineCompletionItem>();
 
+				rs.results.forEach((item, i) => {
+
+					const output = `\n${match.commentSyntax} Source: https://stackoverflow.com${item.sourceURL} ${match.commentSyntaxEnd}\n${item.code}`;
+					items.push({
+						text: output,
+						range: new vscode.Range(position.translate(0, output.length), position),
+						trackingId: `snippet-${i}`,
+					});
+				});
 				return { items };
 			}
-
 			return { items: [] };
 		},
 	};
 
 	vscode.languages.registerInlineCompletionItemProvider({ pattern: "**" }, provider);
+
+	// Be aware that the API around `getInlineCompletionItemController` will not be finalized as is!
+	vscode.window.getInlineCompletionItemController(provider).onDidShowCompletionItem(e => {
+		const id = e.completionItem.trackingId;
+	});
 }
