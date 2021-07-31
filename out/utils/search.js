@@ -31,8 +31,6 @@ async function search(keyword) {
                         results = results.concat(extractStackOverflowResults_1.extractSnippetResults(fetchResult).results);
                     }
                 }
-                for (const y in urls) {
-                }
                 resolve({ results });
             }
             catch (err) {
