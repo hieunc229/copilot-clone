@@ -5,6 +5,10 @@ const extractGoogleResults_1 = require("./extractGoogleResults");
 const extractStackOverflowResults_1 = require("./extractStackOverflowResults");
 const fetchPageContent_1 = require("./fetchPageContent");
 const vscode = require("vscode");
+/**
+ * Cache results to avoid VSCode keep refetching
+ */
+let cachedResults = {};
 // Send search query to google, get answers from stackoverflow
 // then extract and return code results
 async function search(keyword) {

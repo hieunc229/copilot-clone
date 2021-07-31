@@ -3,6 +3,11 @@ import { extractSnippetResults, SnippetResult } from "./extractStackOverflowResu
 import { fetchPageTextContent } from "./fetchPageContent";
 import * as vscode from 'vscode';
 
+/**
+ * Cache results to avoid VSCode keep refetching
+ */
+ let cachedResults: { [keyword: string]: SnippetResult[] } = {}
+ 
 // Send search query to google, get answers from stackoverflow
 // then extract and return code results
 export async function search(keyword: string): Promise<null | { results: SnippetResult[] }> {
