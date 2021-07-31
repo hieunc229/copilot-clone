@@ -1,33 +1,37 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.search = void 0;
-const extractGoogleResults_1 = require("./extractGoogleResults");
-const extractStackOverflowResults_1 = require("./extractStackOverflowResults");
+const extractors_1 = require("./extractors");
 const fetchPageContent_1 = require("./fetchPageContent");
+/**
+ * Cache results to avoid VSCode keep refetching
+ */
+let cachedResults = {};
 // Send search query to google, get answers from stackoverflow
 // then extract and return code results
 async function search(keyword) {
-    return new Promise((resolve, reject) => {
-        extractGoogleResults_1.extractGoogleResults(keyword)
-            .then(async (urls) => {
-            if (urls === null) {
-                return Promise.resolve(null);
-            }
-            let results = [];
-            try {
-                let fetchResult;
-                for (const i in urls.splice(0, 6)) {
-                    if (urls[i]) {
-                        fetchResult = await fetchPageContent_1.fetchPageTextContent(urls[i]);
-                        results = results.concat(extractStackOverflowResults_1.extractSnippetResults(fetchResult).results);
-                    }
+    if (keyword in cachedResults) {
+        return Promise.resolve({ results: cachedResults[keyword] });
+    }
+    /* eslint "no-async-promise-executor": "off" */
+    return new Promise(async (resolve, reject) => {
+        let results = [];
+        let fetchResult;
+        try {
+            for (const i in extractors_1.default) {
+                const extractor = extractors_1.default[i];
+                const urls = await extractor.extractURLFromKeyword(keyword);
+                for (const y in urls) {
+                    fetchResult = await fetchPageContent_1.fetchPageTextContent(urls[y]);
+                    results = results.concat(extractor.extractSnippets(fetchResult));
                 }
-                resolve({ results });
             }
-            catch (err) {
-                reject(err);
-            }
-        }).catch(reject);
+            cachedResults[keyword] = results;
+            resolve({ results });
+        }
+        catch (err) {
+            reject(err);
+        }
     });
 }
 exports.search = search;
