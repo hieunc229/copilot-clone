@@ -3,6 +3,8 @@ import { SnippetResult } from "./extractors/ExtractorAbstract";
 
 import { FetchPageResult, fetchPageTextContent } from "./fetchPageContent";
 
+import * as vscode from 'vscode';
+
 /**
  * Cache results to avoid VSCode keep refetching
  */
@@ -28,7 +30,15 @@ export async function search(keyword: string): Promise<null | { results: Snippet
                 const urls = await extractor.extractURLFromKeyword(keyword);
 
                 for (const y in urls) {
-                    fetchResult = await fetchPageTextContent(urls[y]);
+                    // A promise for vscode to stop showing the status bar message when resolved with the FetchPageResult and then show message with attached promise
+                    // so the message will be hidden again when promise has been resolved.
+                    let promise = new Promise<{ textContent: string, url: string }>((resolve, reject) => {
+                        resolve(fetchPageTextContent(urls[y]));
+                    });
+                    vscode.window.setStatusBarMessage("Loading Captain Stack results...", promise);
+                    fetchResult = await promise;
+                    // When promise resolved, show finished loading for 5 seconds
+                    vscode.window.setStatusBarMessage("Finished loading results", 5000);
                     results = results.concat(extractor.extractSnippets(fetchResult));
                 }
             }
