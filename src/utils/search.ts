@@ -35,9 +35,6 @@ export async function search(keyword: string): Promise<null | { results: Snippet
                         }
                     }
 
-                    for (const y in urls) {
-                    }
-
                     resolve({ results });
                 } catch (err) {
                     reject(err);
