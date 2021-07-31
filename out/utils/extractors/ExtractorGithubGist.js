@@ -10,9 +10,12 @@ class ExtractorGithubGist extends ExtractorAbstract_1.default {
         this.extractSnippets = (options) => {
             const target = linkedom_1.parseHTML(options.textContent);
             const doc = target.window.document;
+            const snippet = doc.querySelector("table.highlight")?.textContent;
+            if (!snippet)
+                return [];
             const item = {
-                votes: parseInt(doc.querySelector(".social-count").textContent),
-                code: cleanContent(doc.querySelector("table.highlight").textContent),
+                votes: parseInt(doc.querySelector(".social-count")?.textContent),
+                code: cleanContent(snippet),
                 sourceURL: options.url,
                 hasCheckMark: false
             };
