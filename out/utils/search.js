@@ -6,7 +6,7 @@ const fetchPageContent_1 = require("./fetchPageContent");
 /**
  * Cache results to avoid VSCode keep refetching
  */
-let cachedResults = {};
+const cachedResults = {};
 // Send search query to google, get answers from stackoverflow
 // then extract and return code results
 async function search(keyword) {
