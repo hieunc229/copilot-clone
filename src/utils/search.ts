@@ -40,7 +40,7 @@ export async function search(keyword: string): Promise<null | { results: Snippet
         } catch (err) {
             reject(err);
         }
-        
+
         // When promise resolved, show finished loading for 7 seconds
         vscode.window.setStatusBarMessage("Finished loading results", 7000);
     });
