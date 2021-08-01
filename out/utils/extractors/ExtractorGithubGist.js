@@ -31,5 +31,5 @@ exports.default = ExtractorGithubGist;
  * @returns
  */
 function cleanContent(input) {
-    return input.replace(/\n      \n        \n        /g, "");
+    return input.replace(/\n {6}\n {8}\n {8}/g, "");
 }
