@@ -14,7 +14,7 @@ async function search(keyword) {
         return Promise.resolve({ results: cachedResults[keyword] });
     }
     /* eslint "no-async-promise-executor": "off" */
-    return new Promise(async (resolve, reject) => {
+    let promise = new Promise(async (resolve, reject) => {
         let results = [];
         let fetchResult;
         try {
@@ -32,6 +32,10 @@ async function search(keyword) {
         catch (err) {
             reject(err);
         }
+        // When promise resolved, show finished loading for 5 seconds
+        vscode.window.setStatusBarMessage("Finished loading results", 5000);
     });
+    vscode.window.setStatusBarMessage("Loading Captain Stack results...", promise);
+    return promise;
 }
 exports.search = search;
