@@ -34,5 +34,3 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           # [NPM PARAM] Audit level. Allowed values are: low|moderate|high|critical.
           level: low
-          # [NPM PARAM] Use this parameter if you want to automate a fix for the found issues
-          fix: true
