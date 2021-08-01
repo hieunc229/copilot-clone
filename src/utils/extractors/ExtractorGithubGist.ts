@@ -34,5 +34,5 @@ export default class ExtractorGithubGist extends ExtractorAbstract {
  * @returns 
  */
 function cleanContent(input: string) {
-    return input.replace(/\n      \n        \n        /g, "")
+    return input.replace(/\n {6}\n {8}\n {8}/g, "");
 }
