@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.search = void 0;
 const extractors_1 = require("./extractors");
 const fetchPageContent_1 = require("./fetchPageContent");
+const vscode = require("vscode");
 /**
  * Cache results to avoid VSCode keep refetching
  */
@@ -14,7 +15,7 @@ async function search(keyword) {
         return Promise.resolve({ results: cachedResults[keyword] });
     }
     /* eslint "no-async-promise-executor": "off" */
-    let promise = new Promise(async (resolve, reject) => {
+    const promise = new Promise(async (resolve, reject) => {
         let results = [];
         let fetchResult;
         try {
