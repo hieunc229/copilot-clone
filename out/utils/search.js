@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.search = void 0;
 const extractors_1 = require("./extractors");
 const fetchPageContent_1 = require("./fetchPageContent");
+const vscode = require("vscode");
 /**
  * Cache results to avoid VSCode keep refetching
  */
@@ -32,6 +33,10 @@ async function search(keyword) {
         catch (err) {
             reject(err);
         }
+        // When promise resolved, show finished loading for 5 seconds
+        vscode.window.setStatusBarMessage("Finished loading results", 5000);
     });
+    vscode.window.setStatusBarMessage("Loading Captain Stack results...", promise);
+    return promise;
 }
 exports.search = search;
