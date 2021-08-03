@@ -44,6 +44,14 @@ export function activate(context: vscode.ExtensionContext) {
 					} as vscode.InlineCompletionItem;
 				});
 
+				let resultCountSO = 0, resultCountGG = 0;
+				for (const i of rs.results) {
+					if (i.sourceURL.includes('stackoverflow.com')) resultCountSO++;
+					else if (i.sourceURL.includes('gist.github.com')) resultCountGG++;
+				}
+				// TODO: refactor in case of more code sources
+				vscode.window.showInformationMessage(`Got ${resultCountSO} results from Stack Overflow, ${resultCountGG} results from Github Gists`);
+
 				return { items };
 			}
 

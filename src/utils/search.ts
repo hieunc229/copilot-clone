@@ -40,9 +40,9 @@ export async function search(keyword: string): Promise<null | { results: Snippet
         } catch (err) {
             reject(err);
         }
-        
-        // When promise resolved, show finished loading for 5 seconds
-        vscode.window.setStatusBarMessage("Finished loading results", 5000);
+
+        // When promise resolved, show finished loading for 7 seconds
+        vscode.window.setStatusBarMessage("Finished loading results", 7000);
     });
     
     vscode.window.setStatusBarMessage("Loading Captain Stack results...", promise);
