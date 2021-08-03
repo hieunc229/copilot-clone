@@ -3,6 +3,8 @@ import { SnippetResult } from "./extractors/ExtractorAbstract";
 
 import { FetchPageResult, fetchPageTextContent } from "./fetchPageContent";
 
+import * as vscode from 'vscode';
+
 /**
  * Cache results to avoid VSCode keep refetching
  */
@@ -18,7 +20,7 @@ export async function search(keyword: string): Promise<null | { results: Snippet
     
 
     /* eslint "no-async-promise-executor": "off" */
-    let promise = new Promise<{ results: SnippetResult[] }>(async (resolve, reject) => {
+    const promise = new Promise<{ results: SnippetResult[] }>(async (resolve, reject) => {
 
         let results: SnippetResult[] = [];
         let fetchResult: FetchPageResult;
@@ -28,7 +30,7 @@ export async function search(keyword: string): Promise<null | { results: Snippet
                 const extractor = SnippetExtractors[i];
                 const urls = await extractor.extractURLFromKeyword(keyword);
 
-                for (const y in urls) {
+                 for (const y in urls) {
                     fetchResult = await fetchPageTextContent(urls[y]);
                     results = results.concat(extractor.extractSnippets(fetchResult));
                 }

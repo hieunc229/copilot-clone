@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.search = void 0;
 const extractors_1 = require("./extractors");
 const fetchPageContent_1 = require("./fetchPageContent");
+const vscode = require("vscode");
 /**
  * Cache results to avoid VSCode keep refetching
  */
@@ -14,7 +15,7 @@ async function search(keyword) {
         return Promise.resolve({ results: cachedResults[keyword] });
     }
     /* eslint "no-async-promise-executor": "off" */
-    let promise = new Promise(async (resolve, reject) => {
+    const promise = new Promise(async (resolve, reject) => {
         let results = [];
         let fetchResult;
         try {
@@ -22,7 +23,15 @@ async function search(keyword) {
                 const extractor = extractors_1.default[i];
                 const urls = await extractor.extractURLFromKeyword(keyword);
                 for (const y in urls) {
-                    fetchResult = await fetchPageContent_1.fetchPageTextContent(urls[y]);
+                    // A promise for vscode to stop showing the status bar message when resolved with the FetchPageResult and then show message with attached promise
+                    // so the message will be hidden again when promise has been resolved.
+                    let promise = new Promise((resolve, reject) => {
+                        resolve(fetchPageContent_1.fetchPageTextContent(urls[y]));
+                    });
+                    vscode.window.setStatusBarMessage("Loading Captain Stack results...", promise);
+                    fetchResult = await promise;
+                    // When promise resolved, show finished loading for 5 seconds
+                    vscode.window.setStatusBarMessage("Finished loading results", 5000);
                     results = results.concat(extractor.extractSnippets(fetchResult));
                 }
             }
