@@ -17,7 +17,7 @@ export async function search(keyword: string): Promise<null | { results: Snippet
     }
 
     /* eslint "no-async-promise-executor": "off" */
-    return new Promise(async (resolve, reject) => {
+    return new Promise<{ results: SnippetResult[] }>(async (resolve, reject) => {
 
         let results: SnippetResult[] = [];
         let fetchResult: FetchPageResult;
