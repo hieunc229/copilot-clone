@@ -30,7 +30,7 @@ export async function search(keyword: string): Promise<null | { results: Snippet
                 const extractor = SnippetExtractors[i];
                 const urls = await extractor.extractURLFromKeyword(keyword);
 
-                for (const y in urls) {
+                 for (const y in urls) {
                     fetchResult = await fetchPageTextContent(urls[y]);
                     results = results.concat(extractor.extractSnippets(fetchResult));
                 }
