@@ -17,7 +17,7 @@ async function search(keyword) {
         return Promise.resolve({ results: cachedResults[keyword] });
     }
     /* eslint "no-async-promise-executor": "off" */
-    let promise = new Promise(async (resolve, reject) => {
+    const promise = new Promise(async (resolve, reject) => {
         let results = [];
         let fetchResult;
         try {

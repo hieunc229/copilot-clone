@@ -20,7 +20,7 @@ export function getConfig() {
 
     return {
         settings: config.settings,
-    } as IConfig
+    } as IConfig;
 }
 
 export default CSConfig;
