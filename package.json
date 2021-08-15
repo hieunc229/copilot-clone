@@ -8,7 +8,11 @@
 	"icon": "icon.png",
 	"homepage": "https://github.com/hieunc229/copilot-clone",
 	"repository": "https://github.com/hieunc229/copilot-clone",
-	"keywords": ["code-suggestion", "copilot", "code-inference"],
+	"keywords": [
+		"code-suggestion",
+		"copilot",
+		"code-inference"
+	],
 	"engines": {
 		"vscode": "^1.34.0"
 	},
@@ -31,18 +35,39 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [
-			{
-				"command": "extension.captain-stack-settings",
-				"title": "Captain Stack Settings"
-			}
-		],
-		"menus": {
-			"editor/inlineCompletions/actions": [
-				{
-					"command": "extension.captain-stack-settings"
+		"configuration": {
+			"title": "CaptainStack",
+			"type": "object",
+			"properties": {
+				"captainStack.settings.sites": {
+					"type": "object",
+					"properties": {
+						"stackoverflow.com": {
+							"title": "stackoverflow",
+							"type": "boolean"
+						},
+						"gist.github.com": {
+							"title": "stackoverflow",
+							"type": "boolean"
+						},
+						"ideone.com": {
+							"title": "stackoverflow",
+							"type": "boolean"
+						}
+					},
+					"default": {
+						"stackoverflow.com": true,
+						"gist.github.com": false,
+						"ideone.com": false
+					},
+					"description": "Enable searching code in given sites"
+				},
+				"captainStack.settings.maxResults": {
+					"type": "integer",
+					"description": "Limit the max number of results",
+					"default": 12
 				}
-			]
+			}
 		}
 	},
 	"scripts": {

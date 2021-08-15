@@ -1,10 +1,17 @@
 import { getSearchURL } from "../../config";
 import { FetchPageResult, fetchPageTextContent } from "../fetchPageContent";
+import { getConfig } from "../../config";
+
+const config = getConfig();
 
 export default abstract class ExtractorAbstract {
 
     abstract name: string;
     abstract URL: string;
+
+    isEnabled() {
+        return this.URL in config.settings.sites && config.settings.sites[this.URL]
+    }
 
     /**
     * Return a list of Source URLs from Google Search's result

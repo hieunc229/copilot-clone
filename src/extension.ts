@@ -3,15 +3,7 @@ import * as vscode from 'vscode';
 import { search } from './utils/search';
 import { matchSearchPhrase } from './utils/matchSearchPhrase';
 
-export function activate(context: vscode.ExtensionContext) {
-	const disposable = vscode.commands.registerCommand(
-		'extension.captain-stack-settings',
-		() => {
-			vscode.window.showInformationMessage('Show settings');
-		}
-	);
-
-	context.subscriptions.push(disposable);
+export function activate(_: vscode.ExtensionContext) {
 
 	const provider: vscode.InlineCompletionItemProvider<vscode.InlineCompletionItem> = {
 		provideInlineCompletionItems: async (document, position, context, token) => {
