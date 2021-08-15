@@ -4,10 +4,12 @@ exports.search = void 0;
 const extractors_1 = require("./extractors");
 const fetchPageContent_1 = require("./fetchPageContent");
 const vscode = require("vscode");
+const config_1 = require("../config");
 /**
  * Cache results to avoid VSCode keep refetching
  */
 const cachedResults = {};
+const config = config_1.getConfig();
 // Send search query to google, get answers from stackoverflow
 // then extract and return code results
 async function search(keyword) {
@@ -15,24 +17,25 @@ async function search(keyword) {
         return Promise.resolve({ results: cachedResults[keyword] });
     }
     /* eslint "no-async-promise-executor": "off" */
-    return new Promise(async (resolve, reject) => {
+    let promise = new Promise(async (resolve, reject) => {
         let results = [];
         let fetchResult;
         try {
             for (const i in extractors_1.default) {
                 const extractor = extractors_1.default[i];
-                const urls = await extractor.extractURLFromKeyword(keyword);
-                for (const y in urls) {
-                    // A promise for vscode to stop showing the status bar message when resolved with the FetchPageResult and then show message with attached promise
-                    // so the message will be hidden again when promise has been resolved.
-                    let promise = new Promise((resolve, reject) => {
-                        resolve(fetchPageContent_1.fetchPageTextContent(urls[y]));
-                    });
-                    vscode.window.setStatusBarMessage("Loading Captain Stack results...", promise);
-                    fetchResult = await promise;
-                    // When promise resolved, show finished loading for 5 seconds
-                    vscode.window.setStatusBarMessage("Finished loading results", 5000);
-                    results = results.concat(extractor.extractSnippets(fetchResult));
+                if (extractor.isEnabled()) {
+                    const urls = await extractor.extractURLFromKeyword(keyword);
+                    for (const y in urls) {
+                        fetchResult = await fetchPageContent_1.fetchPageTextContent(urls[y]);
+                        results = results.concat(extractor.extractSnippets(fetchResult));
+                        vscode.window.setStatusBarMessage(`${extractor.name} (${y}/${urls.length}): ${results.length} results`, 2000);
+                        if (results.length >= config.settings.maxResults) {
+                            break;
+                        }
+                    }
+                    if (results.length >= config.settings.maxResults) {
+                        break;
+                    }
                 }
             }
             cachedResults[keyword] = results;
@@ -41,6 +44,10 @@ async function search(keyword) {
         catch (err) {
             reject(err);
         }
+        // When promise resolved, show finished loading for 5 seconds
+        vscode.window.setStatusBarMessage(`CaptainStack: Finished loading ${results.length} results`);
     });
+    vscode.window.setStatusBarMessage(`CaptainStack: Start loading snippet results...`, promise);
+    return promise;
 }
 exports.search = search;

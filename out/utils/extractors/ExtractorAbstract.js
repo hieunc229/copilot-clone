@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const config_1 = require("../../config");
 const fetchPageContent_1 = require("../fetchPageContent");
+const config_2 = require("../../config");
+const config = config_2.getConfig();
 class ExtractorAbstract {
     constructor() {
         /**
@@ -19,6 +21,9 @@ class ExtractorAbstract {
                     .catch(reject);
             });
         };
+    }
+    isEnabled() {
+        return this.URL in config.settings.sites && config.settings.sites[this.URL];
     }
 }
 exports.default = ExtractorAbstract;

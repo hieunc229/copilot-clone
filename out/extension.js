@@ -4,11 +4,7 @@ exports.activate = void 0;
 const vscode = require("vscode");
 const search_1 = require("./utils/search");
 const matchSearchPhrase_1 = require("./utils/matchSearchPhrase");
-function activate(context) {
-    const disposable = vscode.commands.registerCommand('extension.captain-stack-settings', () => {
-        vscode.window.showInformationMessage('Show settings');
-    });
-    context.subscriptions.push(disposable);
+function activate(_) {
     const provider = {
         provideInlineCompletionItems: async (document, position, context, token) => {
             const textBeforeCursor = document.getText(new vscode.Range(position.with(undefined, 0), position));
