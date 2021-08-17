@@ -21,21 +21,18 @@ async function search(keyword) {
         let results = [];
         let fetchResult;
         try {
-            for (const i in extractors_1.default) {
-                const extractor = extractors_1.default[i];
+            for (const extractor of extractors_1.default) {
                 if (extractor.isEnabled()) {
                     const urls = await extractor.extractURLFromKeyword(keyword);
                     for (const y in urls) {
                         fetchResult = await fetchPageContent_1.fetchPageTextContent(urls[y]);
                         results = results.concat(extractor.extractSnippets(fetchResult));
                         vscode.window.setStatusBarMessage(`${extractor.name} (${y}/${urls.length}): ${results.length} results`, 2000);
-                        if (results.length >= config.settings.maxResults) {
+                        if (results.length >= config.settings.maxResults)
                             break;
-                        }
                     }
-                    if (results.length >= config.settings.maxResults) {
+                    if (results.length >= config.settings.maxResults)
                         break;
-                    }
                 }
             }
             cachedResults[keyword] = results;
