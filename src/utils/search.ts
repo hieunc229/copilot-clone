@@ -38,14 +38,10 @@ export async function search(keyword: string): Promise<null | { results: Snippet
 
                         vscode.window.setStatusBarMessage(`${extractor.name} (${y}/${urls.length}): ${results.length} results`, 2000);
 
-                        if (results.length >= config.settings.maxResults) {
-                            break;
-                        }
+                        if (results.length >= config.settings.maxResults) break;
                     }
 
-                    if (results.length >= config.settings.maxResults) {
-                        break;
-                    }
+                    if (results.length >= config.settings.maxResults) break;
                 }
             }
 
