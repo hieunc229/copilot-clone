@@ -28,9 +28,7 @@ export async function search(keyword: string): Promise<null | { results: Snippet
         let fetchResult: FetchPageResult;
 
         try {
-            for (const i in SnippetExtractors) {
-                const extractor = SnippetExtractors[i];
-
+            for (const extractor of SnippetExtractors) {
                 if (extractor.isEnabled()) {
                     const urls = await extractor.extractURLFromKeyword(keyword);
 
