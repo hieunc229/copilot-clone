@@ -1,34 +1,36 @@
 import { FetchPageResult } from "../fetchPageContent";
 import ExtractorAbstract, { SnippetResult } from "./ExtractorAbstract";
-import fetch from "node-fetch";
+import { request } from "https";
+
 
 export default class ExtractorIdeone extends ExtractorAbstract {
     URL = 'ideone.com'
     name = 'Ideone'
 
     extractSnippets = (options: FetchPageResult): SnippetResult[] => {
-        let r: SnippetResult;
-        get_plaintext(convert_url(options.url)).then(
-            (text) => {
-                    const result: SnippetResult = {
-                        /* TODO: Ideone has no equivalent of "votes", so
-                        results will only display when only ideone.com is
-                        chosen. */
-                        votes: 0,
-                        code: text,
-                        sourceURL: options.url,
-                        hasCheckMark: false
-            }; r = result;});
-        return [r];
+        const result: SnippetResult = {
+            /* TODO: Ideone has no equivalent of "votes", so
+            results will only display when only ideone.com is
+            chosen. */
+            votes: 0,
+            code: get_plainfile(options.url),
+            sourceURL: options.url,
+            hasCheckMark: false
+        };
+        return [result];
     };
 }
 
-async function get_plaintext(url: string) {
-    const f = await fetch(convert_url(url));
-    if (!f.ok) {
-        throw new Error(`HTTP error! status: ${f.status}`);
-      }
-    return await f.text();
+function get_plainfile(url: string): string {
+    const req = request(convert_url(url));
+    req.on('error', (e: Error) => 
+        console.error(`problem with request to ${convert_url(url)}: ${e.message}`)
+    );
+    req.on('uncaughtException', e => console.log(e));
+    const file = '';
+    req.write(file);
+    req.end();
+    return file;
 }
 
 /**
