@@ -6,7 +6,6 @@ const SnippetExtractors = [
     new StackoverflowExtractor(),
     new GithubGistExtractor(),
     new IdeoneExtractor()
-    
 ];
 
 export default SnippetExtractors;
