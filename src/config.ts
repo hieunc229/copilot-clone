@@ -27,7 +27,7 @@ export function getConfig() {
         settings: {
             sites,
             maxResults: config.settings.maxResults
-        },
+        }
     } as IConfig;
 }
 
