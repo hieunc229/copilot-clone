@@ -1,6 +1,5 @@
-import { getSearchURL } from "../../config";
+import { getConfig, getSearchURL } from "../../config";
 import { FetchPageResult, fetchPageTextContent } from "../fetchPageContent";
-import { getConfig } from "../../config";
 
 
 export default abstract class ExtractorAbstract {
@@ -22,7 +21,7 @@ export default abstract class ExtractorAbstract {
 
             fetchPageTextContent(getSearchURL(this.URL, keyword))
                 .then(rs => {
-                    const regex = new RegExp(`(https://${this.URL}/[a-z0-9-/]+)`, "g");
+                    const regex = new RegExp(`(https://${this.URL}/[a-z0-9-/]+)`, "gi");
                     let urls = rs.textContent.match(regex);
                     urls && (urls = urls.filter((url, i, list) => list.indexOf(url) === i));
                     resolve(urls || []);
