@@ -67,7 +67,7 @@ There are a few configurations available for Captain Stack. To open the configur
 
 ### Available settings
 
-- `sites` allows to enable or disable a source site. By the default, only `stackoverflow.com` is enabled. You might need to config this settings in the `.vscode/settings.json` file (by click on **Edit in settings.json**)
+- `sites` allows to enable or disable a source site. By the default, only `Stackoverflow` is enabled.
 
 - `maxResults` is the maximum number of results. It's `12` by default. Note: Since Captain Stack will fetch all the results from a page, the final number of results could be more than `maxResults`
 
