@@ -2,7 +2,6 @@ import { getSearchURL } from "../../config";
 import { FetchPageResult, fetchPageTextContent } from "../fetchPageContent";
 import { getConfig } from "../../config";
 
-const config = getConfig();
 
 export default abstract class ExtractorAbstract {
 
@@ -10,7 +9,8 @@ export default abstract class ExtractorAbstract {
     abstract URL: string;
 
     isEnabled() {
-        return this.URL in config.settings.sites && config.settings.sites[this.URL]
+        const config = getConfig();
+        return this.URL in config.settings.sites && config.settings.sites[this.URL];
     }
 
     /**

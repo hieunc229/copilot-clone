@@ -3,7 +3,7 @@
 	"name": "captain-stack",
 	"displayName": "Captain Stack",
 	"description": "Find snippets codes from Stackoverflow",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"publisher": "captain-stack",
 	"icon": "icon.png",
 	"homepage": "https://github.com/hieunc229/copilot-clone",
@@ -39,28 +39,17 @@
 			"title": "CaptainStack",
 			"type": "object",
 			"properties": {
-				"captainStack.settings.sites": {
-					"type": "object",
-					"properties": {
-						"stackoverflow.com": {
-							"title": "stackoverflow",
-							"type": "boolean"
-						},
-						"gist.github.com": {
-							"title": "stackoverflow",
-							"type": "boolean"
-						},
-						"ideone.com": {
-							"title": "stackoverflow",
-							"type": "boolean"
-						}
-					},
-					"default": {
-						"stackoverflow.com": true,
-						"gist.github.com": false,
-						"ideone.com": false
-					},
-					"description": "Enable searching code in given sites"
+				"captainStack.settings.sites.stackoverflow": {
+					"title": "stackoverflow.com",
+					"description": "Enable searching code in StackOverflow",
+					"type": "boolean",
+					"default": true
+				},
+				"captainStack.settings.sites.githubGist": {
+					"title": "gist.github.com",
+					"description": "Enable searching code in Github Gists",
+					"type": "boolean",
+					"default": false
 				},
 				"captainStack.settings.maxResults": {
 					"type": "integer",
