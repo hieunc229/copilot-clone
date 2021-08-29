@@ -11,8 +11,15 @@ function getSearchURL(site, keyword) {
 exports.getSearchURL = getSearchURL;
 function getConfig() {
     const config = vscode.workspace.getConfiguration("captainStack");
+    let sites = {
+        "stackoverflow.com": config.settings.sites.stackoverflow,
+        "gist.github.com": config.settings.sites.githubGist
+    };
     return {
-        settings: config.settings,
+        settings: {
+            sites,
+            maxResults: config.settings.maxResults
+        },
     };
 }
 exports.getConfig = getConfig;

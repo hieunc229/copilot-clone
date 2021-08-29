@@ -10,16 +10,18 @@ import { getConfig } from "../config";
  * Cache results to avoid VSCode keep refetching
  */
 const cachedResults: { [keyword: string]: SnippetResult[] } = {};
-const config = getConfig();
+
 
 // Send search query to google, get answers from stackoverflow
 // then extract and return code results
 export async function search(keyword: string): Promise<null | { results: SnippetResult[] }> {
 
+
     if (keyword in cachedResults) {
         return Promise.resolve({ results: cachedResults[keyword] });
     }
 
+    const config = getConfig();
 
     /* eslint "no-async-promise-executor": "off" */
     const promise = new Promise<{ results: SnippetResult[] }>(async (resolve, reject) => {

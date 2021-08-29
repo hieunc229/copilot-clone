@@ -9,13 +9,13 @@ const config_1 = require("../config");
  * Cache results to avoid VSCode keep refetching
  */
 const cachedResults = {};
-const config = config_1.getConfig();
 // Send search query to google, get answers from stackoverflow
 // then extract and return code results
 async function search(keyword) {
     if (keyword in cachedResults) {
         return Promise.resolve({ results: cachedResults[keyword] });
     }
+    const config = config_1.getConfig();
     /* eslint "no-async-promise-executor": "off" */
     const promise = new Promise(async (resolve, reject) => {
         let results = [];
