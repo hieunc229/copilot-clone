@@ -1,0 +1,41 @@
+.header h2 {
+    padding-top: 32px;
+    text-align: center;
+}
+
+.body-container h1 {
+    text-align: center;
+    position: relative;
+    top: 45%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    margin: 0;
+}
+
+.footer p {
+    padding-top: 8px;
+    text-align: center;
+}
+
+.buttons {
+    position: relative;
+    top: 50%;
+    width: 100vw;
+    height: 8vh;
+    padding-left: calc(50vw - (28vw / 2) + 4px - 10vw);
+}
+
+.sel-button {
+    width: 9vw;
+    height: 8vh;
+    font-family: Oswald, sans-serif;
+    font-weight: bolder;
+    border-radius: 2px;
+    border: 1px solid black;
+    background: white;
+    padding: 0;
+    float: left;
+    margin-left: 10vw;
+    cursor: pointer;
+}

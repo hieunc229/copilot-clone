@@ -1,0 +1,40 @@
+
+/* Oswald font: font-family: 'Oswald', sans-serif; */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
+
+p, h1, h2, h3, h4, h5 {
+    font-family: 'Oswald', sans-serif;
+}
+
+/* Main layout setup */
+.header {
+    height: 100px;
+    width: 100vw;
+}
+
+.header * , .footer *{
+    margin: 0;
+}
+
+.header, .body-container, .footer {
+    float: left;
+}
+
+.body-container {
+    height: calc(100vh - 140px - 4vh);
+    width: 100vw;
+}
+
+.footer {
+    height: 40px;
+    width: 100vw;
+}
+
+body, html {
+    margin: 0;
+    overflow: hidden;
+}
+
+h1.extrabig {
+    font-size: 7vh;
+}
