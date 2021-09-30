@@ -7,6 +7,8 @@ var questions = [
     "Have you installed the latest Visual Studio Code Insider Version?",
     "Have you cloned the GitHub Repository into its own folder?",
     "Have you opened the folder in Visual Studio Code?",
+    "Have you ran \"npm install\"?",
+    "Have you clicked on \"Run Extension\" under in the Debugging tab?",
     "Done!"
 ];
 
