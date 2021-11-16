@@ -39,22 +39,22 @@
 			"title": "CaptainStack",
 			"type": "object",
 			"properties": {
-				"captainStack.settings.sites.stackoverflow": {
-					"title": "stackoverflow.com",
-					"description": "Enable searching code in StackOverflow",
-					"type": "boolean",
-					"default": true
-				},
-				"captainStack.settings.sites.githubGist": {
-					"title": "gist.github.com",
-					"description": "Enable searching code in Github Gists",
-					"type": "boolean",
-					"default": false
-				},
-				"captainStack.settings.maxResults": {
+				"captainShannon.settings.maxResults": {
 					"type": "integer",
 					"description": "Limit the max number of results",
 					"default": 12
+				},
+				"captainShannon.settings.modelName": {
+					"type": "string",
+					"default": "sep-4",
+					"description": "Model name that will be used to generate the completions.",
+					"scope": "resource"
+				},
+				"captainShannon.settings.APIKey": {
+					"type": "string",
+					"default": "<API_KEY>",
+					"description": "API key sampling from a laptop",
+					"scope": "resource"
 				}
 			}
 		}

@@ -3,29 +3,27 @@ import * as vscode from 'vscode';
 const CSConfig = {
     SEARCH_PATTERN: /(\/\/|#|--|<!--)\s?find\s?(.+)\s?(\.|-->)/
 };
+// const CSConfig = {
+//     SEARCH_PATTERN: /.*/
+// };
 
-export function getSearchURL(site: string, keyword: string) {
-    return `https://www.google.com/search?q=site%3A${site}+${keyword.replace(/\s/g, "+")}`;
-}
+
 
 type IConfig = {
     settings: {
-        sites: { [name: string]: boolean },
+        modelName: string,
+        APIKey: string,
         maxResults: number
     }
 }
 
 export function getConfig() {
-    const config = vscode.workspace.getConfiguration("captainStack");
-
-    let sites = {
-        "stackoverflow.com": config.settings.sites.stackoverflow,
-        "gist.github.com": config.settings.sites.githubGist
-    }
+    const config = vscode.workspace.getConfiguration("captainShannon");
 
     return {
         settings: {
-            sites,
+            modelName: config.settings.modelName,
+            APIKey: config.settings.APIKey,
             maxResults: config.settings.maxResults
         }
     } as IConfig;
