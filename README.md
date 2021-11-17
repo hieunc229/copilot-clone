@@ -1,11 +1,11 @@
-![Captain Stack](./icon.png)
+![Captain Shannon](./icon.png)
 
-# Captain Stack — Code suggestion for VSCode
+# Captain Shannon — Code suggestion for VSCode
 
 
-This feature is somewhat similar to [Github Copilot](https://copilot.github.com/)'s code suggestion. But instead of using AI, it sends your search query to Google, then retrieves StackOverflow answers and autocompletes them for you. 
+This feature is somewhat similar to [Github Copilot](https://copilot.github.com/)'s code suggestion. One might even call this a... copilot clone.
 
-Have questions? [Join our Discord server](https://discord.gg/5F5tDsWFmp) [![Discord Chat](https://img.shields.io/discord/864164585070526475.svg)](https://discord.gg/5F5tDsWFmp)
+
 
 ![Demo Video](./demo.gif)
 
@@ -13,13 +13,8 @@ Have questions? [Join our Discord server](https://discord.gg/5F5tDsWFmp) [![Disc
 
 1. [Installation](#1-installation)
 2. [Play with Captain Stack](#2-play-with-captain-stack)
-3. [Notes](#3-notes)
-4. [Changelog](#4-changelog)
 5. [Troubleshooting](#5-troubleshooting)
-6. [Contributors](#6-contributors)
 
-
-_Note: ⚠️ This extension uses a proposed API (inline-completion) and can only be used for extension development in [VSCode Insider release](https://code.visualstudio.com/insiders/). It's not yet available on VSCode_
 
 ---
 
@@ -27,9 +22,9 @@ _Note: ⚠️ This extension uses a proposed API (inline-completion) and can onl
 
 **Check out the installation video: https://youtu.be/MD-kzsF0Scg**
 
-Before installation, make sure you have [VSCode Insider](https://code.visualstudio.com/insiders/). You'll be using this version. To install and starting Captain Stack:
+To install and starting Captain Stack:
 
-1. Download this repository to your local machine. Unzip and open it on VSCode Insider (make sure the root directory is the same as `package.json` file)
+1. Download this repository to your local machine. Unzip and open it on VSCode (make sure the root directory is the same as `package.json` file)
 2. (optional) Run `npm install` in the terminal to install dependencies. _A `postinstall` script would download the latest version of `vscode.proposed.d.ts`_
 3. Run the `Run Extension` target in the Debug View. Or from the top menu, choose `Run > Start Debugging`.
 
@@ -43,12 +38,7 @@ _Note: When you make changes, you should refresh that window to apply changes. T
 
 ## 2. Play with Captain Stack
 
-To trigger inline completion, you'll need to type `//find {your keyword}.` (start with `//find`, end with a dot `.`)
-
-For example
-```js
-//find binary search in javascript.
-```
+After starting in debug mode, just type some text and you'll get some (dummy) inline completions.
 
 Make sure that `showInlineCompletions` is enabled in your settings!
 ```
@@ -67,32 +57,7 @@ There are a few configurations available for Captain Stack. To open the configur
 
 ### Available settings
 
-- `sites` allows to enable or disable a source site. By the default, only `Stackoverflow` is enabled.
-
-- `maxResults` is the maximum number of results. It's `12` by default. Note: Since Captain Stack will fetch all the results from a page, the final number of results could be more than `maxResults`
-
----
-
-## 4. Notes
-
-- There are more code sources that should be considered besides StackOverflow
-- If you see `unsupported` error message, ignore it
-
-**Limits:**
-- The extension uses fetch-node to get page content, and I don't know if there is any fetching limit
-- The extension uses querySelector to extract code and other info. There is a risk of either StackOverflow or Google changing its querySelector
-
-If those factor became problems, the extension could be using their official APIs instead.
-
----
-
-## 5. Changelog
-
-- Aug 15, 2021 - Added `sites` and `maxResults` configurations
-- Jul 31, 2021 — Create code extracting abstracting to add more code sources 
-- Jul 14, 2021 - Adapted to VS Code Insiders Release Version 1.59
-- Jul 01, 2021 - Added snippet source (thanks for [mechero's suggestion](https://news.ycombinator.com/item?id=27698687))
-- Jun 30, 2021 - Publish the initial version
+- `n_samples` is the maximum number of results. It's `12` by default.
 
 ---
 
@@ -100,7 +65,6 @@ If those factor became problems, the extension could be using their official API
 
 ### Common reasons why you can't run Captain Stack:
 
-- You're not using VSCode Insider. It can be [downloaded here](https://code.visualstudio.com/insiders/)
 - When `Run debugger`, it shows different target options (nodejs, edge, etc.). Your VSCode root directly might be incorrect. Make sure your root directory is the same with the `package.json` file.
 - Error message `module "node-fetch" not found...`. You need to run `npm install`
 - `canvas.node` was compiled against a different Node.js. [Try to remove canvas](https://github.com/hieunc229/copilot-clone/issues/9) (`npm uninstall canvas`)
@@ -109,23 +73,3 @@ If those factor became problems, the extension could be using their official API
 
 - You haven't enabled the inline completion feature. To enable, set VSCode config `"editor.inlineSuggest.enabled": true`
 - It might conflict with some other plugins. You might need to disable plugins to check
-
-If none of the above works, open a thread or join our [Discord channel and have a chat](https://discord.gg/5F5tDsWFmp).
-
----
-
-## 7. Contributors
-
-The plugins is available, thanks to:
-
-- [Kekschen](https://github.com/Kek5chen)
-- [Charlie Lin](https://github.com/clin1234)
-- [Hieu Nguyen](https://github.com/hieunc229)
-
-**Feel free to open a thread for feedback or discussion. And have fun!**
-
----
-Love Captain Stack? Check out other things I do:
-
-- [Inverr Nocode Site Builder](https://inverr.com/?ref=github-filepond)
-- [Hieu's Twitter](https://twitter.com/hieuSSR/)
