@@ -1,19 +1,10 @@
 import * as vscode from 'vscode';
 
-const CSConfig = {
-    SEARCH_PATTERN: /(\/\/|#|--|<!--)\s?find\s?(.+)\s?(\.|-->)/
-};
-// const CSConfig = {
-//     SEARCH_PATTERN: /.*/
-// };
-
-
-
 type IConfig = {
     settings: {
         modelName: string,
         APIKey: string,
-        maxResults: number
+        n_samples: number
     }
 }
 
@@ -24,9 +15,14 @@ export function getConfig() {
         settings: {
             modelName: config.settings.modelName,
             APIKey: config.settings.APIKey,
-            maxResults: config.settings.maxResults
+            n_samples: config.settings.n_samples,
         }
     } as IConfig;
 }
 
-export default CSConfig;
+/*
+
+You can add more hyperparams in package.json
+
+
+*/

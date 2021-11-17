@@ -1,7 +1,6 @@
 import * as vscode from 'vscode';
 
-import { search } from './utils/search';
-import { matchSearchPhrase } from './utils/matchSearchPhrase';
+import { sample } from './sample';
 
 export function activate(_: vscode.ExtensionContext) {
 
@@ -11,14 +10,12 @@ export function activate(_: vscode.ExtensionContext) {
 				new vscode.Range(position.with(undefined, 0), position)
 			);
 
-			const match = matchSearchPhrase(textBeforeCursor);
-
-			if (match) {
+			if (textBeforeCursor) {
 
 				let rs;
 
 				try {
-					rs = await search(match.searchPhrase);
+					rs = await sample(textBeforeCursor);
 				} catch (err) {
 					vscode.window.showErrorMessage(err.toString());
 					return { items: [] };
@@ -29,7 +26,7 @@ export function activate(_: vscode.ExtensionContext) {
 				}
 
 				const items = rs.results.map(item => {
-					const output = `\n${match.commentSyntax} Source: ${item.sourceURL} ${match.commentSyntaxEnd}\n${item.code}`;
+					const output = item.code;
 					return {
 						text: output,
 						range: new vscode.Range(position.translate(0, output.length), position)

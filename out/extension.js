@@ -2,17 +2,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.activate = void 0;
 const vscode = require("vscode");
-const search_1 = require("./utils/search");
-const matchSearchPhrase_1 = require("./utils/matchSearchPhrase");
+const sample_1 = require("./sample");
 function activate(_) {
     const provider = {
         provideInlineCompletionItems: async (document, position, context, token) => {
             const textBeforeCursor = document.getText(new vscode.Range(position.with(undefined, 0), position));
-            const match = matchSearchPhrase_1.matchSearchPhrase(textBeforeCursor);
-            if (match) {
+            if (textBeforeCursor) {
                 let rs;
                 try {
-                    rs = await search_1.search(match.searchPhrase);
+                    rs = await (0, sample_1.sample)(textBeforeCursor);
                 }
                 catch (err) {
                     vscode.window.showErrorMessage(err.toString());
@@ -22,7 +20,7 @@ function activate(_) {
                     return { items: [] };
                 }
                 const items = rs.results.map(item => {
-                    const output = `\n${match.commentSyntax} Source: ${item.sourceURL} ${match.commentSyntaxEnd}\n${item.code}`;
+                    const output = item.code;
                     return {
                         text: output,
                         range: new vscode.Range(position.translate(0, output.length), position)

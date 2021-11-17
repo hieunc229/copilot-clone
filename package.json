@@ -1,14 +1,15 @@
 {
 	"enableProposedApi": true,
-	"name": "captain-stack",
-	"displayName": "Captain Stack",
-	"description": "Find snippets codes from Stackoverflow",
+	"name": "captain-shannon",
+	"displayName": "Captain Shannon",
+	"description": "Basically a copilot clone, yeah.",
 	"version": "0.0.4",
-	"publisher": "captain-stack",
+	"publisher": "captain-shannon",
 	"icon": "icon.png",
 	"homepage": "https://github.com/hieunc229/copilot-clone",
 	"repository": "https://github.com/hieunc229/copilot-clone",
 	"keywords": [
+		"shannon",
 		"code-suggestion",
 		"copilot",
 		"code-inference"
@@ -36,10 +37,10 @@
 	"main": "./out/extension.js",
 	"contributes": {
 		"configuration": {
-			"title": "CaptainStack",
+			"title": "CaptainShannon",
 			"type": "object",
 			"properties": {
-				"captainShannon.settings.maxResults": {
+				"captainShannon.settings.n_samples": {
 					"type": "integer",
 					"description": "Limit the max number of results",
 					"default": 12

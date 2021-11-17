@@ -1,26 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getConfig = exports.getSearchURL = void 0;
+exports.getConfig = void 0;
 const vscode = require("vscode");
-const CSConfig = {
-    SEARCH_PATTERN: /(\/\/|#|--|<!--)\s?find\s?(.+)\s?(\.|-->)/
-};
-function getSearchURL(site, keyword) {
-    return `https://www.google.com/search?q=site%3A${site}+${keyword.replace(/\s/g, "+")}`;
-}
-exports.getSearchURL = getSearchURL;
 function getConfig() {
-    const config = vscode.workspace.getConfiguration("captainStack");
-    let sites = {
-        "stackoverflow.com": config.settings.sites.stackoverflow,
-        "gist.github.com": config.settings.sites.githubGist
-    };
+    const config = vscode.workspace.getConfiguration("captainShannon");
     return {
         settings: {
-            sites,
-            maxResults: config.settings.maxResults
-        },
+            modelName: config.settings.modelName,
+            APIKey: config.settings.APIKey,
+            n_samples: config.settings.n_samples,
+        }
     };
 }
 exports.getConfig = getConfig;
-exports.default = CSConfig;
+/*
+
+You can add more hyperparams in package.json
+
+
+*/ 
