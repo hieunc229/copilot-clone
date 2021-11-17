@@ -2,21 +2,15 @@
 
 # Captain Shannon — Code suggestion for VSCode
 
-
 This feature is somewhat similar to [Github Copilot](https://copilot.github.com/)'s code suggestion. One might even call this a... copilot clone.
-
-
 
 ![Demo Video](./demo.gif)
 
-## Table of contents:
+## 0. Overview
 
-1. [Installation](#1-installation)
-2. [Play with Captain Stack](#2-play-with-captain-stack)
-5. [Troubleshooting](#5-troubleshooting)
+Please edit src/sample.ts, Ben. I can help you get the extension running in the first place if you're having trouble.
 
-
----
+We can add new hyperparams by editing package.json and config.ts.
 
 ## 1. Installation
 
@@ -45,31 +39,12 @@ Make sure that `showInlineCompletions` is enabled in your settings!
 "editor.inlineSuggest.enabled": true
 ```
 
----
 
-## 3. Captain Stack configurations
+## Todo:
 
-There are a few configurations available for Captain Stack. To open the configurationview:
+Ben: Make it so we can sample from a laptop please.
 
-1. Click on the Cog icon at bottom left
-2. Choose **Settings**
-3. In the **Search settings** search box, enter "Captain Stack"
-
-### Available settings
-
-- `n_samples` is the maximum number of results. It's `12` by default.
-
----
-
-## 6. Troubleshooting
-
-### Common reasons why you can't run Captain Stack:
-
-- When `Run debugger`, it shows different target options (nodejs, edge, etc.). Your VSCode root directly might be incorrect. Make sure your root directory is the same with the `package.json` file.
-- Error message `module "node-fetch" not found...`. You need to run `npm install`
-- `canvas.node` was compiled against a different Node.js. [Try to remove canvas](https://github.com/hieunc229/copilot-clone/issues/9) (`npm uninstall canvas`)
-
-### Still not running?
-
-- You haven't enabled the inline completion feature. To enable, set VSCode config `"editor.inlineSuggest.enabled": true`
-- It might conflict with some other plugins. You might need to disable plugins to check
+Also we can improve things like: 
+1. When to start sampling (currently we can't sample if normal intellisense is already sampling -- pretty dumb since they have different UIs)
+3. Might be nice to have a way to trigger autocompletion using a keybinding?
+2. The workarounds for prefix-tokenization we looked into before. I expect two-thirds of samples to be garbage right now due to tokenization artifacts.
