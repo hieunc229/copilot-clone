@@ -1,5 +1,9 @@
 {
 	"enableProposedApi": true,
+	"enabledApiProposals": [
+		"inlineCompletions",
+		"textDocumentNotebook"
+	],
 	"name": "captain-stack",
 	"displayName": "Captain Stack",
 	"description": "Find snippets codes from Stackoverflow",
@@ -24,6 +28,7 @@
 		"url": "https://hieunguyen.info/"
 	},
 	"contributors": [
+    "Kekschen (https://github.com/Kek5chen)",
 		"Charlie Lin <clin@rollins.edu> (https://clin1234.github.io)"
 	],
 	"license": "MIT",
@@ -64,7 +69,7 @@
 		"watch": "tsc -watch -p ./",
 		"download-api": "vscode-dts dev",
 		"postdownload-api": "vscode-dts main",
-		"postinstall": "npm run download-api",
+		"postinstall": "npx vscode-dts dev && mv vscode.proposed.*.ts extension/src",
 		"vscode:prepublish": "webpack --mode production",
 		"webpack": "webpack --mode development",
 		"webpack-dev": "webpack --mode development --watch",
