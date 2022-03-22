@@ -1,5 +1,6 @@
 const keywords = ["def", "void", "int", "if", "else", "while", "return", "true", "false", "null", "this.", "print", "do", "", ""];
-const high_confidence_keywords = ['#!/bin/bash', 'select *', 'select ?', '* from', '? from', 'where', 'order by', 'group by', 'left join', 'right join', 'inner join', 'outer join', 'exec '];
+const high_confidence_keywords = ['#!/bin/bash', 'select *', 'select ?', 'select count', '* from', '? from', 'where',
+    'order by', 'group by', 'left join', 'right join', 'inner join', 'outer join', 'exec '];
 const symbol_keywords = ["=>", "==", "!=", ">", "<", ">=", "<=", "&&", "||"];
 const low_confidence_keywords = ['trace', 'error', 'exception', 'warn'];
 
