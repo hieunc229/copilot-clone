@@ -13,10 +13,11 @@ Have questions? [Join our Discord server](https://discord.gg/5F5tDsWFmp) [![Disc
 
 1. [Installation](#1-installation)
 2. [Play with Captain Stack](#2-play-with-captain-stack)
-3. [Notes](#3-notes)
-4. [Changelog](#4-changelog)
-5. [Troubleshooting](#5-troubleshooting)
-6. [Contributors](#6-contributors)
+3. [Captain Stack configurations](#3-captain-stack-configurations)
+4. [Notes](#4-notes)
+5. [Changelog](#5-changelog)
+6. [Troubleshooting](#6-troubleshooting)
+7. [Contributors](#7-contributors)
 
 
 _Note: ⚠️ This extension uses a proposed API (inline-completion) and can only be used for extension development in [VSCode Insider release](https://code.visualstudio.com/insiders/). It's not yet available on VSCode_
