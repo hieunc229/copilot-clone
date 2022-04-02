@@ -2,6 +2,7 @@ import ExtractorAbstract, { SnippetResult } from "./ExtractorAbstract";
 
 import { parseHTML } from "linkedom";
 import { FetchPageResult } from "../fetchPageContent";
+import {isCodeValid} from "./utils";
 
 export default class ExtractorGithubGist extends ExtractorAbstract {
 
@@ -14,7 +15,7 @@ export default class ExtractorGithubGist extends ExtractorAbstract {
 
         const snippet = doc.querySelector("table.highlight")?.textContent;
 
-        if (!snippet) return [];
+        if (!snippet || !isCodeValid(snippet)) return [];
 
         const item: SnippetResult = {
             votes: parseInt(doc.querySelector(".social-count")?.textContent),
