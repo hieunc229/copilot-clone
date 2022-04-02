@@ -2,7 +2,7 @@ import ExtractorAbstract, { SnippetResult } from "./ExtractorAbstract";
 
 import { parseHTML } from "linkedom";
 import { FetchPageResult } from "../fetchPageContent";
-import {isCodeValid} from "./utils";
+import { isCodeValid } from "./utils";
 
 export default class ExtractorGithubGist extends ExtractorAbstract {
 
