@@ -16,8 +16,10 @@ export default class ExtractorGithubGist extends ExtractorAbstract {
 
         if (!snippet) return [];
 
+        const socialCount = doc.querySelector(".social-count")?.textContent ?? "";
+
         const item: SnippetResult = {
-            votes: parseInt(doc.querySelector(".social-count")?.textContent),
+            votes: parseInt(socialCount),
             code: cleanContent(snippet),
             sourceURL: options.url,
             hasCheckMark: false
