@@ -32,6 +32,7 @@ export function activate(_: vscode.ExtensionContext) {
 					const output = `\n${match.commentSyntax} Source: ${item.sourceURL} ${match.commentSyntaxEnd}\n${item.code}`;
 					return {
 						text: output,
+            insertText: output,
 						range: new vscode.Range(position.translate(0, output.length), position)
 					} as vscode.InlineCompletionItem;
 				});
