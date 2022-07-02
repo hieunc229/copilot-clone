@@ -1,9 +1,4 @@
 {
-	"enableProposedApi": true,
-	"enabledApiProposals": [
-		"inlineCompletions",
-		"textDocumentNotebook"
-	],
 	"name": "captain-stack",
 	"displayName": "Captain Stack",
 	"description": "Find snippets codes from Stackoverflow",
