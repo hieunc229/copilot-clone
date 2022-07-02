@@ -10,8 +10,6 @@ This feature is somewhat similar to Github Copilot's code suggestion. But instea
 
 ---
 
-The following information 
-
 Table of contents:
 
 - [Captain Stack — Code suggestion for VSCode](#captain-stack--code-suggestion-for-vscode)
