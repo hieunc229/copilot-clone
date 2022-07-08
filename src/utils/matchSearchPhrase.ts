@@ -1,4 +1,5 @@
 import CSConfig from "../config";
+import { window } from "vscode";
 
 
 type SearchMatchResult = {
@@ -19,10 +20,16 @@ export function matchSearchPhrase(input: string): SearchMatchResult | undefined 
 
         const [_, commentSyntax, searchPhrase, commentSyntaxEnd] = match;
 
+        // Find file type by file extension in path using vscode api and cut off everything before the last dot
+        // @ts-ignore
+        const fileType = window.activeTextEditor.document.fileName.split(".").pop();
+
+        console.log(`${searchPhrase} ${fileType}`);
+        
         return {
             commentSyntax,
             commentSyntaxEnd,
-            searchPhrase,
+            searchPhrase: `${searchPhrase} ${fileType}`
         };
     }
 
