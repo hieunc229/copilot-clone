@@ -1,4 +1,4 @@
-import {isCodeValid} from '../src/utils/extractors/utils';
+import { isCodeValid } from '../src/utils/extractors/utils';
 
 require('jest');
 

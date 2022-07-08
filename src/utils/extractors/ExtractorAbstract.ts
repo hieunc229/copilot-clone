@@ -13,8 +13,8 @@ export default abstract class ExtractorAbstract {
     }
 
     /**
-    * Return a list of Source URLs from Google Search's result
-    */
+     * Return a list of Source URLs from Google Search's result
+     */
     extractURLFromKeyword = (keyword: string): Promise<string[]> => {
 
         return new Promise((resolve, reject) => {
@@ -28,10 +28,10 @@ export default abstract class ExtractorAbstract {
                 })
                 .catch(reject);
         });
-    }
+    };
 
     // Extract snippets from URL content
-    abstract extractSnippets: (options: FetchPageResult) => SnippetResult[]
+    abstract extractSnippets: (options: FetchPageResult) => SnippetResult[];
 }
 
 export type SnippetResult = {

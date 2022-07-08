@@ -18,7 +18,7 @@ export async function search(keyword: string): Promise<null | { results: Snippet
 
 
     if (keyword in cachedResults) {
-        return Promise.resolve({ results: cachedResults[keyword] });
+        return Promise.resolve({results: cachedResults[keyword]});
     }
 
     const config = getConfig();
@@ -55,7 +55,7 @@ export async function search(keyword: string): Promise<null | { results: Snippet
 
             cachedResults[keyword] = results;
 
-            resolve({ results });
+            resolve({results});
         } catch (err) {
             reject(err);
         }
