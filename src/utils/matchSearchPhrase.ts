@@ -22,7 +22,12 @@ export function matchSearchPhrase(input: string): SearchMatchResult | undefined 
 
         // Find file type by file extension in path using vscode api and cut off everything before the last dot
         // @ts-ignore
-        const fileType = window.activeTextEditor.document.fileName.split(".").pop();
+
+        let fileType = window.activeTextEditor.document.languageId;
+
+        if (fileType === "plaintext") {
+            fileType = ""
+        }
 
         console.log(`${searchPhrase} ${fileType}`);
         
