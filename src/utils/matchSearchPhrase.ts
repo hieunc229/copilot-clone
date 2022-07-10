@@ -1,4 +1,5 @@
 import CSConfig from "../config";
+import { window } from "vscode";
 
 
 type SearchMatchResult = {
@@ -19,10 +20,17 @@ export function matchSearchPhrase(input: string): SearchMatchResult | undefined 
 
         const [_, commentSyntax, searchPhrase, commentSyntaxEnd] = match;
 
+        // @ts-ignore
+        let fileType = window.activeTextEditor.document.languageId;
+
+        if (fileType === "plaintext") {
+            fileType = ""
+        }
+        
         return {
             commentSyntax,
             commentSyntaxEnd,
-            searchPhrase,
+            searchPhrase: `${searchPhrase} ${fileType}`
         };
     }
 
