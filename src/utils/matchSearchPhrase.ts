@@ -20,16 +20,12 @@ export function matchSearchPhrase(input: string): SearchMatchResult | undefined 
 
         const [_, commentSyntax, searchPhrase, commentSyntaxEnd] = match;
 
-        // Find file type by file extension in path using vscode api and cut off everything before the last dot
         // @ts-ignore
-
         let fileType = window.activeTextEditor.document.languageId;
 
         if (fileType === "plaintext") {
             fileType = ""
         }
-
-        console.log(`${searchPhrase} ${fileType}`);
         
         return {
             commentSyntax,
