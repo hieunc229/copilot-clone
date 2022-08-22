@@ -11,6 +11,9 @@ export function getSearchURL(site: string, keyword: string) {
 type IConfig = {
     settings: {
         sites: { [name: string]: boolean },
+        parsers : { [name: string]: boolean }
+        enableParsers: boolean,
+        huggingfaceToken: string,
         maxResults: number
     }
 }
@@ -23,9 +26,14 @@ export function getConfig() {
         "gist.github.com": config.settings.sites.githubGist
     };
 
+    const parsers = config.settings.parsers;
+
     return {
         settings: {
             sites,
+            parsers,
+            enableParsers: config.settings.enableParsers,
+            huggingfaceToken: config.settings.huggingfaceToken,
             maxResults: config.settings.maxResults
         }
     } as IConfig;
