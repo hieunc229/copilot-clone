@@ -55,6 +55,20 @@
 					"type": "integer",
 					"description": "Limit the max number of results",
 					"default": 12
+				},
+				"captainStack.settings.enableParsers": {
+					"type": "boolean",
+					"description": "Parsers are an experimental feature which provide suggestions everywhere, Not just comments.",
+					"default": false
+				},
+				"captainStack.settings.parsers.Bloom": {
+					"type": "boolean",
+					"description": "Enable code suggestions by huggingface/bloom"
+				},
+				"captainStack.settings.huggingfaceToken": {
+					"type": "string",
+					"description": "Enables various machine learning models from huggingface to generate suggestions. Create a token at https://huggingface.co/settings/tokens",
+					"default": ""
 				}
 			}
 		}
@@ -96,7 +110,7 @@
 		"@types/jsdom": "^16.2.12",
 		"jsdom": "^16.6.0",
 		"linkedom": "^0.11.1",
-		"node-fetch": "^2.6.1",
+		"node-fetch": "^2.6.7",
 		"typescript-language-server": "^0.5.4",
 		"vsce": "^1.96.1",
 		"vscode": "^1.1.37"
