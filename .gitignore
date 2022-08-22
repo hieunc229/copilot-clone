@@ -14,3 +14,7 @@ yarn-error.log
 /vscode.proposed.d.ts
 vscode.d.ts
 /out
+
+.history/
+src/old/
+.DS_STORE
