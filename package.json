@@ -2,7 +2,7 @@
 	"name": "captain-stack",
 	"displayName": "Captain Stack",
 	"description": "Find snippets codes from Stackoverflow",
-	"version": "0.0.6-2",
+	"version": "0.0.7",
 	"publisher": "captainstack",
 	"icon": "icon.png",
 	"homepage": "https://github.com/hieunc229/copilot-clone",
