@@ -13,7 +13,7 @@ import fetch from 'node-fetch';
  * @param {Number} top_p 
  * @returns {String} The text returned by the AI.
  */
- const bloom = async (text : string, token : string = '', seed : number = 31, early_stopping : boolean = false, length_penalty : number = 0, max_new_tokens = 20, do_sample = false, top_p : number = 0.9) => {
+ const bloom = async (text : string, token  = '', seed  = 31, early_stopping  = false, length_penalty  = 0, max_new_tokens = 20, do_sample = false, top_p  = 0.9) => {
     const response = await fetch("https://api-inference.huggingface.co/models/bigscience/bloom", {
         "headers": {
             'Authorization': 'Bearer ' + token
@@ -39,13 +39,13 @@ import fetch from 'node-fetch';
 export default class ParserBloom extends ParserAbstract {
     name = 'Bloom'
 
-    provideInlineCodeCompletions = (text : string, filename : string, huggingface_token : string = '') => {
+    provideInlineCodeCompletions = (text : string, filename : string, huggingface_token  = '') => {
         return new Promise<string>(async (resolve, reject) => {
             const textBeforeCursor = 'Language: ' + lang.languages[filename.split('.').pop() || ''] + '\n\n' + text;
             let output = (await bloom(textBeforeCursor, huggingface_token)).substring(textBeforeCursor.length);
             while(output.startsWith('\n')) output = output.substring(1);
 
             resolve(output);
-        })
+        });
     }
 }

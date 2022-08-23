@@ -63,7 +63,7 @@ export function activate(_: vscode.ExtensionContext) {
                                 insertText: result,
                                 range: new vscode.Range(position.translate(0, result.length), position)
                             });
-                        })
+                        });
                         
                         return await new Promise((resolve, reject) => {
                             setInterval(() => {

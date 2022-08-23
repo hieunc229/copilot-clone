@@ -901,4 +901,4 @@ export const languages : any = {
     wisp: 'wisp',
     prg: 'xBase',
     prw: 'xBase'
-  }
+  };
