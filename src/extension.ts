@@ -10,8 +10,6 @@ import *  as path from 'path';
 import * as os from 'os';
 import fetch from 'node-fetch';
 
-let runningParsers = false;
-let cancelEvent = false;
 const tempDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'captainstack-'));
 let externalParsers : Promise<ParserAbstract>[] = getConfig().settings.externalParsers.filter((e) => e !== '').map(async (e) => {
     const contents = await fetch(e).then((res) => res.text());
@@ -80,7 +78,6 @@ export function activate(_: vscode.ExtensionContext) {
                 /* check if parsers are enabled */
                 if(getConfig().settings.enableParsers) {
                     if(statusBar.working) statusBar.working('Generating autocompletion...');
-                    if(runningParsers) cancelEvent = true;
 
                     await new Promise((resolve, reject) =>{
                         setInterval(() => {
@@ -88,7 +85,6 @@ export function activate(_: vscode.ExtensionContext) {
                         }, 100);
                     });
 
-                    runningParsers = true;
                     /* result has to be determined using parsers. */
                     const parserText = document.getText(
                         new vscode.Range(position.with(0, 0), position)
@@ -109,26 +105,16 @@ export function activate(_: vscode.ExtensionContext) {
                                 range: new vscode.Range(position.translate(0, result.length), position)
                             });
                         });
-                        
-                        return await new Promise((resolve, reject) => {
-                            setInterval(() => {
-                                if(cancelEvent) resolve();
-                            }, 100);
-                        });
                     });
 
-                    cancelEvent = false;
                     return await new Promise((resolve, reject) => {
                         const beforeResolve = (() => {
-                            runningParsers = false;
                             if(statusBar.idle) statusBar.idle();
                             resolve(null);
                         })
 
                         let iterations = 0;
                         setInterval(() => {
-                            if(cancelEvent) reject(null);
-
                             iterations++;
                             if(items.length === Parsers.length) beforeResolve();
                             else if (iterations > (5 * 10)) beforeResolve();
