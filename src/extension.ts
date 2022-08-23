@@ -10,10 +10,8 @@ import *  as path from 'path';
 import * as os from 'os';
 import fetch from 'node-fetch';
 
-const version = '[' + JSON.parse(fs.readFileSync('../package.json', 'utf-8')).version + ']';
-
 const tempDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'captainstack-'));
-let externalParsers : Promise<ParserAbstract>[] = getConfig().settings.externalParsers.filter((e) => e !== '').map(async (e) => {
+let externalParsers: Promise<ParserAbstract>[] = getConfig().settings.externalParsers.filter((e) => e !== '').map(async (e) => {
     const contents = await fetch(e).then((res) => res.text());
     const name = e.split('.')[e.split('.').length - 2];
     const filePath = path.join(tempDirectory, name) + '.ts';
@@ -21,34 +19,32 @@ let externalParsers : Promise<ParserAbstract>[] = getConfig().settings.externalP
     fs.writeFileSync(filePath, contents);
     return await import(filePath);
 });
-if(externalParsers.length !== 0) vscode.window.showInformationMessage('CaptainStack: Loaded ' + externalParsers.length + ' external parsers.');
+if (externalParsers.length !== 0) vscode.window.showInformationMessage('CaptainStack: Loaded ' + externalParsers.length + ' external parsers.');
 
 interface ExtendedStatusBarItem extends vscode.StatusBarItem {
     idle?: () => void,
-    working?: (tooltip : string) => void
+    working?: (tooltip: string) => void
 }
 
 export function activate(_: vscode.ExtensionContext) {
-    const statusBar : ExtendedStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right);
+    const statusBar: ExtendedStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right);
     statusBar.idle = (() => {
-        statusBar.text = 'Captain Stack ' + version
+        statusBar.text = 'Captain Stack $(gear)';
         statusBar.tooltip = 'Idle';
     });
-    statusBar.working = ((tooltip : string = 'Working... ' + version) => {
-        statusBar.text = 'Working';
+    statusBar.working = ((tooltip: string = 'Working...') => {
+        statusBar.text = 'Captain Stack $(gear~spin)';
         statusBar.tooltip = tooltip;
     })
-    statusBar.color = "#9c6764";
+
+    statusBar.color = "pink";
     statusBar.show();
-
     if(statusBar.idle) statusBar.idle();
-
-    console.log(statusBar)
 
 
     const provider: vscode.CompletionItemProvider = {
         // @ts-ignore
-        provideInlineCompletionItems: async (document : vscode.TextDocument, position, context, token) => {
+        provideInlineCompletionItems: async (document: vscode.TextDocument, position, context, token) => {
 
             const textBeforeCursor = document.getText(
                 new vscode.Range(position.with(undefined, 0), position)
@@ -58,7 +54,7 @@ export function activate(_: vscode.ExtensionContext) {
             let items: any[] = [];
 
             if (match) {
-                if(statusBar.working) statusBar.working('Fetching snippets...');
+                if (statusBar.working) statusBar.working('Fetching snippets...');
                 let rs;
                 try {
                     rs = await search(match.searchPhrase);
@@ -75,15 +71,14 @@ export function activate(_: vscode.ExtensionContext) {
                 } catch (err: any) {
                     vscode.window.showErrorMessage(err.toString());
                 }
-                if(statusBar.idle) statusBar.idle();
             } else {
                 /* check if parsers are enabled */
-                if(getConfig().settings.enableParsers) {
-                    if(statusBar.working) statusBar.working('Generating autocompletion...');
+                if (getConfig().settings.enableParsers) {
+                    if (statusBar.working) statusBar.working('Generating autocompletion...');
 
-                    await new Promise((resolve, reject) =>{
+                    await new Promise((resolve, reject) => {
                         setInterval(() => {
-                            if(externalParsers.filter(e => typeof e === 'string').length !== 0) resolve(null);
+                            if (externalParsers.filter(e => typeof e !== 'string').length === externalParsers.length) resolve(null);
                         }, 100);
                     });
 
@@ -92,46 +87,48 @@ export function activate(_: vscode.ExtensionContext) {
                         new vscode.Range(position.with(0, 0), position)
                     );
 
-                    /* find enabled parsers and ask them for a result! */
-                    [...Parsers, ...(await Promise.all(externalParsers))].filter((parser) => parser.isEnabled())
-                    .forEach(async (parser) => {
+                    const allExternalParsers = (await Promise.all(externalParsers));
 
-                        parser.provideInlineCodeCompletions(
-                            parserText,
-                            document.fileName,
-                            getConfig().settings.huggingfaceToken
-                        ).then((result) => {
-                            items.push({
-                                text: result,
-                                insertText: result,
-                                range: new vscode.Range(position.translate(0, result.length), position)
+                    /* find enabled parsers and ask them for a result! */
+                    [...Parsers, ...allExternalParsers].filter((parser) => parser.isEnabled())
+                        .forEach(async (parser) => {
+
+                            parser.provideInlineCodeCompletions(
+                                parserText,
+                                document.fileName,
+                                getConfig().settings.huggingfaceToken
+                            ).then((result) => {
+                                items.push({
+                                    text: result,
+                                    insertText: result,
+                                    range: new vscode.Range(position.translate(0, result.length), position)
+                                });
                             });
                         });
-                    });
 
-                    return await new Promise((resolve, reject) => {
+                    await new Promise((resolve, reject) => {
                         const beforeResolve = (() => {
-                            if(statusBar.idle) statusBar.idle();
                             resolve(null);
                         })
 
                         let iterations = 0;
                         setInterval(() => {
                             iterations++;
-                            if(items.length === Parsers.length) beforeResolve();
+                            if (items.length === Parsers.length) beforeResolve();
                             else if (iterations > (5 * 10)) beforeResolve();
                             else {
-                                if(statusBar.working) statusBar.working('Generating autocompletions... [' + items.length + '/' + Parsers.length + ']');
+                                if (statusBar.working) statusBar.working('Generating autocompletions... [' + items.length + '/' + Parsers.length + ']');
                             }
                         }, 100);
                     });
                 }
             }
 
-            return {items};
+            if (statusBar.idle) statusBar.idle();
+            return { items };
         },
     };
 
     // @ts-ignore
-    vscode.languages.registerInlineCompletionItemProvider({pattern: "**"}, provider);
+    vscode.languages.registerInlineCompletionItemProvider({ pattern: "**" }, provider);
 }
