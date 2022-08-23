@@ -35,7 +35,7 @@ export function getConfig() {
             parsers,
             enableParsers: config.settings.enableParsers,
             huggingfaceToken: config.settings.huggingfaceToken,
-            externalParsers: config.settings.externalParserUrls.split(','),
+            externalParsers: config.settings.externalParserUrls[0].split(','),
             maxResults: config.settings.maxResults
         }
     } as IConfig;
