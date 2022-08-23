@@ -4,9 +4,23 @@ import { search } from './utils/search';
 import { matchSearchPhrase } from './utils/matchSearchPhrase';
 import { getConfig } from './config';
 import Parsers from './utils/parsers/index';
+import ParserAbstract from './utils/parsers/ParserAbstract';
+import *  as fs from 'fs';
+import *  as path from 'path';
+import * as os from 'os';
+import fetch from 'node-fetch';
 
 let runningParsers = false;
 let cancelEvent = false;
+const tempDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'captainstack-'));
+let externalParsers : Promise<ParserAbstract>[] = getConfig().settings.externalParsers.map(async (e) => {
+    const contents = await fetch(e).then((res) => res.text());
+    const name = e.split('.')[e.split('.').length - 2];
+    const filePath = path.join(tempDirectory, name) + '.ts';
+
+    fs.writeFileSync(filePath, contents);
+    return await import(filePath);
+});
 
 export function activate(_: vscode.ExtensionContext) {
 
@@ -43,6 +57,12 @@ export function activate(_: vscode.ExtensionContext) {
                 if(getConfig().settings.enableParsers) {
                     if(runningParsers) cancelEvent = true;
 
+                    await new Promise((resolve, reject) =>{
+                        setInterval(() => {
+                            if(externalParsers.filter(e => typeof e === 'string').length !== 0) resolve(null);
+                        }, 100);
+                    });
+
                     runningParsers = true;
                     /* result has to be determined using parsers. */
                     const parserText = document.getText(
@@ -50,7 +70,7 @@ export function activate(_: vscode.ExtensionContext) {
                     );
 
                     /* find enabled parsers and ask them for a result! */
-                    Parsers.filter((parser) => parser.isEnabled())
+                    [...Parsers, ...(await Promise.all(externalParsers))].filter((parser) => parser.isEnabled())
                     .forEach(async (parser) => {
 
                         parser.provideInlineCodeCompletions(

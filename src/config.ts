@@ -14,6 +14,7 @@ type IConfig = {
         parsers : { [name: string]: boolean }
         enableParsers: boolean,
         huggingfaceToken: string,
+        externalParsers: Array<string>,
         maxResults: number
     }
 }
@@ -34,6 +35,7 @@ export function getConfig() {
             parsers,
             enableParsers: config.settings.enableParsers,
             huggingfaceToken: config.settings.huggingfaceToken,
+            externalParsers: config.settings.externalParserUrls.split(','),
             maxResults: config.settings.maxResults
         }
     } as IConfig;

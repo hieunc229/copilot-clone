@@ -69,6 +69,11 @@
 					"type": "string",
 					"description": "Enables various machine learning models from huggingface to generate suggestions. Create a token at https://huggingface.co/settings/tokens",
 					"default": ""
+				},
+				"captainStack.settings.externalParserUrls": {
+					"type": "string",
+					"description": "Add external parsers as URL to be downloaded and used in parsing. Comma seperated",
+					"default": ""
 				}
 			}
 		}
