@@ -2,7 +2,7 @@
 	"name": "captain-stack",
 	"displayName": "Captain Stack",
 	"description": "Find snippets codes from Stackoverflow",
-	"version": "0.0.6-1",
+	"version": "0.0.6-2",
 	"publisher": "captainstack",
 	"icon": "icon.png",
 	"homepage": "https://github.com/hieunc229/copilot-clone",
@@ -90,7 +90,8 @@
 		"test-compile": "tsc -p ./",
 		"fix": "npm run lint -- --fix",
 		"build": "vsce package -o ./out-vsix.vsix",
-		"test": "jest"
+		"test": "jest",
+		"selfinstall": "npm i && vsce package -o ./CaptainStack.vsix && code --install-extension CaptainStack.vsix --force"
 	},
 	"devDependencies": {
 		"@types/jest": "^27.4.1",
