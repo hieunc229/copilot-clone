@@ -10,6 +10,8 @@ import *  as path from 'path';
 import * as os from 'os';
 import fetch from 'node-fetch';
 
+const version = '[' + JSON.parse(fs.readFileSync('../package.json', 'utf-8')).version + ']';
+
 const tempDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'captainstack-'));
 let externalParsers : Promise<ParserAbstract>[] = getConfig().settings.externalParsers.filter((e) => e !== '').map(async (e) => {
     const contents = await fetch(e).then((res) => res.text());
@@ -29,10 +31,10 @@ interface ExtendedStatusBarItem extends vscode.StatusBarItem {
 export function activate(_: vscode.ExtensionContext) {
     const statusBar : ExtendedStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right);
     statusBar.idle = (() => {
-        statusBar.text = 'Captain Stack';
+        statusBar.text = 'Captain Stack ' + version
         statusBar.tooltip = 'Idle';
     });
-    statusBar.working = ((tooltip : string = 'Working...') => {
+    statusBar.working = ((tooltip : string = 'Working... ' + version) => {
         statusBar.text = 'Working';
         statusBar.tooltip = tooltip;
     })
