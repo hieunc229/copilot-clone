@@ -1,5 +1,4 @@
 import ParserAbstract from './ParserAbstract';
-import * as lang from './languages';
 import fetch from 'node-fetch';
 import * as vscode from 'vscode';
 
@@ -61,7 +60,7 @@ export default class ParserBloom extends ParserAbstract {
 
     provideInlineCodeCompletions = (text: string, filename: string, huggingface_token = '') => {
         return new Promise<string>(async (resolve, reject) => {
-            const Language = lang.languages[filename.split('.').pop() || ''];
+            const Language = vscode.window?.activeTextEditor?.document.languageId || "text";
             const textBeforeCursor = (Language !== '' ? 'Language: ' + Language + '\n\n' : '') + text;
             let output = (await bloom(textBeforeCursor, huggingface_token)).substring(textBeforeCursor.length);
 
