@@ -42,6 +42,8 @@ For example
 
 Make sure `Inline Suggest` is `enabled` from the VS Code Settings
 
+_Note: Use `Alt+]` and `Alt+[` to move through suggestions_
+
 ## 3. Installation for Development
 
 **Check out the installation video: https://youtu.be/MD-kzsF0Scg**
