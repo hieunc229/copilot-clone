@@ -1,0 +1,3 @@
+Flask==2.2.2
+transformers==4.22.2
+torch==1.12.1

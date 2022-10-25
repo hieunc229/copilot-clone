@@ -1,10 +1,12 @@
-![Captain Stack](./icon.png)
+![Maverick](./yurts.png)
 
-# Captain Stack — Code suggestion for VSCode
+# Maverick — AI Code suggestion for VSCode
 
-[![Captain Stack on Marketplace](https://vsmarketplacebadge.apphb.com/version/captainstack.captain-stack.svg)](https://marketplace.visualstudio.com/items?itemName=captainstack.captain-stack) [![Captain Stack on Marketplace](https://vsmarketplacebadge.apphb.com/installs-short/captainstack.captain-stack.svg)](https://marketplace.visualstudio.com/items?itemName=captainstack.captain-stack) [![Discord Chat](https://img.shields.io/discord/864164585070526475.svg)](https://discord.gg/5F5tDsWFmp)
+**Forked from [Captain Stack](https://marketplace.visualstudio.com/items?itemName=captainstack.captain-stack)**
 
-This feature is somewhat similar to Github Copilot's code suggestion. But instead of using AI, it sends your search query to Google, then retrieves StackOverflow and Github Gist answers and autocompletes them for you.
+[![Maverick on Marketplace](https://vsmarketplacebadge.apphb.com/version/captainstack.captain-stack.svg)](https://marketplace.visualstudio.com/items?itemName=YurtsAI.maverick) [![Maverick on Marketplace](https://vsmarketplacebadge.apphb.com/installs-short/captainstack.captain-stack.svg)](https://marketplace.visualstudio.com/items?itemName=YurtsAI.maverick) [![Discord Chat](https://img.shields.io/discord/864164585070526475.svg)](https://discord.gg/qgUprRUX)
+
+This feature is somewhat similar to Github Copilot's code suggestion. This fork specifically incorporates AI into the workflow.
 
 ![Demo Video](./demo.gif)
 
@@ -12,9 +14,11 @@ This feature is somewhat similar to Github Copilot's code suggestion. But instea
 
 Table of contents:
 
-- [Captain Stack — Code suggestion for VSCode](#captain-stack--code-suggestion-for-vscode)
+- [Maverick — AI Code suggestion for VSCode](#maverick--ai-code-suggestion-for-vscode)
   - [1. Install extension from the marketplace](#1-install-extension-from-the-marketplace)
   - [2. How to use](#2-how-to-use)
+    - [Inline Completion using AI (only Python)](#inline-completion-using-ai-only-python)
+    - [Inline Completion using Querying](#inline-completion-using-querying)
   - [3. Installation for Development](#3-installation-for-development)
   - [4. Captain Stack Configurations](#4-captain-stack-configurations)
     - [Available settings](#available-settings)
@@ -29,13 +33,26 @@ Table of contents:
 
 ## 1. Install extension from the marketplace
 
-You can search for "Captain Stack" on the VSCode Extension Marketplace, or use [this link](https://marketplace.visualstudio.com/items?itemName=captainstack.captain-stack) to install. Have questions? [Join our Discord server](https://discord.gg/5F5tDsWFmp)
+You can search for "Maverick" on the VSCode Extension Marketplace, or use [this link](https://marketplace.visualstudio.com/items?itemName=YurtsAI.maverick) to install. Have questions? [Join our Discord server](https://discord.gg/qgUprRUX)
 
 ## 2. How to use
+
+### Inline Completion using AI (only Python)
+
+AI inline completion will trigger on keywords `def` and `class` and upon entering colon `:`.
+
+For example
+
+```python
+class LinkedList:
+```
+
+### Inline Completion using Querying
 
 To trigger inline completion, you'll need to type `//find {your keyword}.` (start with `//find`, end with a dot `.`)
 
 For example
+
 ```js
 //find binary search in javascript.
 ```
@@ -44,17 +61,15 @@ Make sure `Inline Suggest` is `enabled` from the VS Code Settings
 
 ## 3. Installation for Development
 
-**Check out the installation video: https://youtu.be/MD-kzsF0Scg**
+To install and starting developing on Maverick:
 
-To install and starting Captain Stack:
-
-1. Clone this repository to your PC using `git clone https://github.com/hieunc229/copilot-clone.git .`. Please note there is a dot at the end of the command
-   
+1. Clone this repository to your local machine using `git clone https://github.com/YurtsAI/maverick.git`.
 2. Run `npm install` in the terminal to install dependencies
 
 3. Now, you can start the extension. From the top menu, choose `Run > Start Debugging`.
 
 This will:
+
 - Start a task `npm: watch` to compile the code and watch for changes
 - Open a new VSCode window (you should use the extension there)
 
@@ -84,6 +99,7 @@ There are a few configurations available for Captain Stack. To open the settings
 - If you see an `unsupported` error message, ignore it
 
 **Limits:**
+
 - The extension uses fetch-node to get page content, and I don't know if there is any fetching limit
 - The extension uses querySelector to extract code and other info. There is a risk of either StackOverflow or Google changing its querySelector
 
@@ -97,7 +113,7 @@ If those factors became problems, the extension could be using their official AP
 - Mar 22, 2022 — Added AI Code Validation
 - Aug 15, 2021 - Added `sites` and `maxResults` configurations
 - Jul 31, 2022 — Added GithubGist source
-- Jul 31, 2021 — Create code extracting abstracting to add more code sources 
+- Jul 31, 2021 — Create code extracting abstracting to add more code sources
 - Jul 14, 2021 - Adapted to VS Code Insiders Release Version 1.59
 - Jul 01, 2021 - Added snippet source (thanks for [mechero's suggestion](https://news.ycombinator.com/item?id=27698687))
 - Jun 30, 2021 - Publish the initial version
@@ -132,6 +148,7 @@ The plugin is available, thanks to:
 **Feel free to open a thread for feedback or discussion. And have fun!**
 
 ---
+
 Love Captain Stack? Check out other things I do:
 
 - [Rebit Nocode Site Builder](https://rebit.co/?ref=github)

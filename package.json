@@ -1,108 +1,125 @@
 {
-	"name": "captain-stack",
-	"displayName": "Captain Stack",
-	"description": "Find snippets codes from Stackoverflow",
-	"version": "0.0.5",
-	"publisher": "captainstack",
-	"icon": "icon.png",
-	"homepage": "https://github.com/hieunc229/copilot-clone",
-	"repository": "https://github.com/hieunc229/copilot-clone",
-	"keywords": [
-		"code-suggestion",
-		"copilot",
-		"code-inference"
-	],
-	"engines": {
-		"vscode": "^1.34.0"
-	},
-	"bugs": {
-		"url": "https://github.com/hieunc229/copilot-clone/issues"
-	},
-	"author": {
-		"name": "Hieu Nguyen",
-		"url": "https://hieunguyen.info/"
-	},
-	"contributors": [
-		"Kekschen (https://github.com/Kek5chen)",
-		"Charlie Lin <clin@rollins.edu> (https://clin1234.github.io)"
-	],
-	"license": "MIT",
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"*"
-	],
-	"main": "./out/extension.js",
-	"contributes": {
-		"configuration": {
-			"title": "CaptainStack",
-			"type": "object",
-			"properties": {
-				"captainStack.settings.sites.stackoverflow": {
-					"title": "stackoverflow.com",
-					"description": "Enable searching code in StackOverflow",
-					"type": "boolean",
-					"default": true
-				},
-				"captainStack.settings.sites.githubGist": {
-					"title": "gist.github.com",
-					"description": "Enable searching code in Github Gists",
-					"type": "boolean",
-					"default": false
-				},
-				"captainStack.settings.maxResults": {
-					"type": "integer",
-					"description": "Limit the max number of results",
-					"default": 12
-				}
-			}
-		}
-	},
-	"scripts": {
-		"lint": "eslint . --ext .ts,.tsx",
-		"watch": "tsc -watch -p ./",
-		"download-api": "vscode-dts dev",
-		"postdownload-api": "vscode-dts main",
-		"postinstall": "npx vscode-dts dev",
-		"vscode:prepublish": "webpack --mode production",
-		"webpack": "webpack --mode development",
-		"webpack-dev": "webpack --mode development --watch",
-		"test-compile": "tsc -p ./",
-		"prebuild": "npm run lint -- --fix",
-		"build": "vsce package -o ./out-vsix",
-		"test": "jest"
-	},
-	"devDependencies": {
-		"@types/jest": "^27.4.1",
-		"@types/node": "^14.15.0",
-		"@types/node-fetch": "^2.5.10",
-		"@typescript-eslint/eslint-plugin": "^4.16.0",
-		"@typescript-eslint/parser": "^4.16.0",
-		"bufferutil": "^4.0.3",
-		"esbuild": "^0.12.15",
-		"eslint": "^7.21.0",
-		"jest": "^27.5",
-		"node-loader": "^2.0.0",
-		"ts-jest": "^27.1.4",
-		"ts-loader": "^9.2.3",
-		"typescript": "^4.2.2",
-		"utf-8-validate": "^5.0.5",
-		"vscode-dts": "^0.3.3",
-		"webpack": "^5.46.0",
-		"webpack-cli": "^4.7.2"
-	},
-	"dependencies": {
-		"@types/jsdom": "^16.2.12",
-		"jsdom": "^16.6.0",
-		"linkedom": "^0.11.1",
-		"node-fetch": "^2.6.1",
-		"typescript-language-server": "^0.5.4",
-		"vsce": "^1.96.1",
-		"vscode": "^1.1.37"
-	},
-	"jest": {
-		"preset": "ts-jest",
-		"testEnvironment": "node"
-	}
+  "name": "maverick",
+  "displayName": "Maverick",
+  "description": "AI code generation at your fingertips",
+  "version": "0.0.8",
+  "publisher": "YurtsAI",
+  "icon": "yurts.png",
+  "homepage": "https://github.com/YurtsAI/maverick",
+  "repository": "https://github.com/YurtsAI/maverick",
+  "keywords": [
+    "code-suggestion",
+    "copilot",
+    "code-inference",
+    "code-generation"
+  ],
+  "engines": {
+    "vscode": "^1.34.0"
+  },
+  "bugs": {
+    "url": "https://github.com/YurtsAI/maverick/issues"
+  },
+  "author": {
+    "name": "Yurts Technologies Inc.",
+    "url": "https://yurts.ai"
+  },
+  "contributors": [
+    "Kekschen (https://github.com/Kek5chen)",
+    "Charlie Lin <clin@rollins.edu> (https://clin1234.github.io)",
+    "Hieu Nguyen (https://hieunguyen.info/)"
+  ],
+  "license": "MIT",
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*",
+    "onCommand:extension.generateCode"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.generateCode",
+        "title": "Maverick Code Generator"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.generateCode",
+        "key": "ctrl+m",
+        "mac": "cmd+m",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "title": "CaptainStack",
+      "type": "object",
+      "properties": {
+        "captainStack.settings.sites.stackoverflow": {
+          "title": "stackoverflow.com",
+          "description": "Enable searching code in StackOverflow",
+          "type": "boolean",
+          "default": true
+        },
+        "captainStack.settings.sites.githubGist": {
+          "title": "gist.github.com",
+          "description": "Enable searching code in Github Gists",
+          "type": "boolean",
+          "default": false
+        },
+        "captainStack.settings.maxResults": {
+          "type": "integer",
+          "description": "Limit the max number of results",
+          "default": 12
+        }
+      }
+    }
+  },
+  "scripts": {
+    "lint": "eslint . --ext .ts,.tsx",
+    "watch": "tsc -watch -p ./",
+    "download-api": "vscode-dts dev",
+    "postdownload-api": "vscode-dts main",
+    "postinstall": "npx vscode-dts dev",
+    "vscode:prepublish": "webpack --mode production",
+    "webpack": "webpack --mode development",
+    "webpack-dev": "webpack --mode development --watch",
+    "test-compile": "tsc -p ./",
+    "prebuild": "npm run lint -- --fix",
+    "build": "vsce package -o ./out-vsix",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.4.1",
+    "@types/node": "^14.15.0",
+    "@types/node-fetch": "^2.5.10",
+    "@typescript-eslint/eslint-plugin": "^4.16.0",
+    "@typescript-eslint/parser": "^4.16.0",
+    "bufferutil": "^4.0.3",
+    "esbuild": "^0.12.15",
+    "eslint": "^7.21.0",
+    "jest": "^27.5",
+    "node-loader": "^2.0.0",
+    "ts-jest": "^27.1.4",
+    "ts-loader": "^9.2.3",
+    "typescript": "^4.2.2",
+    "utf-8-validate": "^5.0.5",
+    "vscode-dts": "^0.3.3",
+    "webpack": "^5.46.0",
+    "webpack-cli": "^4.7.2",
+    "vscode": "^1.1.37"
+  },
+  "dependencies": {
+    "@types/jsdom": "^16.2.12",
+    "jsdom": "^16.6.0",
+    "linkedom": "^0.11.1",
+    "node-fetch": "^2.6.1",
+    "typescript-language-server": "^0.5.4",
+    "vsce": "^1.96.1"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  }
 }
