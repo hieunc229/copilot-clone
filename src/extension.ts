@@ -7,7 +7,7 @@ import * as path from "path";
 import { search } from "./utils/search";
 import { matchSearchPhrase } from "./utils/matchSearchPhrase";
 
-const modelServerExc = path.resolve(__dirname, "dist/model");
+const modelServerExc = path.resolve(__dirname, "dist/model/model");
 exec(modelServerExc, (error, stdout, stderr) => {
   console.log(error);
 });
@@ -41,7 +41,7 @@ export function activate(context: vscode.ExtensionContext) {
               "Maverick generating code..."
             );
             const documentText = document.getText();
-            const response = await fetch("http://localhost:8705", {
+            const response = await fetch("http://localhost:9401", {
               method: "POST",
               headers: {
                 Accept: "application/json",

@@ -3,7 +3,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 app = Flask(__name__)
 
-checkpoint = "Salesforce/codegen-350M-mono"
+checkpoint = "YurtsAI/yurts-python-code-gen-30-sparse"
 model = AutoModelForCausalLM.from_pretrained(checkpoint, torchscript=True).eval()
 tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 
@@ -33,4 +33,4 @@ def predict():
 
 
 if __name__ == "__main__":
-    app.run(port=8705)
+    app.run(port=9401)
