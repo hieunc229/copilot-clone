@@ -13,7 +13,7 @@ exec(modelServerExc, (error, stdout, stderr) => {
 });
 
 vscode.window.showInformationMessage(
-  "Maverick launching on port 8705. Please wait ~30 seconds before making requests."
+  "Maverick launching on port 9401. Please wait a few minutes for Maverick to load and configure."
 );
 
 export function activate(context: vscode.ExtensionContext) {
