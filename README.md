@@ -1,4 +1,4 @@
-![Maverick]<img src="./yurts.png" height="128">
+<img src="./yurts.png" height="128" alt="Maverick">
 
 # Maverick — AI Code suggestion for VSCode
 
