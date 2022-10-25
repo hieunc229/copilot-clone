@@ -2,7 +2,7 @@
   "name": "maverick",
   "displayName": "Maverick",
   "description": "AI code generation at your fingertips",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "publisher": "YurtsAI",
   "icon": "yurts.png",
   "homepage": "https://github.com/YurtsAI/maverick",
@@ -38,37 +38,23 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "extension.generateCode",
-        "title": "Maverick Code Generator"
-      }
-    ],
-    "keybindings": [
-      {
-        "command": "extension.generateCode",
-        "key": "ctrl+m",
-        "mac": "cmd+m",
-        "when": "editorTextFocus"
-      }
-    ],
     "configuration": {
-      "title": "CaptainStack",
+      "title": "maverick",
       "type": "object",
       "properties": {
-        "captainStack.settings.sites.stackoverflow": {
+        "maverick.settings.sites.stackoverflow": {
           "title": "stackoverflow.com",
           "description": "Enable searching code in StackOverflow",
           "type": "boolean",
           "default": true
         },
-        "captainStack.settings.sites.githubGist": {
+        "maverick.settings.sites.githubGist": {
           "title": "gist.github.com",
           "description": "Enable searching code in Github Gists",
           "type": "boolean",
           "default": false
         },
-        "captainStack.settings.maxResults": {
+        "maverick.settings.maxResults": {
           "type": "integer",
           "description": "Limit the max number of results",
           "default": 12

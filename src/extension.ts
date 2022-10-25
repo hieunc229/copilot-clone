@@ -8,35 +8,15 @@ import { search } from "./utils/search";
 import { matchSearchPhrase } from "./utils/matchSearchPhrase";
 
 const modelServerExc = path.resolve(__dirname, "dist/model");
-
 exec(modelServerExc, (error, stdout, stderr) => {
   console.log(error);
 });
 
 vscode.window.showInformationMessage(
-  "Maverick launching. Please wait ~10 seconds before making requests."
+  "Maverick launching on port 8705. Please wait ~10 seconds before making requests."
 );
 
 export function activate(context: vscode.ExtensionContext) {
-  // const command = "extension.generateCode";
-  // const commandHandler = () => {
-  //   const editor = vscode.window.activeTextEditor;
-  //   if (!editor) {
-  //     return;
-  //   }
-  //   // let document = editor.document;
-  //   // let curPos = editor.selection.active;
-  //   // let offset = document.offsetAt(curPos);
-  //   return editor.insertSnippet(
-  //     new vscode.SnippetString("def hello_world():"),
-  //     new vscode.Position(0, 0)
-  //   );
-  // };
-
-  // context.subscriptions.push(
-  //   vscode.commands.registerCommand(command, commandHandler)
-  // );
-
   const provider: vscode.CompletionItemProvider = {
     // @ts-ignore
     provideInlineCompletionItems: async (
@@ -61,7 +41,7 @@ export function activate(context: vscode.ExtensionContext) {
               "Maverick generating code..."
             );
             const documentText = document.getText();
-            const response = await fetch("http://localhost:5000", {
+            const response = await fetch("http://localhost:8705", {
               method: "POST",
               headers: {
                 Accept: "application/json",

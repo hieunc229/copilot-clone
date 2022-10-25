@@ -1,32 +1,17 @@
 from flask import Flask, jsonify, request
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 app = Flask(__name__)
 
-import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
-
 checkpoint = "Salesforce/codegen-350M-mono"
 model = AutoModelForCausalLM.from_pretrained(checkpoint, torchscript=True).eval()
-
-tokenizer = AutoTokenizer.from_pretrained(checkpoint)
-text = "def hello_world():"
-input_ids = tokenizer(text, return_tensors="pt").input_ids
-
-traced_model_generate = torch.jit.trace(model.generate, (input_ids, 128))
 tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 
 
 @app.route("/", methods=["POST", "GET"])
 def predict():
     if request.method == "GET":
-        import sys
-
-        if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
-            return "running in a PyInstaller bundle"
-        else:
-            return "running in a normal Python process"
-
-        # return "Maverick loaded properly. Use POST methods to retrieve predictions."
+        return "Maverick loaded properly. Use POST methods to retrieve predictions."
 
     text = request.json["text"]
     input_ids = tokenizer(text, return_tensors="pt").input_ids
@@ -47,4 +32,4 @@ def predict():
 
 
 if __name__ == "__main__":
-    app.run(port=5000, debug=True)
+    app.run(port=8705)
