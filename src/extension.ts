@@ -13,7 +13,7 @@ exec(modelServerExc, (error, stdout, stderr) => {
 });
 
 vscode.window.showInformationMessage(
-  "Maverick launching on port 8705. Please wait ~10 seconds before making requests."
+  "Maverick launching on port 8705. Please wait ~30 seconds before making requests."
 );
 
 export function activate(context: vscode.ExtensionContext) {
@@ -47,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
                 Accept: "application/json",
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ text: documentText }),
+              body: JSON.stringify({ text: documentText, numTokens: 64 }),
             });
             const result = await response.json();
             const generatedText = result.text;

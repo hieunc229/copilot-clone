@@ -14,11 +14,12 @@ def predict():
         return "Maverick loaded properly. Use POST methods to retrieve predictions."
 
     text = request.json["text"]
+    num_tokens = request.json.get("numTokens", 64)
     input_ids = tokenizer(text, return_tensors="pt").input_ids
 
     generated_ids = model.generate(
         input_ids,
-        max_length=len(input_ids[0]) + 64,
+        max_length=len(input_ids[0]) + num_tokens,
     )
 
     return jsonify(
