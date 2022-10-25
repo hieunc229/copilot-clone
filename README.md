@@ -2,11 +2,11 @@
 
 # Maverick — AI Code suggestion for VSCode
 
-[![Maverick on Marketplace](https://vsmarketplacebadge.apphb.com/version/YurtsAI.maverick.svg)](https://marketplace.visualstudio.com/items?itemName=YurtsAI.maverick) [![Maverick on Marketplace](https://vsmarketplacebadge.apphb.com/installs-short/YurtsAI.maverick.svg)](https://marketplace.visualstudio.com/items?itemName=YurtsAI.maverick) [![Discord Chat](https://img.shields.io/discord/864164585070526475.svg)](https://discord.gg/qgUprRUX)
+[![Maverick on Marketplace](https://vsmarketplacebadge.apphb.com/version/YurtsAI.maverick.svg)](https://marketplace.visualstudio.com/items?itemName=YurtsAI.maverick) [![Maverick on Marketplace](https://vsmarketplacebadge.apphb.com/installs-short/YurtsAI.maverick.svg)](https://marketplace.visualstudio.com/items?itemName=YurtsAI.maverick) [![Discord Chat](https://img.shields.io/discord/1032744296471855124.svg)](https://discord.gg/qgUprRUX)
 
 **Forked from [Captain Stack](https://marketplace.visualstudio.com/items?itemName=captainstack.captain-stack)**
 
-This feature is somewhat similar to Github Copilot's code suggestion. This fork specifically incorporates AI into the workflow.
+This feature is somewhat similar to Github Copilot's code suggestion. This fork specifically incorporates AI into the workflow and is meant to be a **free alternative**.
 
 ![Demo Video](./demo.gif)
 
