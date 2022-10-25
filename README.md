@@ -1,10 +1,10 @@
-![Maverick](./yurts.png)
+![Maverick](./small_yurts.png)
 
 # Maverick — AI Code suggestion for VSCode
 
-**Forked from [Captain Stack](https://marketplace.visualstudio.com/items?itemName=captainstack.captain-stack)**
+[![Maverick on Marketplace](https://vsmarketplacebadge.apphb.com/version/YurtsAI.maverick.svg)](https://marketplace.visualstudio.com/items?itemName=YurtsAI.maverick) [![Maverick on Marketplace](https://vsmarketplacebadge.apphb.com/installs-short/YurtsAI.maverick.svg)](https://marketplace.visualstudio.com/items?itemName=YurtsAI.maverick) [![Discord Chat](https://img.shields.io/discord/864164585070526475.svg)](https://discord.gg/qgUprRUX)
 
-[![Maverick on Marketplace](https://vsmarketplacebadge.apphb.com/version/captainstack.captain-stack.svg)](https://marketplace.visualstudio.com/items?itemName=YurtsAI.maverick) [![Maverick on Marketplace](https://vsmarketplacebadge.apphb.com/installs-short/captainstack.captain-stack.svg)](https://marketplace.visualstudio.com/items?itemName=YurtsAI.maverick) [![Discord Chat](https://img.shields.io/discord/864164585070526475.svg)](https://discord.gg/qgUprRUX)
+**Forked from [Captain Stack](https://marketplace.visualstudio.com/items?itemName=captainstack.captain-stack)**
 
 This feature is somewhat similar to Github Copilot's code suggestion. This fork specifically incorporates AI into the workflow.
 
@@ -20,14 +20,15 @@ Table of contents:
     - [Inline Completion using AI (only Python)](#inline-completion-using-ai-only-python)
     - [Inline Completion using Querying](#inline-completion-using-querying)
   - [3. Installation for Development](#3-installation-for-development)
-  - [4. Captain Stack Configurations](#4-captain-stack-configurations)
-    - [Available settings](#available-settings)
-  - [5. Notes](#5-notes)
-  - [6. Changelog](#6-changelog)
-  - [7. Troubleshooting](#7-troubleshooting)
-    - [Common reasons why you can't run Captain Stack:](#common-reasons-why-you-cant-run-captain-stack)
-    - [Still not running?](#still-not-running)
-  - [8. Contributors](#8-contributors)
+  - [4. Captain Stack Archive](#4-captain-stack-archive)
+    - [a. Captain Stack Configurations](#a-captain-stack-configurations)
+      - [Available settings](#available-settings)
+    - [b. Notes](#b-notes)
+    - [c. Changelog](#c-changelog)
+    - [d. Troubleshooting](#d-troubleshooting)
+      - [Common reasons why you can't run Captain Stack:](#common-reasons-why-you-cant-run-captain-stack)
+      - [Still not running?](#still-not-running)
+  - [5. Contributors](#5-contributors)
 
 ---
 
@@ -77,7 +78,9 @@ _Note: When you make changes, you should refresh that window to apply changes. T
 
 ---
 
-## 4. Captain Stack Configurations
+## 4. Captain Stack Archive
+
+### a. Captain Stack Configurations
 
 There are a few configurations available for Captain Stack. To open the settings page:
 
@@ -85,15 +88,13 @@ There are a few configurations available for Captain Stack. To open the settings
 2. Choose **Settings**
 3. In the **Search settings** search box, enter "Captain Stack"
 
-### Available settings
+#### Available settings
 
 - `sites` allows to enable or disable a source site. By default, only `Stackoverflow` is enabled.
 
 - `maxResults` is the maximum number of results. It's `12` by default. Note: Since Captain Stack will fetch all the results from a page, the final number of results could be more than `maxResults`
 
----
-
-## 5. Notes
+### b. Notes
 
 - There are more code sources that should be considered besides StackOverflow
 - If you see an `unsupported` error message, ignore it
@@ -105,9 +106,7 @@ There are a few configurations available for Captain Stack. To open the settings
 
 If those factors became problems, the extension could be using their official APIs instead.
 
----
-
-## 6. Changelog
+### c. Changelog
 
 - Jul 02, 2022 — Officially published Captain Stack on the extension marketplace
 - Mar 22, 2022 — Added AI Code Validation
@@ -118,28 +117,24 @@ If those factors became problems, the extension could be using their official AP
 - Jul 01, 2021 - Added snippet source (thanks for [mechero's suggestion](https://news.ycombinator.com/item?id=27698687))
 - Jun 30, 2021 - Publish the initial version
 
----
+### d. Troubleshooting
 
-## 7. Troubleshooting
-
-### Common reasons why you can't run Captain Stack:
+#### Common reasons why you can't run Captain Stack:
 
 - When pressing `Run debugger`, it shows different target options (nodejs, edge, etc.). Your VSCode root directory might be incorrect. Make sure your root directory is the folder in which the `package.json` file is.
 - Error message `module "node-fetch" not found...`. You need to run `npm install`.
 - `canvas.node` was compiled against a different Node.js. [Try to remove canvas](https://github.com/hieunc229/copilot-clone/issues/9) (`npm uninstall canvas`)
 
-### Still not running?
+#### Still not running?
 
 - You haven't enabled the inline completion feature. To enable, set VSCode config `"editor.inlineSuggest.enabled": true`
 - It might conflict with some other plugins. You might need to disable plugins to check
 
 If none of the above works, open a thread or join our [Discord channel and have a chat](https://discord.gg/5F5tDsWFmp).
 
----
+## 5. Contributors
 
-## 8. Contributors
-
-The plugin is available, thanks to:
+The plugin is available, thanks to the original Captain Stack creators:
 
 - [Kekschen](https://github.com/Kek5chen)
 - [Charlie Lin](https://github.com/clin1234)
@@ -149,7 +144,4 @@ The plugin is available, thanks to:
 
 ---
 
-Love Captain Stack? Check out other things I do:
-
-- [Rebit Nocode Site Builder](https://rebit.co/?ref=github)
-- [Hieu's Twitter](https://twitter.com/hieuSSR/)
+Love Maverick? Please drop us a star :) and expand the yurt.

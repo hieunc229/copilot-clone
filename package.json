@@ -2,7 +2,7 @@
   "name": "maverick",
   "displayName": "Maverick",
   "description": "AI code generation at your fingertips",
-  "version": "0.0.9",
+  "version": "0.1.1",
   "publisher": "YurtsAI",
   "icon": "yurts.png",
   "homepage": "https://github.com/YurtsAI/maverick",
