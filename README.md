@@ -6,7 +6,7 @@
 
 **Forked from [Captain Stack](https://marketplace.visualstudio.com/items?itemName=captainstack.captain-stack)**
 
-This feature is somewhat similar to Github Copilot's code suggestion. This fork specifically incorporates AI into the workflow and is meant to be a **free alternative**.
+This feature is somewhat similar to Github Copilot's code suggestion. This fork specifically incorporates AI into the workflow and is meant to be a **free alternative** and **has only been tested/bundled for compatibility with MacOS Intel/M1**.
 
 ![Demo Video](./demo.gif)
 
@@ -34,7 +34,7 @@ Table of contents:
 
 ## 1. Install extension from the marketplace
 
-You can search for "Maverick" on the VSCode Extension Marketplace, or use [this link](https://marketplace.visualstudio.com/items?itemName=YurtsAI.maverick) to install. Have questions? [Join our Discord server](https://discord.gg/qgUprRUX)
+You can search for "Maverick" on the VSCode Extension Marketplace, or use [this link](https://marketplace.visualstudio.com/items?itemName=YurtsAI.maverick) to install. **Note that Maverick has only been tested/bundled to work with MacOS Intel/M1.** Have questions? [Join our Discord server](https://discord.gg/qgUprRUX)
 
 ## 2. How to use
 
