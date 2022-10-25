@@ -1,4 +1,4 @@
-![Maverick](./yurts.png =128x119)
+![Maverick]<img src="./yurts.png" height="128">
 
 # Maverick — AI Code suggestion for VSCode
 
