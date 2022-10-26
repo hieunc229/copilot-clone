@@ -1,8 +1,7 @@
 import * as vscode from "vscode";
 
 const CSConfig = {
-  SEARCH_PATTERN:
-    /(\/\/|#|--|<!--)\s?find\s?(.+)\s?(\.|-->)|(def|class|\.\.\.)\s?(.+)\s?(\:|-->)/,
+  SEARCH_PATTERN: /(\/\/|#|--|<!--)\s?find\s?(.+)\s?(\.|-->)/,
 };
 
 export function getSearchURL(site: string, keyword: string) {

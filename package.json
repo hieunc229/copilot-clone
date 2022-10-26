@@ -2,7 +2,7 @@
   "name": "maverick",
   "displayName": "Maverick",
   "description": "AI code generation at your fingertips",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "publisher": "YurtsAI",
   "icon": "yurts.png",
   "homepage": "https://github.com/YurtsAI/maverick",
@@ -70,7 +70,21 @@
           "default": 64
         }
       }
-    }
+    },
+    "commands": [
+      {
+        "command": "maverick.sendPrediction",
+        "title": "Maverick Code Generator"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "maverick.sendPrediction",
+        "key": "ctrl+shift+m",
+        "mac": "cmd+shift+m",
+        "when": "editorTextFocus"
+      }
+    ]
   },
   "scripts": {
     "lint": "eslint . --ext .ts,.tsx",
