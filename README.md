@@ -6,7 +6,7 @@
 
 **Forked from [Captain Stack](https://marketplace.visualstudio.com/items?itemName=captainstack.captain-stack)**
 
-This feature is somewhat similar to Github Copilot's code suggestion. This fork specifically incorporates AI into the workflow and is meant to be a **free alternative** and **has only been tested/bundled for compatibility with MacOS Intel/M1**.
+This feature is somewhat similar to Github Copilot's code suggestion. This fork specifically incorporates AI into the workflow and is meant to be a **free alternative**.
 
 ![Demo Video](./demo.gif)
 
