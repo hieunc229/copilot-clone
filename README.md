@@ -48,13 +48,15 @@ After Docker is installed and running, you can search for "Maverick" on the VSCo
 
 ### Inline Completion using AI (only Python)
 
-AI inline completion will trigger on keywords `def` and `class` and upon entering colon `:`.
+AI inline completion triggers on the **key command `cmd + shift + m` (macOS) or `ctrl + shift + m` (Windows/Linux)**.
 
-For example
+For example, if the following was typed into your editor:
 
 ```python
 class LinkedList:
 ```
+
+Hitting `cmd + shift + m` or `ctrl + shift + m` would then send the prediction request to Maverick. (_You can tell a prediction is in progress if the Status Message in the bottom left of VSCode reads "Maverick generating code..."_) The prediction will then render as an line suggestion!
 
 ### Inline Completion using Querying
 
