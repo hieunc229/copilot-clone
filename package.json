@@ -2,7 +2,7 @@
   "name": "maverick",
   "displayName": "Maverick",
   "description": "AI code generation at your fingertips",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "publisher": "YurtsAI",
   "icon": "yurts.png",
   "homepage": "https://github.com/YurtsAI/maverick",
@@ -58,6 +58,16 @@
           "type": "integer",
           "description": "Limit the max number of results",
           "default": 12
+        },
+        "maverick.settings.port": {
+          "type": "integer",
+          "description": "Port to run model on",
+          "default": 9401
+        },
+        "maverick.settings.maxTokens": {
+          "type": "integer",
+          "description": "Maximum number of tokens to generate",
+          "default": 64
         }
       }
     }

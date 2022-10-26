@@ -1,17 +1,23 @@
+import os
+
 from flask import Flask, jsonify, request
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 app = Flask(__name__)
 
-checkpoint = "YurtsAI/yurts-python-code-gen-30-sparse"
-model = AutoModelForCausalLM.from_pretrained(checkpoint, torchscript=True).eval()
-tokenizer = AutoTokenizer.from_pretrained(checkpoint)
+ckpt = "YurtsAI/yurts-python-code-gen-30-sparse"
+model = AutoModelForCausalLM.from_pretrained(ckpt, torchscript=True)
+model = model.eval()
+tokenizer = AutoTokenizer.from_pretrained(ckpt)
 
 
 @app.route("/", methods=["POST", "GET"])
 def predict():
     if request.method == "GET":
-        return "Maverick loaded properly. Use POST methods to retrieve predictions."
+        return (
+            "Maverick loaded properly. "
+            "Use POST methods to retrieve predictions."
+        )
 
     text = request.json["text"]
     num_tokens = request.json.get("numTokens", 64)
@@ -33,4 +39,5 @@ def predict():
 
 
 if __name__ == "__main__":
-    app.run(port=9401)
+    port = int(os.environ.get("PORT", 9401))
+    app.run(debug=False, host="0.0.0.0", port=port)

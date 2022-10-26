@@ -16,6 +16,8 @@ type IConfig = {
   settings: {
     sites: { [name: string]: boolean };
     maxResults: number;
+    port: number;
+    maxTokens: number;
   };
 };
 
@@ -31,6 +33,8 @@ export function getConfig() {
     settings: {
       sites,
       maxResults: config.settings.maxResults,
+      port: config.settings.port,
+      maxTokens: config.settings.maxTokens,
     },
   } as IConfig;
 }

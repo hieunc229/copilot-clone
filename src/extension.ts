@@ -5,16 +5,11 @@ import fetch from "node-fetch";
 import * as path from "path";
 
 import { search } from "./utils/search";
+import { predict } from "./utils/predict";
 import { matchSearchPhrase } from "./utils/matchSearchPhrase";
+import { loadModel } from "./utils/loadModel";
 
-const modelServerExc = path.resolve(__dirname, "dist/model/model");
-exec(modelServerExc, (error, stdout, stderr) => {
-  console.log(error);
-});
-
-vscode.window.showInformationMessage(
-  "Maverick launching on port 9401. Please wait a few minutes for Maverick to load and configure."
-);
+loadModel();
 
 export function activate(context: vscode.ExtensionContext) {
   const provider: vscode.CompletionItemProvider = {
@@ -37,21 +32,9 @@ export function activate(context: vscode.ExtensionContext) {
         try {
           if (!(match.commentSyntax && match.commentSyntaxEnd)) {
             // Trigger model prediction on given line
-            const disposable = vscode.window.setStatusBarMessage(
-              "Maverick generating code..."
-            );
             const documentText = document.getText();
-            const response = await fetch("http://localhost:9401", {
-              method: "POST",
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ text: documentText, numTokens: 64 }),
-            });
-            const result = await response.json();
-            const generatedText = result.text;
-            items = generatedText.map((item: any) => {
+            rs = await predict(documentText);
+            items = rs.map((item: any) => {
               const finalText = item.slice(documentText.length, item.length);
               return {
                 text: `${finalText}`,
@@ -62,7 +45,6 @@ export function activate(context: vscode.ExtensionContext) {
                 ),
               };
             });
-            disposable.dispose();
           } else {
             rs = await search(match.searchPhrase);
             if (rs) {
