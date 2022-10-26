@@ -17,6 +17,7 @@ Table of contents:
 - [Maverick — AI Code suggestion for VSCode](#maverick--ai-code-suggestion-for-vscode)
   - [1. Install extension from the marketplace](#1-install-extension-from-the-marketplace)
     - [System Requirements](#system-requirements)
+    - [Installation](#installation)
   - [2. How to use](#2-how-to-use)
     - [Inline Completion using AI (only Python)](#inline-completion-using-ai-only-python)
     - [Inline Completion using Querying](#inline-completion-using-querying)
@@ -37,7 +38,9 @@ Table of contents:
 
 ### System Requirements
 
-The Maverick model runs in a docker container. This means in order for the extension to run properly, **Docker must be installed and running**. You can install [docker here](https://docs.docker.com/get-docker/).
+The Maverick model runs in a docker container. This means in order for the extension to run properly, **Docker must be installed and running**. You can install [Docker here](https://docs.docker.com/get-docker/).
+
+### Installation
 
 After Docker is installed and running, you can search for "Maverick" on the VSCode Extension Marketplace, or use [this link](https://marketplace.visualstudio.com/items?itemName=YurtsAI.maverick) to install. Have questions? [Join our Discord server](https://discord.gg/qgUprRUX)
 
