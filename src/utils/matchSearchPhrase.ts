@@ -24,7 +24,7 @@ export function matchSearchPhrase(input: string): SearchMatchResult | undefined 
         let fileType = window.activeTextEditor.document.languageId;
 
         if (fileType === "plaintext") {
-            fileType = ""
+            fileType = "";
         }
         
         return {
