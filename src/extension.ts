@@ -3,7 +3,7 @@ import * as vscode from "vscode";
 import { search } from "./utils/search";
 import { predict } from "./utils/predict";
 import { matchSearchPhrase } from "./utils/matchSearchPhrase";
-import { loadModel } from "./utils/loadModel";
+import { loadModel } from "./model_server/loadModel";
 import { forceRender } from "./utils/forceRender";
 
 loadModel();

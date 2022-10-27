@@ -38,11 +38,15 @@ Table of contents:
 
 ### System Requirements
 
-The Maverick model runs in a docker container. This means in order for the extension to run properly, **Docker must be installed and running**. You can install [Docker here](https://docs.docker.com/get-docker/).
+Currently, Maverick can be ran on `linux/arm64`, `linux/amd64`, and `windows/amd64` platforms. This is because `PyTorch` requires 64-bit precision to be ran.
+
+Additionally, the Maverick model is packaged within a Docker container. This means in order for the extension to run properly, **Docker must be installed and running**. You can install [Docker here](https://docs.docker.com/get-docker/).
 
 ### Installation
 
-After Docker is installed and running, you can search for "Maverick" on the VSCode Extension Marketplace, or use [this link](https://marketplace.visualstudio.com/items?itemName=YurtsAI.maverick) to install. Have questions? [Join our Discord server](https://discord.gg/qgUprRUX)
+After Docker is installed and running, you can search for "Maverick" on the VSCode Extension Marketplace, or use [this link](https://marketplace.visualstudio.com/items?itemName=YurtsAI.maverick) to install.
+
+Have questions? [Join our Discord server!](https://discord.gg/qgUprRUX)
 
 ## 2. How to use
 
