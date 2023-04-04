@@ -2,19 +2,20 @@ import fetch from "node-fetch";
 import { getConfig } from "../config";
 
 const config = getConfig();
-//const API_KEY = config.settings.openaiApiKey;
-const API_KEY ="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";
+const API_KEY = config.settings.openaiApiKey;
 const API_URL = "https://api.openai.com/v1/chat/completions";
 
 export class OpenAIApiClient {
   async generateCode(prompt: string): Promise<any> {
+    
     try {
       const response = await fetch(API_URL, {
         method: "POST",
         body: JSON.stringify({
             "model": "gpt-3.5-turbo",
-            "messages": [{"role": "user", "content": `${prompt}`}],
-            "temperature": 0.7
+            "messages": [{"role": "user", "content": `Actua siempre desarrollador web senior en todos los lenjuajes de programacion, tendras la capacidad de escribir codigo fuente, limpio y funcional, genera un solo bloque de codigo en formato markdown, no des tus opiniones solo crea el codigo, a partir de esta propuesta que te indico, omite "//find",  aca  lo que necesito: ${prompt}`}],
+            "temperature": 0.5,
+            "max_tokens" : 100
               
         }),
         headers: {
