@@ -2,9 +2,9 @@ import fetch from "node-fetch";
 import { getConfig } from "../config";
 
 const config = getConfig();
-const API_KEY = config.settings.openaiApiKey;
-
-const API_URL = "https://api.openai.com/v1/engines/davinci-codex/completions";
+//const API_KEY = config.settings.openaiApiKey;
+const API_KEY ="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";
+const API_URL = "https://api.openai.com/v1/chat/completions";
 
 export class OpenAIApiClient {
   async generateCode(prompt: string): Promise<any> {
@@ -12,11 +12,10 @@ export class OpenAIApiClient {
       const response = await fetch(API_URL, {
         method: "POST",
         body: JSON.stringify({
-          prompt,
-          max_tokens: 100,
-          n: 5,
-          stop: null,
-          temperature: 0.5,
+            "model": "gpt-3.5-turbo",
+            "messages": [{"role": "user", "content": `${prompt}`}],
+            "temperature": 0.7
+              
         }),
         headers: {
           "Content-Type": "application/json",
