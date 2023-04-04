@@ -27,7 +27,7 @@ export function activate(_: vscode.ExtensionContext) {
               completionItem.filterText = match.searchPhrase;
               completionItem.detail = item.sourceURL;
               completionItem.documentation = new vscode.MarkdownString(item.code);
-              // Define the snippet
+              // Define   the snippet
               completionItem.insertText = new vscode.SnippetString(item.code);
               completionItem.range = new vscode.Range(
                 position.translate(0, -match.searchPhrase.length),
