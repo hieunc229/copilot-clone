@@ -3,6 +3,7 @@ import { search } from './utils/search';
 import { matchSearchPhrase } from './utils/matchSearchPhrase';
 
 export function activate(_: vscode.ExtensionContext) {
+  vscode.window.setStatusBarMessage(`CaptainStack: Active`, 5000);
   const generatingCodeMsg = vscode.window.setStatusBarMessage(`CaptainStack: Generating code...`, 5000);
 
   const provider: vscode.CompletionItemProvider = {
