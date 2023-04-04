@@ -6,6 +6,7 @@ import { matchSearchPhrase } from './utils/matchSearchPhrase';
 export function activate(_: vscode.ExtensionContext) {
 
     const provider: vscode.CompletionItemProvider = {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         provideInlineCompletionItems: async (document, position, context, token) => {
 
@@ -21,13 +22,11 @@ export function activate(_: vscode.ExtensionContext) {
                 try {
                     rs = await search(match.searchPhrase);
                     if (rs) {
-                        items = rs.results.map(item => {
+                        items = rs.results.map((item: { sourceURL: any; code: any; }) => {
                             const output = `\n${match.commentSyntax} Source: ${item.sourceURL} ${match.commentSyntaxEnd}\n${item.code}`;
-                            return {
-                                text: output,
-                                insertText: output,
-                                range: new vscode.Range(position.translate(0, output.length), position)
-                            };
+                            const completionItem = new vscode.CompletionItem(output);
+                            completionItem.insertText = output;
+                            return completionItem;
                         });
                     }
                 } catch (err: any) {
@@ -37,7 +36,21 @@ export function activate(_: vscode.ExtensionContext) {
             return {items};
         },
     };
+    
+    
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     vscode.languages.registerInlineCompletionItemProvider({pattern: "**"}, provider);
+    const openSettingsCommand = vscode.commands.registerCommand('captainStack.openSettings', () => {
+        vscode.commands.executeCommand('workbench.action.openSettings', '@ext:captainstack.captain-stack');
+      });
+      
+      const statusBarSettings = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
+      statusBarSettings.command = 'captainStack.openSettings';
+      statusBarSettings.text = '$(gear) CaptainStack';
+      statusBarSettings.tooltip = 'Open CaptainStack Settings';
+      statusBarSettings.show();
+      
+      _.subscriptions.push(openSettingsCommand, statusBarSettings);
 }

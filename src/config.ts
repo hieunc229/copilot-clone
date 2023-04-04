@@ -11,7 +11,8 @@ export function getSearchURL(site: string, keyword: string) {
 type IConfig = {
     settings: {
         sites: { [name: string]: boolean },
-        maxResults: number
+        maxResults: number,
+        openaiApiKey: string
     }
 }
 
@@ -22,11 +23,14 @@ export function getConfig() {
         "stackoverflow.com": config.settings.sites.stackoverflow,
         "gist.github.com": config.settings.sites.githubGist
     };
+    const openaiApiKey = config.settings.openai.apiKey;
+
 
     return {
         settings: {
             sites,
-            maxResults: config.settings.maxResults
+            maxResults: config.settings.maxResults,
+            openaiApiKey
         }
     } as IConfig;
 }

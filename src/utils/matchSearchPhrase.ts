@@ -20,11 +20,12 @@ export function matchSearchPhrase(input: string): SearchMatchResult | undefined 
 
         const [_, commentSyntax, searchPhrase, commentSyntaxEnd] = match;
 
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         let fileType = window.activeTextEditor.document.languageId;
 
         if (fileType === "plaintext") {
-            fileType = ""
+            fileType = "";
         }
         
         return {

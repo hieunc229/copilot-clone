@@ -23,6 +23,8 @@ export default abstract class ExtractorAbstract {
                 .then(rs => {
                     const regex = new RegExp(`(https://${this.URL}/[a-z0-9-/]+)`, "gi");
                     let urls = rs.textContent.match(regex);
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    //@ts-ignore
                     urls && (urls = urls.filter((url, i, list) => list.indexOf(url) === i));
                     resolve(urls || []);
                 })
