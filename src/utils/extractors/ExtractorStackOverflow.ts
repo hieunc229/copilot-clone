@@ -26,7 +26,9 @@ export default class ExtractorStackOverflow extends ExtractorAbstract {
                 sourceURL: `https://${this.URL}${item.querySelector(".js-share-link").href}`,
                 hasCheckMark: item.querySelector("iconCheckmarkLg") != null
             }) as SnippetResult)
-            .filter(item => isCodeValid(item.code));
+             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-ignore
+            .filter(item => isCodeValid(item?.code));
 
 
         results.sort(sortSnippetResultFn);
@@ -40,7 +42,10 @@ function sortSnippetResultFn(a: SnippetResult, b: SnippetResult) {
     if (a.hasCheckMark != b.hasCheckMark) {
         return a.hasCheckMark ? 1 : -1;
     }
-
-    const result = b.votes - a.votes;
-    return result === 0 ? b.code.length - a.code.length : result;
+     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    const result = b?.votes - a?.votes;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    return result === 0 ? b?.code.length - a?.code.length : result;
 }

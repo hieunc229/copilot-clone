@@ -37,10 +37,10 @@ export default abstract class ExtractorAbstract {
 }
 
 export type SnippetResult = {
-    votes: number,
-    code: string,
-    hasCheckMark: boolean,
-    sourceURL: string,
+    votes?: number,
+    code?: string,
+    hasCheckMark?: boolean,
+    sourceURL?: string,
 }
 
 export type SnippetPageResult = {
