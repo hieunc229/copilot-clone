@@ -45,7 +45,7 @@ export function activate(_: vscode.ExtensionContext) {
     }
   };
 
-  vscode.languages.registerCompletionItemProvider({ pattern: "**" }, provider);
+  vscode.languages.registerInlineCompletionItemProvider({ pattern: "**" }, provider);
 
   const openSettingsCommand = vscode.commands.registerCommand('captainStack.openSettings', () => {
       vscode.commands.executeCommand('workbench.action.openSettings', '@ext:captainstack.captain-stack');
