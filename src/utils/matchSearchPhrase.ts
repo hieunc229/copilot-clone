@@ -15,8 +15,8 @@ type SearchMatchResult = {
  */
 export function matchSearchPhrase(input: string): SearchMatchResult | undefined {
     const match = CSConfig.SEARCH_PATTERN.exec(input);
-    console.log('Input:',input);
-    console.log('match:',input);
+   // console.log('Input:',input);
+    //console.log('match:',match);
     if (match && match.length > 2) {
 
         const [_, commentSyntax, searchPhrase, commentSyntaxEnd] = match;
