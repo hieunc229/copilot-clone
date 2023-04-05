@@ -49,7 +49,7 @@
 					"title": "gist.github.com",
 					"description": "Enable searching code in Github Gists",
 					"type": "boolean",
-					"default": false
+					"default": true
 				},
 				"captainStack.settings.maxResults": {
 					"type": "integer",
@@ -59,6 +59,13 @@
 				"captainStack.settings.openai.apiKey": {
 					"title": "OpenAI API Key",
 					"description": "API Key for OpenAI's ChatGPT",
+					"type": "string",
+					"default": ""
+				 }
+				 ,
+				"captainStack.settings.stackoverflow.apiKey": {
+					"title": "Stackoverflow API Key",
+					"description": "API Key for Stackoverflow's for Capture snippets",
 					"type": "string",
 					"default": ""
 				 }

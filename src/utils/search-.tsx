@@ -38,6 +38,8 @@ export async function search(keyword: string): Promise<null | { results: Snippet
 
                     for (const y in urls) {
                         fetchResult = await fetchPageTextContent(urls[y]);
+                         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                        //@ts-ignore
                         results = results.concat(extractor.extractSnippets(fetchResult));
 
                         vscode.window.setStatusBarMessage(`${extractor.name} (${y}/${urls.length}): ${results.length} results`, 2000);

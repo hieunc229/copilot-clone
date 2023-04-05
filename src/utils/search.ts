@@ -17,17 +17,23 @@ export async function search(keyword: string): Promise<null | { results: Snippet
   const config = getConfig();
   let results: SnippetResult[] = [];
   let fetchResult: FetchPageResult;
+ 
 
   try {
     for (const i in SnippetExtractors) {
+     
       const extractor = SnippetExtractors[i];
-
+      console.log('extractor:',extractor);
       if (extractor.isEnabled()) {
         const urls = await extractor.extractURLFromKeyword(keyword);
-
+        console.log('urls:',urls);
         for (const y in urls) {
           fetchResult = await fetchPageTextContent(urls[y]);
+          console.log('fetchResult:',fetchResult);
+           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-ignore
           results = results.concat(extractor.extractSnippets(fetchResult));
+          console.log('results:',results);
 
           //updateStatusBarMessage(`${extractor.name} (${y}/${urls.length}): ${results.length} results`, 2000);
 
@@ -41,7 +47,7 @@ export async function search(keyword: string): Promise<null | { results: Snippet
         }
       }
     }
-
+    console.log(results.length);
     if (results.length === 0) {
       // Search using AI if no results were found from the internet
       //console.log('Busca Chat GPT', keyword);
@@ -52,7 +58,7 @@ export async function search(keyword: string): Promise<null | { results: Snippet
           const code = response.choices[0].message.content.trim();
           
           //updateStatusBarMessage(`CaptainStack: loading results`, 2000);
-          //console.log(code);
+          console.log(code);
           results =  [{ sourceURL: 'CaptainStack', code }];
           return { results: [{ sourceURL: 'CaptainStack', code }] };
           

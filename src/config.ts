@@ -14,6 +14,7 @@ type IConfig = {
         sites: { [name: string]: boolean },
         maxResults: number,
         openaiApiKey: string
+        stackoverflow: string
     }
 }
 
@@ -25,13 +26,14 @@ export function getConfig() {
         "gist.github.com": config.settings.sites.githubGist
     };
     const openaiApiKey = config.settings.openai.apiKey;
-
+    const stackoverflow = config.settings.stackoverflow.apiKey;
 
     return {
         settings: {
             sites,
             maxResults: config.settings.maxResults,
-            openaiApiKey
+            openaiApiKey,
+            stackoverflow
         }
     } as IConfig;
 }

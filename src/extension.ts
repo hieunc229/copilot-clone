@@ -12,12 +12,12 @@ export function activate(context: vscode.ExtensionContext) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
      provideInlineCompletionItems: async (document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken, context: vscode.CompletionContext) => {
-      // console.log("Checking for completion items...");
+     // console.log("Checking for completion items...");
       const textBeforeCursor = document.getText(
         new vscode.Range(position.with(undefined, 0), position)
       );
       const match = matchSearchPhrase(textBeforeCursor);
-      // console.log("Match result:", match);
+      console.log("Match result:", match);
 
       let items: any[] = [];
       if (match) {

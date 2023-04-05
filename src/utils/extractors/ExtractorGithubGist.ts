@@ -13,7 +13,9 @@ export default class ExtractorGithubGist extends ExtractorAbstract {
         const target = parseHTML(options.textContent);
         const doc = target.window.document;
 
-        const snippet = doc.querySelector("table.highlight")?.textContent;
+       // const snippet = doc.querySelector("table.highlight")?.textContent;
+        const snippet = doc.querySelector("table.highlight pre")?.textContent;
+
 
         if (!snippet || !isCodeValid(snippet)) return [];
 
@@ -37,5 +39,5 @@ export default class ExtractorGithubGist extends ExtractorAbstract {
  * @returns
  */
 function cleanContent(input: string) {
-    return input.replace(/\n {6}\n {8}\n {8}/g, "");
+    return input.replace(/^\s+|\s+$/gm, '');
 }
