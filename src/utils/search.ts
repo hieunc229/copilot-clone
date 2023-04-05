@@ -1,69 +1,79 @@
 import SnippetExtractors from "./extractors";
 import { SnippetResult } from "./extractors/ExtractorAbstract";
-
 import { FetchPageResult, fetchPageTextContent } from "./fetchPageContent";
-
-import * as vscode from 'vscode';
+import { OpenAIApiClient } from './openai-client';
 import { getConfig } from "../config";
+import { updateStatusBarMessage, statusBarMessage } from './statusBarMessage';
 
-/**
- * Cache results to avoid VSCode keep refetching
- */
+const openaiClient = new OpenAIApiClient();
+
 const cachedResults: { [keyword: string]: SnippetResult[] } = {};
 
-
-// Send search query to google, get answers from stackoverflow
-// then extract and return code results
 export async function search(keyword: string): Promise<null | { results: SnippetResult[] }> {
+  if (keyword in cachedResults) {
+    return Promise.resolve({ results: cachedResults[keyword] });
+  }
 
+  const config = getConfig();
+  let results: SnippetResult[] = [];
+  let fetchResult: FetchPageResult;
+ 
 
-    if (keyword in cachedResults) {
-        return Promise.resolve({results: cachedResults[keyword]});
-    }
+  try {
+    for (const i in SnippetExtractors) {
+     
+      const extractor = SnippetExtractors[i];
+      console.log('extractor:',extractor);
+      if (extractor.isEnabled()) {
+        const urls = await extractor.extractURLFromKeyword(keyword);
+        console.log('urls:',urls);
+        for (const y in urls) {
+          fetchResult = await fetchPageTextContent(urls[y]);
+          console.log('fetchResult:',fetchResult);
+           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-ignore
+          results = results.concat(extractor.extractSnippets(fetchResult));
+          console.log('results:',results);
 
-    const config = getConfig();
+          //updateStatusBarMessage(`${extractor.name} (${y}/${urls.length}): ${results.length} results`, 2000);
 
-    /* eslint "no-async-promise-executor": "off" */
-    const promise = new Promise<{ results: SnippetResult[] }>(async (resolve, reject) => {
-
-        let results: SnippetResult[] = [];
-        let fetchResult: FetchPageResult;
-
-        try {
-            for (const i in SnippetExtractors) {
-                const extractor = SnippetExtractors[i];
-
-                if (extractor.isEnabled()) {
-                    const urls = await extractor.extractURLFromKeyword(keyword);
-
-                    for (const y in urls) {
-                        fetchResult = await fetchPageTextContent(urls[y]);
-                        results = results.concat(extractor.extractSnippets(fetchResult));
-
-                        vscode.window.setStatusBarMessage(`${extractor.name} (${y}/${urls.length}): ${results.length} results`, 2000);
-
-                        if (results.length >= config.settings.maxResults) {
-                            break;
-                        }
-                    }
-
-                    if (results.length >= config.settings.maxResults) {
-                        break;
-                    }
-                }
-            }
-
-            cachedResults[keyword] = results;
-
-            resolve({results});
-        } catch (err) {
-            reject(err);
+          if (results.length >= config.settings.maxResults) {
+            break;
+          }
         }
 
-        // When promise resolved, show finished loading for 5 seconds
-        vscode.window.setStatusBarMessage(`CaptainStack: Finished loading ${results.length} results`);
-    });
+        if (results.length >= config.settings.maxResults) {
+          break;
+        }
+      }
+    }
+    console.log(results.length);
+    if (results.length === 0) {
+      // Search using AI if no results were found from the internet
+      //console.log('Busca Chat GPT', keyword);
+      try {
+        const response = await openaiClient.generateCode(keyword);
+        
+        if (response && response.choices && response.choices.length > 0) {
+          const code = response.choices[0].message.content.trim();
+          
+          //updateStatusBarMessage(`CaptainStack: loading results`, 2000);
+          console.log(code);
+          results =  [{ sourceURL: 'CaptainStack', code }];
+          return { results: [{ sourceURL: 'CaptainStack', code }] };
+          
+        }
+      } catch (error: any) {
+        throw new Error(`Error searching with ChatGPT: ${error.message}`);
+      }
+      //updateStatusBarMessage(`CaptainStack: Start loading snippet results...`, 2000);
+    }
 
-    vscode.window.setStatusBarMessage(`CaptainStack: Start loading snippet results...`, promise);
-    return promise;
+    cachedResults[keyword] = results;
+    //updateStatusBarMessage(`CaptainStack: Finished loading ${results.length} results`);
+
+    return { results };
+  } catch (err: any) {
+    throw new Error(`Error searching for code snippets: ${err.message}`);
+  }
 }

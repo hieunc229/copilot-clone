@@ -15,16 +15,18 @@ type SearchMatchResult = {
  */
 export function matchSearchPhrase(input: string): SearchMatchResult | undefined {
     const match = CSConfig.SEARCH_PATTERN.exec(input);
-
+   // console.log('Input:',input);
+    //console.log('match:',match);
     if (match && match.length > 2) {
 
         const [_, commentSyntax, searchPhrase, commentSyntaxEnd] = match;
 
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         let fileType = window.activeTextEditor.document.languageId;
 
         if (fileType === "plaintext") {
-            fileType = ""
+            fileType = "";
         }
         
         return {

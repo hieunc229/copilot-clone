@@ -1,5 +1,5 @@
 import GithubGistExtractor from "./ExtractorGithubGist";
-import StackoverflowExtractor from "./ExtractorStackOverflow";
+import StackoverflowExtractor from "./ExtractorStackOverflowAPI";
 
 const SnippetExtractors = [
     new StackoverflowExtractor(),
