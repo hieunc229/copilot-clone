@@ -2,7 +2,7 @@
 
 # Captain Stack — Code suggestion for VSCode
 
-[![Captain Stack on Marketplace](https://vsmarketplacebadge.apphb.com/version/captainstack.captain-stack.svg)](https://marketplace.visualstudio.com/items?itemName=captainstack.captain-stack) [![Captain Stack on Marketplace](https://vsmarketplacebadge.apphb.com/installs-short/captainstack.captain-stack.svg)](https://marketplace.visualstudio.com/items?itemName=captainstack.captain-stack) [![Discord Chat](https://img.shields.io/discord/864164585070526475.svg)](https://discord.gg/5F5tDsWFmp)
+[![Captain Stack on Marketplace](https://img.shields.io/badge/Downloads-VSCode_Marketplace-blue)](https://marketplace.visualstudio.com/items?itemName=captainstack.captain-stack) [![Captain Stack on Marketplace](https://img.shields.io/visual-studio-marketplace/d/captainstack.captain-stack)](https://marketplace.visualstudio.com/items?itemName=captainstack.captain-stack) [![Discord Chat](https://img.shields.io/discord/864164585070526475.svg)](https://discord.gg/5F5tDsWFmp)
 
 This feature is somewhat similar to Github Copilot's code suggestion. But instead of using AI, it sends your search query to Google, then retrieves StackOverflow and Github Gist answers and autocompletes them for you.
 
@@ -36,6 +36,7 @@ You can search for "Captain Stack" on the VSCode Extension Marketplace, or use [
 To trigger inline completion, you'll need to type `//find {your keyword}.` (start with `//find`, end with a dot `.`)
 
 For example
+
 ```js
 //find binary search in javascript.
 ```
@@ -51,12 +52,12 @@ _Note: Use `Alt+]` and `Alt+[` to move through suggestions_
 To install and starting Captain Stack:
 
 1. Clone this repository to your PC using `git clone https://github.com/hieunc229/copilot-clone.git .`. Please note there is a dot at the end of the command
-   
 2. Run `npm install` in the terminal to install dependencies
 
 3. Now, you can start the extension. From the top menu, choose `Run > Start Debugging`.
 
 This will:
+
 - Start a task `npm: watch` to compile the code and watch for changes
 - Open a new VSCode window (you should use the extension there)
 
@@ -86,6 +87,7 @@ There are a few configurations available for Captain Stack. To open the settings
 - If you see an `unsupported` error message, ignore it
 
 **Limits:**
+
 - The extension uses fetch-node to get page content, and I don't know if there is any fetching limit
 - The extension uses querySelector to extract code and other info. There is a risk of either StackOverflow or Google changing its querySelector
 
@@ -99,7 +101,7 @@ If those factors became problems, the extension could be using their official AP
 - Mar 22, 2022 — Added AI Code Validation
 - Aug 15, 2021 - Added `sites` and `maxResults` configurations
 - Jul 31, 2022 — Added GithubGist source
-- Jul 31, 2021 — Create code extracting abstracting to add more code sources 
+- Jul 31, 2021 — Create code extracting abstracting to add more code sources
 - Jul 14, 2021 - Adapted to VS Code Insiders Release Version 1.59
 - Jul 01, 2021 - Added snippet source (thanks for [mechero's suggestion](https://news.ycombinator.com/item?id=27698687))
 - Jun 30, 2021 - Publish the initial version
@@ -134,7 +136,13 @@ The plugin is available, thanks to:
 **Feel free to open a thread for feedback or discussion. And have fun!**
 
 ---
+
 Love Captain Stack? Check out other things I do:
 
+<a href="https://gasbyai.com?ref=csgithub">
+<img src="https://gasbyai.com/assets/banner.svg" alt="GasbyAI - Chat with your fancy AI personal assistant - Fancy ChatGPT alternative" height="100" width="360" />
+</a>
+
+- [GasbyAI - Fancy ChatGPT alternative](https://gasbyai.com?ref=csgithub)
 - [Rebit Nocode Site Builder](https://rebit.co/?ref=github)
 - [Hieu's Twitter](https://twitter.com/hieuSSR/)
