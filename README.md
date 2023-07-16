@@ -146,3 +146,5 @@ Love Captain Stack? Check out other things I do:
 - [GasbyAI - Fancy ChatGPT alternative](https://gasbyai.com?ref=csgithub)
 - [Rebit Nocode Site Builder](https://rebit.co/?ref=github)
 - [Hieu's Twitter](https://twitter.com/hieuSSR/)
+
+<img alt="Gum Pixels" src="https://lsn.gumanalytics.com/images/XOsbYS_va/gp.png" width="33" height="10" />
