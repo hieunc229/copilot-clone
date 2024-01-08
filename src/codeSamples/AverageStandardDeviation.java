@@ -1,0 +1,26 @@
+import java.util.Scanner;
+/*
+ * Write a program which takes in 3 numbers and computes their average
+ * and standard deviation.
+ */
+public class AverageStandardDeviation {
+
+	public static void main(String[] args) {
+
+		System.out.print("Enter three numbers separated by spaces:");
+		Scanner inputScanner = new Scanner( System.in );
+		double number1 = inputScanner.nextDouble();
+		double number2 = inputScanner.nextDouble();
+		double number3 = inputScanner.nextDouble();
+		inputScanner.close();
+
+		double average = (number1 + number2 + number3) / 3.0;
+		double variance = ((number1-average)*(number1-average) +
+						   (number2-average)*(number2-average) +
+						   (number3-average)*(number3-average)) / 3.0;
+		double standardDeviation = Math.sqrt( variance );
+
+		System.out.printf("For numbers %.1f, %.1f, %.1f the average is %.2f and the standard deviation is %.2f", number1, number2, number3, average, standardDeviation );
+	}
+
+}

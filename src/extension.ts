@@ -14,6 +14,8 @@ export function activate(_: vscode.ExtensionContext) {
             );
 
             const match = matchSearchPhrase(textBeforeCursor);
+            //gets the entire commented string and breaks into components
+            console.log(match);
             let items: any[] = [];
 
             if (match) {
