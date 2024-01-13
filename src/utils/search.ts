@@ -1,7 +1,8 @@
 import * as vscode from 'vscode';
 
 import bmi from './resources/BMI.txt';
-import { BADFAMILY } from 'dns';
+import deviation from './resources/AverageStandardDeviation.txt';
+import minmax from './resources/MinMax.txt';
 
 /**
  * Cache results to avoid VSCode keep refetching
@@ -19,7 +20,7 @@ export async function search(keyword: string): Promise<null | { results: string[
     const promise = new Promise<{ results: string[] }>(async (resolve, reject) => {
 
         console.log('Searching:', keyword);
-        console.log('File Contents', bmi);
+        console.log('File Contents', minmax);
         const results: string[] = [];
 
         try {
@@ -30,7 +31,7 @@ export async function search(keyword: string): Promise<null | { results: string[
             //         results.push(fs.readFileSync(file, 'utf-8'));
         
             // });
-            results.push(bmi);
+            results.push(minmax);
             resolve({ results });
         } catch (error) {
             console.error('Error reading directory:', error);

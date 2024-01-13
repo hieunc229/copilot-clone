@@ -31,8 +31,8 @@ const config = {
         loader: "node-loader",
       },
       {
-        test: /\.txt$/,
-        type: 'asset/source',
+        test: /\.(txt)$/i,
+        loader: 'raw-loader',
       }
     ]
   }
