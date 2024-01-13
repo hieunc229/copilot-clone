@@ -24,7 +24,6 @@ export async function search(keyword: string): Promise<null | { results: string[
     const promise = new Promise<{ results: string[] }>(async (resolve, reject) => {
 
         console.log('Searching:', keyword);
-        console.log('File Contents', minmax);
         const results: string[] = [];
         const solutions: { [key: string]: string } = { bmi, deviation, minmax, multiples, coin, area, vert };
 
