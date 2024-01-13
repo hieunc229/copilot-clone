@@ -6,6 +6,7 @@ import { matchSearchPhrase } from './utils/matchSearchPhrase';
 export function activate(_: vscode.ExtensionContext) {
 
     const provider: vscode.CompletionItemProvider = {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         provideInlineCompletionItems: async (document, position, context, token) => {
 
@@ -15,7 +16,7 @@ export function activate(_: vscode.ExtensionContext) {
 
             const match = matchSearchPhrase(textBeforeCursor);
             //gets the entire commented string and breaks into components
-            console.log(match);
+            console.log('Matched:', match);
             let items: any[] = [];
 
             if (match) {
@@ -24,7 +25,7 @@ export function activate(_: vscode.ExtensionContext) {
                     rs = await search(match.searchPhrase);
                     if (rs) {
                         items = rs.results.map(item => {
-                            const output = `\n${match.commentSyntax} Source: ${item.sourceURL} ${match.commentSyntaxEnd}\n${item.code}`;
+                            const output = `\n\n${item}`;
                             return {
                                 text: output,
                                 insertText: output,
@@ -40,6 +41,7 @@ export function activate(_: vscode.ExtensionContext) {
         },
     };
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     vscode.languages.registerInlineCompletionItemProvider({pattern: "**"}, provider);
 }

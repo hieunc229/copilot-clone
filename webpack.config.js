@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require("webpack");
 
 const config = {
   target: 'node',
@@ -14,7 +13,7 @@ const config = {
     vscode: 'commonjs vscode'
   },
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.js', '.txt']
   },
   module: {
     rules: [
@@ -30,6 +29,10 @@ const config = {
       {
         test: /\.node$/,
         loader: "node-loader",
+      },
+      {
+        test: /\.txt$/,
+        type: 'asset/source',
       }
     ]
   }

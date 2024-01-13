@@ -1,69 +1,47 @@
-import SnippetExtractors from "./extractors";
-import { SnippetResult } from "./extractors/ExtractorAbstract";
-
-import { FetchPageResult, fetchPageTextContent } from "./fetchPageContent";
-
 import * as vscode from 'vscode';
-import { getConfig } from "../config";
+
+import bmi from './resources/BMI.txt';
+import { BADFAMILY } from 'dns';
 
 /**
  * Cache results to avoid VSCode keep refetching
  */
-const cachedResults: { [keyword: string]: SnippetResult[] } = {};
+const cachedResults: { [keyword: string]: string[] } = {};
 
-
-// Send search query to google, get answers from stackoverflow
-// then extract and return code results
-export async function search(keyword: string): Promise<null | { results: SnippetResult[] }> {
+export async function search(keyword: string): Promise<null | { results: string[] }> {
 
 
     if (keyword in cachedResults) {
         return Promise.resolve({results: cachedResults[keyword]});
     }
 
-    const config = getConfig();
+    // eslint-disable-next-line no-async-promise-executor
+    const promise = new Promise<{ results: string[] }>(async (resolve, reject) => {
 
-    /* eslint "no-async-promise-executor": "off" */
-    const promise = new Promise<{ results: SnippetResult[] }>(async (resolve, reject) => {
-
-        let results: SnippetResult[] = [];
-        let fetchResult: FetchPageResult;
+        console.log('Searching:', keyword);
+        console.log('File Contents', bmi);
+        const results: string[] = [];
 
         try {
-            for (const i in SnippetExtractors) {
-                const extractor = SnippetExtractors[i];
-
-                if (extractor.isEnabled()) {
-                    const urls = await extractor.extractURLFromKeyword(keyword);
-
-                    for (const y in urls) {
-                        fetchResult = await fetchPageTextContent(urls[y]);
-                        results = results.concat(extractor.extractSnippets(fetchResult));
-
-                        vscode.window.setStatusBarMessage(`${extractor.name} (${y}/${urls.length}): ${results.length} results`, 2000);
-
-                        if (results.length >= config.settings.maxResults) {
-                            break;
-                        }
-                    }
-
-                    if (results.length >= config.settings.maxResults) {
-                        break;
-                    }
-                }
-            }
-
-            cachedResults[keyword] = results;
-
-            resolve({results});
-        } catch (err) {
-            reject(err);
+            // const files = fs.readdirSync('resources');
+            // files.forEach((file) => {
+            //     console.log("File Name: ", file);
+            //     if(file.toLowerCase().includes(keyword))
+            //         results.push(fs.readFileSync(file, 'utf-8'));
+        
+            // });
+            results.push(bmi);
+            resolve({ results });
+        } catch (error) {
+            console.error('Error reading directory:', error);
+            reject(error);
         }
+        
 
         // When promise resolved, show finished loading for 5 seconds
-        vscode.window.setStatusBarMessage(`CaptainStack: Finished loading ${results.length} results`);
+        vscode.window.setStatusBarMessage(`CommandPilot: Finished loading ${results.length} results`);
     });
 
-    vscode.window.setStatusBarMessage(`CaptainStack: Start loading snippet results...`, promise);
+    vscode.window.setStatusBarMessage(`CommandPilot: Start loading snippet results...`, promise);
     return promise;
 }

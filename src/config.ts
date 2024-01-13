@@ -1,12 +1,8 @@
 import * as vscode from 'vscode';
 
 const CSConfig = {
-    SEARCH_PATTERN: /(\/\/|#|--|<!--)\s?find\s?(.+)\s?(\.|-->)/
+    SEARCH_PATTERN: /(\/\/|#|--|<!--)\s?solve\s?(.+)\s?(\.|-->)/
 };
-
-export function getSearchURL(site: string, keyword: string) {
-    return `https://www.google.com/search?q=site%3A${site}+${keyword.replace(/\s/g, "+")}`;
-}
 
 type IConfig = {
     settings: {
@@ -16,16 +12,10 @@ type IConfig = {
 }
 
 export function getConfig() {
-    const config = vscode.workspace.getConfiguration("captainStack");
-
-    const sites = {
-        "stackoverflow.com": config.settings.sites.stackoverflow,
-        "gist.github.com": config.settings.sites.githubGist
-    };
+    const config = vscode.workspace.getConfiguration("CommandPilot");
 
     return {
         settings: {
-            sites,
             maxResults: config.settings.maxResults
         }
     } as IConfig;
