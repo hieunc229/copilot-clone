@@ -1,13 +1,6 @@
 import java.util.Scanner;
-
 import javax.swing.JOptionPane;
-
-/*
- * Write a program to compute the maximum and minimum numbers in a
- * list of numbers entered by the user (on a single line).
- */
 public class MinMax {
-
 	public static void main(String[] args)
 	{
 		System.out.print("Enter your list of numbers separated by spaces:");

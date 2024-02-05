@@ -39,6 +39,8 @@ export async function search(keyword: string): Promise<null | { results: string[
             reject(error);
         }
 
+        console.log(results[0]);
+
         // When promise resolved, show finished loading for 5 seconds
         vscode.window.setStatusBarMessage(`CommandPilot: Finished loading ${results.length} results`);
     });
