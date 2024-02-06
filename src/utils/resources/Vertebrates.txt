@@ -21,7 +21,7 @@ public class Vertebrates {
 			boolean hasScales = hasScalesAnswer.equalsIgnoreCase("Yes");
 			if (hasScales)
 			{
-				System.out.print("Does the animal have any fins (Yes/No)? ");
+					System.out.print("Does the animal have any fins (Yes/No)? ");
 				String hasFinsAnswer = input.next();
 				boolean hasFins = hasFinsAnswer.equalsIgnoreCase("Yes");
 				if (hasFins)

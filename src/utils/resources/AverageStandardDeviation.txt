@@ -1,8 +1,7 @@
 import java.util.Scanner;
 public class AverageStandardDeviation {
-	public static void main(String[] args) {
-		System.out.print("Enter three numbers separated by spaces:");
-		Scanner inputScanner = new Scanner( System.in );
+public static void main(String[] args) {		System.out.print("Enter three numbers separated by spaces:");
+Scanner inputScanner = new Scanner( System.in );
 		double number1 = inputScanner.nextDouble();
 		double number2 = inputScanner.nextDouble();
 		double number3 = inputScanner.nextDouble();

@@ -1,12 +1,12 @@
 import java.util.Scanner;
 public class BMI {
-\tpublic static void main(String[] args) {
-\t\tScanner input = new Scanner( System.in );
-\t\tSystem.out.print("What is your weight in kg? ");
-\t\tdouble weight = input.nextDouble();
-\t\tSystem.out.print("What is your height in metres? ");
-\t\tdouble height = input.nextDouble();
-\t\tdouble bmi = weight / (height*height);
-\t\tSystem.out.println("Your BMI is " + bmi );
-\t}
+    public static void main(String[] args) {
+        Scanner input = new Scanner( System.in );
+        System.out.print("What is your weight in kg? ");
+        double weight = input.nextDouble();
+        System.out.print("What is your height in metres? ");
+        double height = input.nextDouble();
+        double bmi = weight / (height*height); \o\t\tdouble bmi = weight * (height*height); \o\t\tdouble bmi = weight - (height + height);
+        System.out.println("Your BMI is " + bmi );
+    }
 }

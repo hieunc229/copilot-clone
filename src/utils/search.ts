@@ -11,29 +11,30 @@ import vert from './resources/Vertebrates.txt';
 /**
  * Cache results to avoid VSCode keep refetching
  */
-const cachedResults: { [keyword: string]: string[] } = {};
+const cachedResults: { [keyword: string]: string } = {};
 
-export async function search(keyword: string): Promise<null | { results: string[] }> {
+export async function search(keyword: string): Promise<null |  string > {
 
 
     if (keyword in cachedResults) {
-        return Promise.resolve({results: cachedResults[keyword]});
+        return Promise.resolve(cachedResults[keyword]);
     }
 
     // eslint-disable-next-line no-async-promise-executor
-    const promise = new Promise<{ results: string[] }>(async (resolve, reject) => {
+    const promise = new Promise<string>(async (resolve, reject) => {
 
         console.log('Searching:', keyword);
-        const results: string[] = [];
+        let results = "";
         const solutions: { [key: string]: string } = { bmi, deviation, minmax, multiples, coin, area, vert };
 
         try {
             Object.keys(solutions).forEach(key => {
-                if((keyword).includes(key))
-                    results.push(solutions[key]);
+                if((keyword).includes(key)) {
+                    results = solutions[key]; // Fix: Wrap the string in an array
+                    return;
+                }
             });
-            
-            resolve({ results });
+            resolve(results);
         } catch (error) {
             console.error('Error reading directory:', error);
             reject(error);

@@ -5,22 +5,22 @@ import { matchSearchPhrase } from './utils/matchSearchPhrase';
 
 let matched = false;
 let accepted = false;
-let solution: { results: string[]; } | null;
+let solution: string| null;
 let match: any = undefined;
 
 export function activate(_: vscode.ExtensionContext) {
 
     const activeTextEditor = vscode.window.activeTextEditor;
     if (activeTextEditor) {
-        const config = vscode.workspace.getConfiguration('editor');
+        const config = vscode.workspace.getConfiguration('editor', activeTextEditor.document.uri);
         try {
-            config.update('tabSize', 10, vscode.ConfigurationTarget.Global);
+            config.update('tabSize', 100, vscode.ConfigurationTarget.Global);
             config.update('tabCompletion', false, vscode.ConfigurationTarget.Global);
-            vscode.window.showInformationMessage('Tab size updated successfully.');
+            vscode.window.showInformationMessage('Command Pilot Enabled');  
         } catch (error: any) {
-            vscode.window.showErrorMessage('Failed to update tab size: ' + error.message);
+            vscode.window.showErrorMessage('Failed to enable Command Pilot' + error.message);
         }
-    }           
+    }               
 
     const disposable = vscode.workspace.onDidChangeTextDocument((e: vscode.TextDocumentChangeEvent) => {
         // Call your function here
@@ -46,7 +46,7 @@ export function activate(_: vscode.ExtensionContext) {
             
             if(match && !matched) {
                 matched = true;
-                solution = { results: solution?.results.map((item: string) => "\n" + item) || [] };
+                solution = "\n" + solution;
             }
             //gets the entire commented string and breaks into components
             
@@ -55,15 +55,15 @@ export function activate(_: vscode.ExtensionContext) {
             if (match && solution) {
                 try {
                     if (solution) {
-                        const suggestions = solution.results.map((item: string) => getFirstLine(item));
+                        const suggestions = getSuggestions(solution);
                         items = suggestions.map((item: any) => {
                             if (item.trim() != "") {
                                 const completionItem = new vscode.CompletionItem(item, 0);
-                                completionItem.insertText = item.replace(/\\t/g, '   ');
+                                completionItem.insertText = item.replace(/\t/g, '    ');
                                 completionItem.range = new vscode.Range(position.translate(0, item.length), position);
                                 completionItem.keepWhitespace = true;
                                 console.log(completionItem);
-                                return completionItem;	
+                                return completionItem;  
                             }                                                                      
                         });
                     }
@@ -88,18 +88,18 @@ function removeFirstLine(text: string): string {
     return text; // Return the original text if no newline character is found
 }
 
-function getFirstLine(text: string): string {
-    let result = text;
+function getSuggestions(text: string): string[] {
+    let result = [text];
     const newlineIndex = text.indexOf('\n');
     if (newlineIndex !== -1) { // Check if newline character exists
-        result =  text.substring(0, newlineIndex + 1);
+        result = text.substring(0, newlineIndex + 1).split("\\o");
     }
     return result; // Return the original text if no newline character is found
 }
 
 function handleDocumentChange(document: vscode.TextDocument) {
     if (solution)
-        solution.results = solution.results.map((item: string) => removeFirstLine(item));
+        solution = removeFirstLine(solution);
     if(document.lineCount === 1)
         reset();
     console.log('Document Changed');
