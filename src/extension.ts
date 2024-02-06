@@ -12,14 +12,9 @@ export function activate(_: vscode.ExtensionContext) {
 
     const activeTextEditor = vscode.window.activeTextEditor;
     if (activeTextEditor) {
-        const config = vscode.workspace.getConfiguration('editor', activeTextEditor.document.uri);
-        try {
-            config.update('tabSize', 100, vscode.ConfigurationTarget.Global);
-            config.update('tabCompletion', false, vscode.ConfigurationTarget.Global);
-            vscode.window.showInformationMessage('Command Pilot Enabled');  
-        } catch (error: any) {
-            vscode.window.showErrorMessage('Failed to enable Command Pilot' + error.message);
-        }
+        activeTextEditor.options = {
+        tabSize: 100
+        };
     }               
 
     const disposable = vscode.workspace.onDidChangeTextDocument((e: vscode.TextDocumentChangeEvent) => {
@@ -92,7 +87,7 @@ function getSuggestions(text: string): string[] {
     let result = [text];
     const newlineIndex = text.indexOf('\n');
     if (newlineIndex !== -1) { // Check if newline character exists
-        result = text.substring(0, newlineIndex + 1).split("\\o");
+        result = text.substring(0, newlineIndex + 1).split("\\o ");
     }
     return result; // Return the original text if no newline character is found
 }
