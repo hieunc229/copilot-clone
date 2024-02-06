@@ -19,10 +19,10 @@ export function activate(_: vscode.ExtensionContext) {
         };
     }               
 
-    const disposable = vscode.workspace.onDidChangeTextDocument((e: vscode.TextDocumentChangeEvent) => {
-        // Call your function here
-        handleDocumentChange(e.document);
-    });
+    // const disposable = vscode.workspace.onDidChangeTextDocument((e: vscode.TextDocumentChangeEvent) => {
+    //     // Call your function here
+    //     handleDocumentChange(e.document);
+    // });
 
     const provider: vscode.CompletionItemProvider = {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -52,11 +52,11 @@ export function activate(_: vscode.ExtensionContext) {
             if (match && solution) {
                 try {
                     if (solution) {
-                        const suggestions = getSuggestions(solution);
+                        const suggestions = getSuggestions(solution.split('\n')[position.line]);
                         items = suggestions.map((item: any) => {
                             if (item.trim() != "") {
                                 const completionItem = new vscode.CompletionItem(item, 0);
-                                completionItem.insertText = item.replace(/\t/g, '    ');
+                                completionItem.insertText = item.replace(/\t/g, '    ') + '\n';
                                 completionItem.range = new vscode.Range(position.translate(0, item.length), position);
                                 completionItem.keepWhitespace = true;
                                 console.log(completionItem);
@@ -87,16 +87,13 @@ function removeFirstLine(text: string): string {
 
 function getSuggestions(text: string): string[] {
     let result = [text];
-    const newlineIndex = text.indexOf('\n');
-    if (newlineIndex !== -1) { // Check if newline character exists
-        result = text.substring(0, newlineIndex + 1).split("\\o ");
-        if(result.length > 1){
-            const leadingWhitespace = result[0].match(/^\s*/)?.[0];
-            result.forEach(item => {
-                item.trim();
-                result = result.map(item => leadingWhitespace + item.trim() + '\n');
-            });
-        }
+    if(text.includes("\\o")){
+        result = text.split("\\o ");
+        const leadingWhitespace = result[0].match(/^\s*/)?.[0];
+        result.forEach(item => {
+            item.trim();
+            result = result.map(item => leadingWhitespace + item.trim());
+        });
     }
     return result; // Return the original text if no newline character is found
 }
