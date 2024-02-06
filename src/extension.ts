@@ -10,6 +10,8 @@ let match: any = undefined;
 
 export function activate(_: vscode.ExtensionContext) {
 
+    vscode.window.showInformationMessage(`CommandPilot Enabled`);
+
     const activeTextEditor = vscode.window.activeTextEditor;
     if (activeTextEditor) {
         activeTextEditor.options = {
@@ -88,6 +90,13 @@ function getSuggestions(text: string): string[] {
     const newlineIndex = text.indexOf('\n');
     if (newlineIndex !== -1) { // Check if newline character exists
         result = text.substring(0, newlineIndex + 1).split("\\o ");
+        if(result.length > 1){
+            const leadingWhitespace = result[0].match(/^\s*/)?.[0];
+            result.forEach(item => {
+                item.trim();
+                result = result.map(item => leadingWhitespace + item.trim() + '\n');
+            });
+        }
     }
     return result; // Return the original text if no newline character is found
 }

@@ -43,9 +43,7 @@ export async function search(keyword: string): Promise<null |  string > {
         console.log(results[0]);
 
         // When promise resolved, show finished loading for 5 seconds
-        vscode.window.setStatusBarMessage(`CommandPilot: Finished loading ${results.length} results`);
+        vscode.window.showInformationMessage(`CommandPilot: Finished loading results`);
     });
-
-    vscode.window.setStatusBarMessage(`CommandPilot: Start loading snippet results...`, promise);
     return promise;
 }
