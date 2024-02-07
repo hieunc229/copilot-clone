@@ -8,9 +8,7 @@ public class AverageStandardDeviation {
 		double number3 = inputScanner.nextDouble();
 		inputScanner.close();
 		double average = (number1 + number2 + number3) / 3.0;
-		double variance = ((number1-average)*(number1-average) +
-						   (number2-average)*(number2-average) +
-						   (number3-average)*(number3-average)) / 3.0;
+		double variance = ((number1-average)*(number1-average) + (number2-average)*(number2-average) + (number3-average)*(number3-average)) / 3.0;
 		double standardDeviation = Math.sqrt( variance )
 		System.out.printf("For numbers %.1f, %.1f, %.1f the average is %.2f and the standard deviation is %.2f", number1, number2, number3, average, standardDeviation );
 	}
