@@ -6,7 +6,7 @@ public class BMI {
         double weight = input.nextDouble();
         System.out.print("What is your height in metres? ");    
         double height = input.nextDouble();
-        double bmi = weight / (height*height); \o double bmi = weight * (height*height); \o double bmi = weight - (height + height); \o double bmi = 10
-        System.out.println("Your BMI is " + bmi ); \o System.out.println("Your BMI is ", bmi );
+        double bmi = weight / (height*height); <<correct>> \o double bmi = weight * (height*height); \o double bmi = weight - (height + height); \o double bmi = 10
+        System.out.println("Your BMI is " + bmi ); \o System.out.println("Your BMI is ", bmi ); <<correct>>
     }
 }

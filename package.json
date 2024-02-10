@@ -57,7 +57,13 @@
 					"default": 12
 				}
 			}
-		}
+		},
+		"commands": [
+            {
+                "command": "extension.CheckSolution",
+                "title": "Command Pilot: Compare Chosen Items With Solution"
+            }
+        ]
 	},
 	"scripts": {
 		"lint": "eslint . --ext .ts,.tsx",

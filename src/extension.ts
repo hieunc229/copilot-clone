@@ -6,11 +6,17 @@ import { matchSearchPhrase } from './utils/matchSearchPhrase';
 let matched = false;
 let accepted = false;
 let solution: string| null;
+let original: string;
 let match: any = undefined;
+let chosenOptions: string[] = [];
 
 export function activate(_: vscode.ExtensionContext) {
 
     vscode.window.showInformationMessage(`CommandPilot Enabled`);
+
+    vscode.commands.registerCommand('extension.onCompletionItemSelected', (item: vscode.CompletionItem) => {
+        chosenOptions.push(item.label.replace("//option line", "").trim());
+    });
 
     const activeTextEditor = vscode.window.activeTextEditor;
     if (activeTextEditor) {
@@ -38,8 +44,9 @@ export function activate(_: vscode.ExtensionContext) {
             //Uses that as search query - Change it so if match, gets the next line?
             if(!matched) {
                 match = matchSearchPhrase(textBeforeCursor);
-                console.log('Matched:', match);
+                //console.log('Matched:', match);
                 solution = await search(match.searchPhrase);
+                original = solution ?? '';
             }
             
             if(match && !matched) {
@@ -60,7 +67,11 @@ export function activate(_: vscode.ExtensionContext) {
                                 completionItem.insertText = item.replace(/\t/g, '    ') + (document.lineCount === position.line + 1 ? '\n' : '');
                                 completionItem.range = new vscode.Range(position.translate(0, item.length), position);
                                 completionItem.keepWhitespace = true;
-                                console.log(completionItem);
+                                //console.log(completionItem);
+                                if (suggestions.length > 1) {
+                                    completionItem.command = { command: 'extension.onCompletionItemSelected', title: '', arguments: [completionItem] };
+                                }
+                                //console.log(chosenOptions);
                                 return completionItem;  
                             }                                                                      
                         });
@@ -82,13 +93,31 @@ export function activate(_: vscode.ExtensionContext) {
             const change = e.contentChanges[0];
             if (change.text === '' && change.rangeLength === 1) {
                 const line = change.range.start.line;
-                //if (line !== 0) {
-                    const lineMaxColumn = e.document.lineAt(line).range.end.character;
-                    const wholeLineRange = new vscode.Range(line, 0, line, lineMaxColumn);
-                    const edit = new vscode.WorkspaceEdit();
-                    edit.delete(e.document.uri, wholeLineRange);
-                    vscode.workspace.applyEdit(edit);
-                //}
+                const lineMaxColumn = e.document.lineAt(line).range.end.character;
+                const wholeLineRange = new vscode.Range(line, 0, line, lineMaxColumn);
+                const deletedLineText = e.document.lineAt(line).text.trim();
+                const edit = new vscode.WorkspaceEdit();
+                edit.delete(e.document.uri, wholeLineRange);
+                console.log("Deleted; ", deletedLineText);
+                const index = chosenOptions.indexOf(deletedLineText.replace("//option lin", "").trim());
+                if (index !== -1) {
+                    chosenOptions.splice(index, 1);
+                }
+                vscode.workspace.applyEdit(edit);
+            }
+        }
+    });
+
+    vscode.commands.registerCommand('extension.CheckSolution', () => {
+        if(solution){
+            const sortedChosenOptions = [...chosenOptions].sort();
+            const sortedCorrectSolution = getCorrectSolution(solution).sort();
+            console.log("Chosen: ", sortedChosenOptions);
+            console.log("Solution:", sortedCorrectSolution);
+            if (JSON.stringify(sortedChosenOptions) === JSON.stringify(sortedCorrectSolution)) {
+                vscode.window.showInformationMessage('You chose the correct combination of options!');
+            } else {
+                vscode.window.showInformationMessage('You did not choose the correct combination of options.');
             }
         }
     });
@@ -107,7 +136,7 @@ function getSuggestions(text: string): string[] {
     if(text.includes("\\o")){
         result = text.split("\\o ");
         const leadingWhitespace = result[0].match(/^\s*/)?.[0];
-        result = result.map(item => (leadingWhitespace + item.trim() + " //option line"));
+        result = result.map(item => (leadingWhitespace + item.replace("<<correct>>", "").trim() + " //option line"));
     }
     return result; // Return the original text if no newline character is found
 }
@@ -121,7 +150,7 @@ function handleDocumentChange(document: vscode.TextDocument) {
             reset();
         }
     }
-    console.log('Document Changed');
+    //console.log('Document Changed');
 }
 
 function reset() {
@@ -129,6 +158,8 @@ function reset() {
     accepted = false;
     solution = null;
     match  = undefined;
+    original = "";
+    chosenOptions = [];
     clearEditor();
 }
 
@@ -143,4 +174,18 @@ function clearEditor() {
             ));
         });
     }
+}
+
+function getCorrectSolution(solution: string) {
+    const correctSolution: string[] = [];
+    const lines = original.split('\n');
+    lines.forEach((line: string) => {
+        const options = line.split('\\o');
+        options.forEach(option => {
+            if (option.includes('<<correct>>')) {
+            correctSolution.push(option.replace('<<correct>>', '').trim());
+            }
+        });
+    });
+    return correctSolution;
 }
