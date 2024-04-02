@@ -30,7 +30,10 @@
   ],
   "license": "MIT",
   "categories": [
-    "Other"
+    "Programming Languages",
+    "Snippets",
+    "Machine Learning",
+    "Education"
   ],
   "activationEvents": [
     "onStartupFinished"
