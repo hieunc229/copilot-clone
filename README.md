@@ -2,7 +2,7 @@
 
 # Captain Stack — Code generator and suggestion for VSCode
 
-[![Captain Stack on Marketplace](https://img.shields.io/badge/Downloads-VSCode_Marketplace-blue)](https://marketplace.visualstudio.com/items?itemName=captainstack.captain-stack) [![Captain Stack on Marketplace](https://img.shields.io/visual-studio-marketplace/d/captainstack.captain-stack)](https://marketplace.visualstudio.com/items?itemName=captainstack.captain-stack) [![Discord Chat](https://img.shields.io/discord/864164585070526475.svg)](https://discord.gg/5F5tDsWFmp)
+[![Captain Stack on Marketplace](https://img.shields.io/badge/Downloads-VSCode_Marketplace-blue)](https://marketplace.visualstudio.com/items?itemName=captainstack.captain-stack) [![Captain Stack on Marketplace](https://img.shields.io/visual-studio-marketplace/d/captainstack.captain-stack)](https://marketplace.visualstudio.com/items?itemName=captainstack.captain-stack)
 
 This feature is somewhat similar to Github Copilot's code suggestion. But instead of using AI, it sends your search query to Google, then retrieves StackOverflow and Github Gist answers and autocompletes them for you.
 
