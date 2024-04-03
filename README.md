@@ -55,6 +55,7 @@ For Code Generator
 - `Ai: N`: Number of generated code outputs. Default is `1`
 - `Ai: Temperature`: Code output creativeness, higher value will make the output more random (value between 0.0-1.0). Default is `0.5`
 
+Please note when using OpenRouter, `X-Title` and `HTTP-Referer` will be set as GasbyAI
 
 ## 3. Contributors
 
