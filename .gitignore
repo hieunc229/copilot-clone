@@ -5,7 +5,6 @@ node_modules
 
 yarn.lock
 yarn-error.log
-package-lock.json
 
 /out-vsxi
 
@@ -13,3 +12,6 @@ package-lock.json
 
 /vscode.d.ts
 /vscode.proposed.d.ts
+vscode.d.ts
+/out
+out-vsix

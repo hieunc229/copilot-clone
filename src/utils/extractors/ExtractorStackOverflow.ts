@@ -6,12 +6,12 @@ import { FetchPageResult } from "../fetchPageContent";
 
 export default class ExtractorStackOverflow extends ExtractorAbstract {
 
-    name = "Stackoverflow"
+    name = "Stackoverflow";
     URL = "stackoverflow.com";
 
     extractSnippets = (options: FetchPageResult): SnippetResult[] => {
         const target = parseHTML(options.textContent);
-        
+
         const answersWithCodeBlock = Array.from(target.window.document.querySelectorAll(".answer"))
             .filter((item: any) => item.querySelector("code") != null);
 
@@ -32,7 +32,7 @@ export default class ExtractorStackOverflow extends ExtractorAbstract {
         results.sort(sortSnippetResultFn);
 
         return results;
-    }
+    };
 }
 
 function sortSnippetResultFn(a: SnippetResult, b: SnippetResult) {

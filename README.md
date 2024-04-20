@@ -1,114 +1,82 @@
 ![Captain Stack](./icon.png)
 
-# Captain Stack — Code suggestion for VSCode
+# Captain Stack — Code generator and suggestion for VSCode
 
+[![Captain Stack on Marketplace](https://img.shields.io/badge/Downloads-VSCode_Marketplace-blue)](https://marketplace.visualstudio.com/items?itemName=captainstack.captain-stack) [![Captain Stack on Marketplace](https://img.shields.io/visual-studio-marketplace/d/captainstack.captain-stack)](https://marketplace.visualstudio.com/items?itemName=captainstack.captain-stack)
 
-This feature is somewhat similar to [Github Copilot](https://copilot.github.com/)'s code suggestion. But instead of using AI, it sends your search query to Google, then retrieves StackOverflow answers and autocompletes them for you. 
+This feature is somewhat similar to Github Copilot's code suggestion. But instead of using AI, it sends your search query to Google, then retrieves StackOverflow and Github Gist answers and autocompletes them for you.
 
-Have questions? [Join our Discord server](https://discord.gg/5F5tDsWFmp) [![Discord Chat](https://img.shields.io/discord/864164585070526475.svg)](https://discord.gg/5F5tDsWFmp)
+✅ OpenAI and OpenRouter added to generate code with AI (Bring Your Own Key)
 
 ![Demo Video](./demo.gif)
 
-## Table of contents:
+## 1. Usage
 
-1. [Installation](#1-installation)
-2. [Play with Captain Stack](#2-play-with-captain-stack)
-3. [Notes](#3-notes)
-4. [Changelog](#4-changelog)
-5. [Troubleshooting](#5-troubleshooting)
-6. [Contributors](#6-contributors)
+Captain Stack provides Code Search (from Github Gist, StackOverflow), and AI Code Generation (with OpenAI and OpenRouter). With multiple options can be enabled at the same time.
 
+To generate/search code, use `// find {what you need}.`. For example:
 
-_Note: ⚠️ This extension uses a proposed API (inline-completion) and can only be used for extension development in [VSCode Insider release](https://code.visualstudio.com/insiders/). It's not yet available on VSCode_
-
----
-
-## 1. Installation
-
-**Check out the installation video: https://youtu.be/MD-kzsF0Scg**
-
-Before installation, make sure you have [VSCode Insider](https://code.visualstudio.com/insiders/). You'll be using this version. To install and starting Captain Stack:
-
-1. Download this repository to your local machine. Unzip and open it on VSCode Insider (make sure the root directory is the same as `package.json` file)
-2. (optional) Run `npm install` in the terminal to install dependencies. _A `postinstall` script would download the latest version of `vscode.proposed.d.ts`_
-3. Run the `Run Extension` target in the Debug View. Or from the top menu, choose `Run > Start Debugging`.
-
-This will:
-- Start a task `npm: watch` to compile the code and watch for changes
-- Open a new VSCode window (you should use the extension here)
-
-_Note: When you make changes, you should refresh that window to apply changes. To refresh, open Command Palette (Command+Shift+P on MacOS, or Ctrl+Shift+P on Windows), then choose "Developer: Reload window"_
-
----
-
-## 2. Play with Captain Stack
-
-To trigger inline completion, you'll need to type `//find {your keyword}.` (start with `//find`, end with a dot `.`)
-
-For example
 ```js
-//find binary search in javascript.
+// find binary search in JavaScript.
+
+// generate binary search function in Python.
 ```
 
-Make sure that `showInlineCompletions` is enabled in your settings!
-```
-"editor.inlineSuggest.enabled": true
-```
+Note:
+- Make sure there is a dot at the end of `{what you need}` search phrase
+- You can use either `// find` or `// generate` to trigger Captain Stack code completion. Both are the same.
 
----
 
-## 3. Notes
+## 2. Settings
 
-- There are more code sources that should be considered besides StackOverflow
-- If you see `unsupported` error message, ignore it
+To configure setting options for Captain Stack, open the settings page by using hotkey `Meta + ,`, or:
 
-**Limits:**
-- The extension uses fetch-node to get page content, and I don't know if there is any fetching limit
-- The extension uses querySelector to extract code and other info. There is a risk of either StackOverflow or Google changing its querySelector
+1. Click on the Cog icon in the bottom left
+2. Choose **Settings**
+3. In the **Search settings** search box, enter "Captain Stack"
 
-If those factor became problems, the extension could be using their official APIs instead.
+### Settings options
 
----
+Tick the checkbox of the following provider to enable
+- Github Gist
+- Stackoverflow
+- Open AI
+- Open Router
 
-## 4. Changelog
+For Code Search (from Github Gist, StackOverflow)
+-  `Max results`: the max number of search results return
 
-- Jul 31, 2021 — Create code extracting abstracting to add more code sources 
-- Jul 14, 2021 - Adapted to VS Code Insiders Release Version 1.59
-- Jul 01, 2021 - Added snippet source (thanks for [mechero's suggestion](https://news.ycombinator.com/item?id=27698687))
-- Jun 30, 2021 - Publish the initial version
+For Code Generator
 
----
+- `Open AI: Api Key`: OpenAI API Key, see [how to get OpenAI API Key](https://gasbyai.com/docs/setup-openai). Required when using OpenAI provider
+- `Open AI: Model`: Model used to generate code. Model list is available at https://platform.openai.com/docs/models
+- `Open Router: Api Key`: OpenRouter API Key, see [how to get OpenRouter API Key](https://gasbyai.com/docs/setup-openrouter). Required when using OpenRouter provider
+- `Open Router: Model`: Model used to generate code. Model list is available at https://platform.openai.com/docs/models
+- `Ai: N`: Number of generated code outputs. Default is `1`
+- `Ai: Temperature`: Code output creativeness, higher value will make the output more random (value between 0.0-1.0). Default is `0.5`
 
-## 5. Troubleshooting
+Please note when using OpenRouter, `X-Title` and `HTTP-Referer` will be set as GasbyAI
 
-### Common reasons why you can't run Captain Stack:
+## 3. Contributors
 
-- You're not using VSCode Insider. It can be [downloaded here](https://code.visualstudio.com/insiders/)
-- When `Run debugger`, it shows different target options (nodejs, edge, etc.). Your VSCode root directly might be incorrect. Make sure your root directory is the same with the `package.json` file.
-- Error message `module "node-fetch" not found...`. You need to run `npm install`
-- `canvas.node` was compiled against a different Node.js. [Try to remove canvas](https://github.com/hieunc229/copilot-clone/issues/9) (`npm uninstall canvas`)
-
-### Still not running?
-
-- You haven't enabled the inline completion feature. To enable, set VSCode config `"editor.inlineSuggest.enabled": true`
-- It might conflict with some other plugins. You might need to disable plugins to check
-
-If none of the above works, open a thread or join our [Discord channel and have a chat](https://discord.gg/5F5tDsWFmp).
-
----
-
-## 6. Contributors
-
-The plugins is available, thanks to:
+The plugin is available, thanks to:
 
 - [Kekschen](https://github.com/Kek5chen)
 - [Charlie Lin](https://github.com/clin1234)
-- [Hieu Nguyen](https://github.com/hieunc229)
+- [Hieu Nguyen](https://twitter.com/hieuSSR/)
 
 **Feel free to open a thread for feedback or discussion. And have fun!**
 
 ---
+
 Love Captain Stack? Check out other things I do:
 
-- [Inverr Nocode Site Builder](https://inverr.com/?ref=github-filepond)
-- [Hieu's Twitter](https://twitter.com/hieuSSR/)
+<a href="https://gasbyai.com?ref=csgithub">
+<img src="https://gasbyai.com/banner.png" alt="GasbyAI - Chat with your fancy AI personal assistant - Fancy ChatGPT alternative" height="100" width="360" />
+</a>
+
+- [GasbyAI - Fancy ChatGPT alternative](https://gasbyai.com?ref=csgithub)
+- [Rebit Nocode Site Builder](https://rebit.co/?ref=github)
+- [...more at theGums](https://thegums.co)
+
+<img alt="Gum Pixels" src="https://lsn.gumanalytics.com/images/XOsbYS_va/gp.png" width="33" height="10" />

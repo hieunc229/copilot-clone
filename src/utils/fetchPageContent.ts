@@ -9,7 +9,7 @@ export function fetchPageTextContent(url: string): Promise<FetchPageResult> {
     return new Promise((resolve, reject) => {
         return fetch(url)
             .then(rs => rs.text())
-            .then(textContent => resolve({ textContent, url }))
+            .then(textContent => resolve({textContent, url}))
             .catch(reject);
     });
 }
