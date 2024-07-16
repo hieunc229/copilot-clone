@@ -15,10 +15,9 @@ type SearchMatchResult = {
  */
 export function matchSearchPhrase(input: string): SearchMatchResult | undefined {
     const match = CSConfig.SEARCH_PATTERN.exec(input);
-
     if (match && match.length > 2) {
 
-        const [_, commentSyntax, searchPhrase, commentSyntaxEnd] = match;
+        const [_, commentSyntax, searchSymbol, searchPhrase, commentSyntaxEnd] = match;
 
         // @ts-ignore
         let fileType = window.activeTextEditor.document.languageId;

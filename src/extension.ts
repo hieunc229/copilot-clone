@@ -21,7 +21,7 @@ export function activate(_: vscode.ExtensionContext) {
           rs = await search(match.searchPhrase);
           if (rs) {
             items = rs.results.map((item) => {
-              const output = `\n${match.commentSyntax} Source: ${item.sourceURL} ${match.commentSyntaxEnd}\n${item.code}`;
+              const output = `\n${match.commentSyntax} Source: ${item.sourceURL} ${match.searchPhrase}\n${item.code}`;
               return {
                 text: output,
                 insertText: output,
