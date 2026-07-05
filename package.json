@@ -68,6 +68,12 @@
           "type": "boolean",
           "default": false
         },
+        "captainStack.settings.sites.Requesty": {
+          "title": "requesty.ai",
+          "description": "Enable AI code generation with Requesty",
+          "type": "boolean",
+          "default": false
+        },
         "captainStack.settings.ai.systemPrompt": {
           "title": "System prompt",
           "description": "System prompt for AI Code Generator",
@@ -95,6 +101,17 @@
           "title": "OpenRouter Model",
           "description": "OpenRouter model used to generate code. Model list is available at https://openrouter.ai/docs#models",
           "type": "string"
+        },
+        "captainStack.settings.Requesty.apiKey": {
+          "title": "Requesty API Key",
+          "description": "Requesty API Key, available at https://app.requesty.ai/api-keys",
+          "type": "string"
+        },
+        "captainStack.settings.Requesty.model": {
+          "title": "Requesty Model",
+          "description": "Requesty model used to generate code (provider/model format). Default is openai/gpt-4o-mini",
+          "type": "string",
+          "default": "openai/gpt-4o-mini"
         },
         "captainStack.settings.OpenAI.apiKey": {
           "title": "OpenAI API Key",
