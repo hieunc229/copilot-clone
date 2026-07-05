@@ -6,13 +6,13 @@
 
 This feature is somewhat similar to Github Copilot's code suggestion. But instead of using AI, it sends your search query to Google, then retrieves StackOverflow and Github Gist answers and autocompletes them for you.
 
-✅ OpenAI and OpenRouter added to generate code with AI (Bring Your Own Key)
+✅ OpenAI, OpenRouter and Requesty added to generate code with AI (Bring Your Own Key)
 
 ![Demo Video](./demo.gif)
 
 ## 1. Usage
 
-Captain Stack provides Code Search (from Github Gist, StackOverflow), and AI Code Generation (with OpenAI and OpenRouter). With multiple options can be enabled at the same time.
+Captain Stack provides Code Search (from Github Gist, StackOverflow), and AI Code Generation (with OpenAI, OpenRouter and Requesty). With multiple options can be enabled at the same time.
 
 To generate/search code, use `// find {what you need}.`. For example:
 
@@ -42,6 +42,7 @@ Tick the checkbox of the following provider to enable
 - Stackoverflow
 - Open AI
 - Open Router
+- Requesty
 
 For Code Search (from Github Gist, StackOverflow)
 -  `Max results`: the max number of search results return
@@ -52,10 +53,12 @@ For Code Generator
 - `Open AI: Model`: Model used to generate code. Model list is available at https://platform.openai.com/docs/models
 - `Open Router: Api Key`: OpenRouter API Key, see [how to get OpenRouter API Key](https://gasbyai.com/docs/setup-openrouter). Required when using OpenRouter provider
 - `Open Router: Model`: Model used to generate code. Model list is available at https://platform.openai.com/docs/models
+- `Requesty: Api Key`: Requesty API Key, available at https://app.requesty.ai/api-keys. Required when using Requesty provider
+- `Requesty: Model`: Model used to generate code (provider/model format, e.g. `openai/gpt-4o-mini`). See https://requesty.ai
 - `Ai: N`: Number of generated code outputs. Default is `1`
 - `Ai: Temperature`: Code output creativeness, higher value will make the output more random (value between 0.0-1.0). Default is `0.5`
 
-Please note when using OpenRouter, `X-Title` and `HTTP-Referer` will be set as GasbyAI
+Please note when using OpenRouter or Requesty, `X-Title` and `HTTP-Referer` will be set as GasbyAI
 
 ## 3. Contributors
 

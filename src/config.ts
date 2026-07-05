@@ -18,6 +18,7 @@ type IConfig = {
     maxResults: number;
     OpenAI?: { apiKey: string; model: string; systemPrompt?: string };
     OpenRouter?: { apiKey: string; model: string };
+    Requesty?: { apiKey: string; model: string };
     ai?: {
       temperature?: number;
       systemPrompt?: string;
@@ -33,6 +34,7 @@ export function getConfig() {
     "gist.github.com": config.settings.sites.githubGist,
     "openai.com": config.settings.sites.OpenAI,
     "openrouter.ai": config.settings.sites.OpenRouter,
+    "requesty.ai": config.settings.sites.Requesty,
   };
 
   return {
@@ -41,6 +43,7 @@ export function getConfig() {
       maxResults: config.settings.maxResults,
       OpenAI: config.settings.OpenAI,
       OpenRouter: config.settings.OpenRouter,
+      Requesty: config.settings.Requesty,
       ai: config.settings.ai,
     },
   } as IConfig;
